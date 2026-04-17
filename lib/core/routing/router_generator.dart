@@ -4,7 +4,7 @@ import 'package:roshetta/core/routing/app_routes.dart';
 
 class RouterGenerator {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRoutes.splashScreen,
+    initialLocation: AppRoutes.login,
     routes: [
       
     ],

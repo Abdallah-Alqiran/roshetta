@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/utils/get_responsive_size.dart';
+
+class CustomPrimaryButton extends StatelessWidget {
+  final String text;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final VoidCallback? onTap;
+  final double? width;
+  final double? height;
+  final double? iconPadding;
+  final double? iconSize;
+  final TextStyle? textStyle;
+  final ButtonStyle? style;
+  final Color? color;
+  final Widget? child;
+
+  const CustomPrimaryButton({
+    super.key,
+    required this.text,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.onTap,
+    this.width,
+    this.height,
+    this.iconPadding,
+    this.iconSize,
+    this.textStyle,
+    this.style,
+    this.color,
+    this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final Color defaultColor =
+        textStyle?.color ??
+        style?.foregroundColor?.resolve({}) ??
+        context.colorScheme.onPrimary;
+
+    return SizedBox(
+      width: width ?? 278,
+      height: height ?? 50,
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: style,
+        child:
+            child ??
+            IconTheme(
+              data: IconThemeData(color: defaultColor, size: iconSize ?? 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (prefixIcon != null) ...[
+                    prefixIcon!,
+                    SizedBox(width: iconPadding ?? 8),
+                  ],
+                  Flexible(
+                    child: Text(
+                      text,
+                      maxLines: 1,
+                      style: (textStyle ?? context.textTheme.labelLarge)
+                          ?.copyWith(
+                            color: defaultColor,
+                            fontSize:
+                                textStyle?.fontSize ??
+                                getResponsiveSize(
+                                  context: context,
+                                  webSize: 16,
+                                  mobileSize: 14,
+                                ),
+                          ),
+                    ),
+                  ),
+                  if (suffixIcon != null) ...[
+                    SizedBox(width: iconPadding ?? 8),
+                    suffixIcon!,
+                  ],
+                ],
+              ),
+            ),
+      ),
+    );
+  }
+}

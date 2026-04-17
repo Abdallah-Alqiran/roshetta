@@ -4,7 +4,6 @@ import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/core/routing/router_generator.dart';
 import 'package:roshetta/core/di/service_locator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:roshetta/core/theme/app_theme.dart';
 import 'package:roshetta/core/constants/app_breakpoints.dart';
 
 void main() async {
