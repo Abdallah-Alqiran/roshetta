@@ -5,6 +5,7 @@ import 'package:roshetta/core/routing/router_generator.dart';
 import 'package:roshetta/core/di/service_locator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:roshetta/core/constants/app_breakpoints.dart';
+import 'package:roshetta/core/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             locale: const Locale('ar'),
             debugShowCheckedModeBanner: false,
             title: 'Roshetta',
-            // theme: AppTheme.lightTheme,
+            theme: AppTheme.lightTheme,
             routerConfig: RouterGenerator.goRouter,
           );
         },

@@ -1,3 +1,9 @@
 {
-  
+  "welcome_back": "Welcome Back!",
+  "good_to_see_you_again": "Good to see you again",
+  "email_address": "Email Address",
+  "email_hint": "Enter your email",
+  "password": "Password",
+  "password_hint": "Enter your password",
+  "sign_in": "Sign In"
 }

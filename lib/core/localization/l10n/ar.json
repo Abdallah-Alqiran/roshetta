@@ -1,3 +1,9 @@
 {
-  
+  "welcome_back": "مرحباً بعودتك!",
+  "good_to_see_you_again": "يسعدنا رؤيتك مرة أخرى",
+  "email_address": "البريد الإلكتروني",
+  "email_hint": "أدخل بريدك الإلكتروني",
+  "password": "كلمة المرور",
+  "password_hint": "أدخل كلمة المرور",
+  "sign_in": "تسجيل الدخول"
 }
