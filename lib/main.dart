@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             locale: const Locale('ar'),
             debugShowCheckedModeBanner: false,
             title: 'Roshetta',
-            // theme: AppTheme.lightTheme,
+            theme: AppTheme.lightTheme,
             routerConfig: RouterGenerator.goRouter,
           );
         },
