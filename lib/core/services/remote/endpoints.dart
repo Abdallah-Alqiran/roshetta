@@ -6,7 +6,9 @@ class EndPoint {
 
   // auth
   static String login = "auth/login/";
-  static String register = "auth/doctor-registration/";
+  static String doctorRegistration = "auth/doctor-registration/";
+  static String patientRegistration = "auth/patient-registration/";
+
 }
 
 class ApiKey {
