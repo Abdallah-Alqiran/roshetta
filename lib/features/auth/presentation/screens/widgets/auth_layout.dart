@@ -23,7 +23,7 @@ class AuthLayout extends StatelessWidget {
               children: [
                 Positioned(
                   top: -100,
-                  right: -100,
+                  left: -100,
                   child: Container(
                     width: 300,
                     height: 300,
@@ -44,29 +44,29 @@ class AuthLayout extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  bottom: -150,
-                  left: -150,
-                  child: Container(
-                    width: 400,
-                    height: 400,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: context.colorScheme.primary.withValues(
-                        alpha: 0.08,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: context.colorScheme.primary.withValues(
-                            alpha: 0.08,
-                          ),
-                          blurRadius: 120,
-                          spreadRadius: 60,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // Positioned(
+                //   bottom: -150,
+                //   right: -150,
+                //   child: Container(
+                //     width: 400,
+                //     height: 400,
+                //     decoration: BoxDecoration(
+                //       shape: BoxShape.circle,
+                //       color: context.colorScheme.primary.withValues(
+                //         alpha: 0.08,
+                //       ),
+                //       boxShadow: [
+                //         BoxShadow(
+                //           color: context.colorScheme.primary.withValues(
+                //             alpha: 0.08,
+                //           ),
+                //           blurRadius: 120,
+                //           spreadRadius: 60,
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
 
                 Center(child: child),
               ],
