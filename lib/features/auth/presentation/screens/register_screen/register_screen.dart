@@ -88,6 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   SizedBox(height: 32.h),
                   CustomTextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: authBloc.firstNameController,
                     txt: context.tr('name'),
                     hint: context.tr('name'),
@@ -103,6 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   SizedBox(height: 16.h),
                   CustomTextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: authBloc.emailController,
                     txt: context.tr('email_address'),
                     hint: context.tr('email_hint'),
@@ -119,6 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   SizedBox(height: 16.h),
                   CustomTextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: authBloc.passwordController,
                     txt: context.tr('password'),
                     hint: context.tr('password_hint'),
@@ -135,6 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   SizedBox(height: 16.h),
                   CustomTextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: authBloc.confirmPasswordController,
                     txt: context.tr('confirm_password'),
                     hint: context.tr('confirm_password'),
@@ -154,6 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   
                   SizedBox(height: 16.h),
                   CustomTextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: authBloc.phoneController,
                     txt: context.tr('phone_number'),
                     hint: context.tr('phone_number'),
@@ -169,6 +174,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   SizedBox(height: 16.h),
                   CustomTextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _dateController,
                     txt: context.tr('birth_date'),
                     hint: context.tr('birth_date'),

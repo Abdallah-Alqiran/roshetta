@@ -16,6 +16,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool isPassword;
   final bool readOnly;
   final VoidCallback? onTap;
+  final AutovalidateMode? autovalidateMode;
 
   const CustomTextFormField({
     super.key,
@@ -32,6 +33,7 @@ class CustomTextFormField extends StatefulWidget {
     this.isPassword = false,
     this.readOnly = false,
     this.onTap,
+    this.autovalidateMode,
   });
 
   @override
@@ -60,6 +62,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           obscureText: _obscureText,
           readOnly: widget.readOnly,
           onTap: widget.onTap,
+          autovalidateMode: widget.autovalidateMode,
           style: context.textTheme.labelMedium?.copyWith(
             color: context.colorScheme.onSurface,
             fontSize: 16.sp,

@@ -28,5 +28,11 @@
   "account_type": "Account Type",
   "patient": "Patient",
   "clinic": "Clinic",
-  "birth_date": "Birth Date"
+  "birth_date": "Birth Date",
+  "roshetta": "Roshetta",
+  "dashboard": "Dashboard",
+  "booked": "Booked",
+  "patient_data": "Patient Data",
+  "profile": "Profile",
+  "availability": "Availability"
 }

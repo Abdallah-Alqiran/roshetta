@@ -6,6 +6,7 @@ import 'package:roshetta/core/services/remote/dio_consumer.dart';
 import 'package:roshetta/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:roshetta/features/auth/domain/repositories/auth_repository.dart';
 import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:roshetta/root/bloc/root_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -24,6 +25,8 @@ Future<void> setupServiceLocator() async {
   );
 
   sl.registerLazySingleton(() => AuthBloc(authRepository: sl(), cacheHelper: sl()));
+
+  sl.registerLazySingleton(() => RootBloc());
 
   
  

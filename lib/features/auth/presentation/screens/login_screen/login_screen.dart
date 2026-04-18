@@ -55,6 +55,7 @@ class LoginScreen extends StatelessWidget {
                 const AuthToggleSwitch(isLogin: true),
                 SizedBox(height: 32.h),
                 CustomTextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: authBloc.emailController,
                   txt: context.tr('email_address'),
                   hint: context.tr('email_hint'),
@@ -69,6 +70,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 16.h),
                 CustomTextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: authBloc.passwordController,
                   txt: context.tr('password'),
                   hint: context.tr('password_hint'),

@@ -28,5 +28,11 @@
   "account_type": "نوع الحساب",
   "patient": "مريض",
   "clinic": "عيادة",
-  "birth_date": "تاريخ الميلاد"
+  "birth_date": "تاريخ الميلاد",
+  "roshetta": "روشته",  
+  "dashboard": "لوحة التحكم",
+  "booked": "الحجوزات",
+  "patient_data": "بيانات المرضى",
+  "profile": "الملف الشخصي",
+  "availability": "التوافر"
 }
