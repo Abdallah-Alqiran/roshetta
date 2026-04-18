@@ -1,9 +1,24 @@
 {
+  "join_medical_platform": "Join Our Medical Platform",
+  "access_healthcare_services": "Access quality healthcare services anytime, anywhere",
+  "name": "Name",
+  "phone_number": "Phone Number",
+  "confirm_password": "Confirm Password",
+  "please_confirm_password": "Please confirm your password",
+  "passwords_do_not_match": "Passwords do not match",
+  "creating_account": "Creating Account...",
+  "create_account": "Create Account",
+  "already_have_account": "Already have an account? ",
   "welcome_back": "Welcome Back!",
   "good_to_see_you_again": "Good to see you again",
   "email_address": "Email Address",
   "email_hint": "Enter your email",
   "password": "Password",
   "password_hint": "Enter your password",
-  "sign_in": "Sign In"
+  "sign_in": "Sign In",
+  "roshetta": "Roshetta",
+  "dashboard": "Dashboard",
+  "booked": "Booked",
+  "patient_data": "Patient Data",
+  "profile": "Profile"
 }
