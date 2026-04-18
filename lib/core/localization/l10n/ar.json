@@ -1,9 +1,24 @@
 {
+   "join_medical_platform": "انضم إلى منصتنا الطبية",
+  "access_healthcare_services": "احصل على خدمات رعاية صحية عالية الجودة في أي وقت وأي مكان",
+  "name": "الاسم",
+  "phone_number": "رقم الهاتف",
+  "confirm_password": "تأكيد كلمة المرور",
+  "please_confirm_password": "يرجى تأكيد كلمة المرور",
+  "passwords_do_not_match": "كلمات المرور غير متطابقة",
+  "creating_account": "جاري إنشاء الحساب...",
+  "create_account": "إنشاء حساب",
+  "already_have_account": "لديك حساب بالفعل؟ ",
   "welcome_back": "مرحباً بعودتك!",
   "good_to_see_you_again": "يسعدنا رؤيتك مرة أخرى",
   "email_address": "البريد الإلكتروني",
   "email_hint": "أدخل بريدك الإلكتروني",
   "password": "كلمة المرور",
   "password_hint": "أدخل كلمة المرور",
-  "sign_in": "تسجيل الدخول"
+  "sign_in": "تسجيل الدخول",
+  "roshetta": "روشته",
+  "dashboard": "لوحة التحكم",
+  "booked": "الحجوزات",
+  "patient_data": "بيانات المرضى",
+  "profile": "الملف الشخصي"
 }

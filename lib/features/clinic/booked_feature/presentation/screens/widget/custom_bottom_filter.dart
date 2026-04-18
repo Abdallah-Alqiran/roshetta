@@ -25,8 +25,10 @@ class CustomBottomFilter extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
-        width: isSelected ? 102.w : 66.w,
-        height: isSelected ? 48.h : 38.h,
+        padding: EdgeInsets.symmetric(
+          horizontal: isSelected ? 24.w : 16.w,
+          vertical: 8.h,
+        ),
         decoration: BoxDecoration(
           color: isSelected
               ? context.colorScheme.primary
