@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
-  // New Color Palette
   static const Color lightPrimary = Color(0xff00A991);
   static const Color lightBackground = Color(0xFFFFFFFF);
   static const Color lightText = Color(0xFF000000);
