@@ -20,5 +20,6 @@
   "dashboard": "لوحة التحكم",
   "booked": "الحجوزات",
   "patient_data": "بيانات المرضى",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "availability": "التوافر"
 }
