@@ -11,6 +11,7 @@ class CustomTextFormField extends StatefulWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final TextEditingController controller;
+  final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final bool isPassword;
 
@@ -24,6 +25,7 @@ class CustomTextFormField extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     required this.controller,
+    this.keyboardType,
     this.validator,
     this.isPassword = false,
   });
@@ -49,6 +51,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         padding: EdgeInsets.all(1.0),
         child: TextFormField(
           controller: widget.controller,
+          keyboardType: widget.keyboardType,
           validator: widget.validator,
           obscureText: _obscureText,
           style: context.textTheme.labelMedium?.copyWith(
