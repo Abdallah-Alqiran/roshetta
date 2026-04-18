@@ -15,5 +15,10 @@
   "email_hint": "Enter your email",
   "password": "Password",
   "password_hint": "Enter your password",
-  "sign_in": "Sign In"
+  "sign_in": "Sign In",
+  "roshetta": "Roshetta",
+  "dashboard": "Dashboard",
+  "booked": "Booked",
+  "patient_data": "Patient Data",
+  "profile": "Profile"
 }

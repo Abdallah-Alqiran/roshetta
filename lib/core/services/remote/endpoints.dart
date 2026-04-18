@@ -9,4 +9,5 @@ class ApiKey {
   static String message = "message";
   static String authorization = "Authorization";
   static String accessToken = "access";
+  static String role = "role";
 }

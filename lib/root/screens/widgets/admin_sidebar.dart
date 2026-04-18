@@ -37,7 +37,7 @@ class AdminSidebar extends StatelessWidget {
           Padding(
             padding: EdgeInsets.fromLTRB(28.w, 32.h, 28.w, 24.h),
             child: Text(
-              context.tr('lms_admin'),
+              context.tr('roshetta'),
               style: context.textTheme.displaySmall?.copyWith(
                 color: context.colorScheme.primary,
                 fontWeight: FontWeight.bold,
@@ -73,23 +73,23 @@ class AdminSidebar extends StatelessWidget {
             height: 1,
             thickness: 1,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              children: [
-                SizedBox(height: 16.h),
-                ResponsiveNavItem(
-                  icon: navItems[5].icon,
-                  label: navItems[5].label,
-                  index: navItems[5].index,
-                  isSelected: selectedIndex == navItems[5].index,
-                  onTap: () => onItemTap(navItems[5].index),
-                ),
-                const AdminProfileWidget(),
-              ],
-            ),
-          ),
-          SizedBox(height: 16.h),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 16.w),
+          //   child: Column(
+          //     children: [
+          //       SizedBox(height: 16.h),
+          //       ResponsiveNavItem(
+          //         icon: navItems[5].icon,
+          //         label: navItems[5].label,
+          //         index: navItems[5].index,
+          //         isSelected: selectedIndex == navItems[5].index,
+          //         onTap: () => onItemTap(navItems[5].index),
+          //       ),
+          //       const AdminProfileWidget(),
+          //     ],
+          //   ),
+          // ),
+          // SizedBox(height: 16.h),
         ],
       ),
     );

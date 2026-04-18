@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/utils/get_responsive_size.dart';
 import 'package:roshetta/root/bloc/root_bloc.dart';
 import 'package:roshetta/root/models/nav_items.dart';
@@ -63,6 +64,7 @@ class _RootScreenState extends State<RootScreen> {
           final bool isDesktop = context.isDesktop;
 
           return Scaffold(
+            backgroundColor: context.colorScheme.background,
             body: Row(
               children: [
                 if (isDesktop)

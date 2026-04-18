@@ -17,7 +17,7 @@ class _CustomViewNavBarState extends State<CustomViewNavBar> {
   Widget build(BuildContext context) {
     log("Role is: ${widget.role}");
     return RootScreen(
-      navItems: widget.role == 'clinic' ? clinicNavItems : [],
+      navItems: widget.role == 'Doctor' ? clinicNavItems : clinicNavItems,
     );
   }
 }
