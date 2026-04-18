@@ -110,14 +110,14 @@ class AppTheme {
   }
 
   static ThemeData get lightTheme {
-    final colorScheme = const ColorScheme.light(
+    final colorScheme = ColorScheme.light(
       primary: lightPrimary,
       onPrimary: Colors.white,
       secondary: lightPrimary,
       onSecondary: Colors.white,
       background: lightBackground,
       onSurface: lightText,
-      surface: Colors.white,
+      surface: Colors.grey[100]!,
       surfaceVariant: lightBackground,
       onSurfaceVariant: lightSecondaryText,
       error: Color(0xFFD32F2F),
