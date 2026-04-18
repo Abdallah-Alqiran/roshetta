@@ -14,6 +14,8 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final bool isPassword;
+  final bool readOnly;
+  final VoidCallback? onTap;
 
   const CustomTextFormField({
     super.key,
@@ -28,6 +30,8 @@ class CustomTextFormField extends StatefulWidget {
     this.keyboardType,
     this.validator,
     this.isPassword = false,
+    this.readOnly = false,
+    this.onTap,
   });
 
   @override
@@ -54,6 +58,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           keyboardType: widget.keyboardType,
           validator: widget.validator,
           obscureText: _obscureText,
+          readOnly: widget.readOnly,
+          onTap: widget.onTap,
           style: context.textTheme.labelMedium?.copyWith(
             color: context.colorScheme.onSurface,
             fontSize: 16.sp,
@@ -63,7 +69,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 ? Icon(
                     widget.prefixIcon,
                     size: 18.sp,
-                    color: context.colorScheme.onSecondary.withValues(
+                    color: context.colorScheme.onSurfaceVariant.withValues(
                       alpha: 0.7,
                     ),
                   )

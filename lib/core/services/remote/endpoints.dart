@@ -1,6 +1,6 @@
 class EndPoint {
   static String localUrl = "";
-  static String remoteUrl = "";
+  static String remoteUrl = "http://roshetta.runasp.net";
 
   static String baseUrl = remoteUrl;
 }

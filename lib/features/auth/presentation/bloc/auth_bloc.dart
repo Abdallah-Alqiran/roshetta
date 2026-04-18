@@ -10,6 +10,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with AuthFormControllersMixin 
   final AuthRepository authRepository;
   final CacheHelper? cacheHelper;
 
+  String? selectedGender;
+  String? selectedRole;
+
   AuthBloc({required this.authRepository, required this.cacheHelper})
-      : super(AuthInitial());
+      : super(AuthInitial()) {
+   
+    on<GenderSelectedEvent>((event, emit) {
+      selectedGender = event.gender;
+    });
+    
+    on<RoleSelectedEvent>((event, emit) {
+      selectedRole = event.role;
+    });
+  }
+  
+  @override
+  Future<void> close() {
+    disposeControllers();
+    return super.close();
+  }
 }

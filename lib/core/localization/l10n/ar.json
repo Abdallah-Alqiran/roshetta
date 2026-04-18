@@ -1,5 +1,10 @@
 {
-   "join_medical_platform": "انضم إلى منصتنا الطبية",
+  "please_enter_email": "يرجى إدخال البريد الإلكتروني",
+  "please_enter_password": "يرجى إدخال كلمة المرور",
+  "please_enter_name": "يرجى إدخال الاسم",
+  "please_enter_phone": "يرجى إدخال رقم الهاتف",
+  "please_enter_birth_date": "يرجى إدخال تاريخ الميلاد",
+  "join_medical_platform": "انضم إلى منصتنا الطبية",
   "access_healthcare_services": "احصل على خدمات رعاية صحية عالية الجودة في أي وقت وأي مكان",
   "name": "الاسم",
   "phone_number": "رقم الهاتف",
@@ -15,5 +20,13 @@
   "email_hint": "أدخل بريدك الإلكتروني",
   "password": "كلمة المرور",
   "password_hint": "أدخل كلمة المرور",
-  "sign_in": "تسجيل الدخول"
+  "sign_in": "تسجيل الدخول",
+  "login": "دخول",
+  "gender": "النوع",
+  "male": "ذكر",
+  "female": "أنثى",
+  "account_type": "نوع الحساب",
+  "patient": "مريض",
+  "clinic": "عيادة",
+  "birth_date": "تاريخ الميلاد"
 }

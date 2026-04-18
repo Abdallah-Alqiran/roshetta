@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/utils/get_responsive_size.dart';
 import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:roshetta/features/auth/presentation/screens/widgets/auth_toggle_switch.dart';
 import 'package:roshetta/features/auth/utils/auth_validator.dart';
@@ -18,9 +19,18 @@ class LoginScreen extends StatelessWidget {
 
     return Center(
       child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: context.isDesktop ? 80.w : context.isTablet ? 48.w : 24.w,
+          vertical: context.isDesktop ? 80.h : context.isTablet ? 48.h : 32.h,
+        ),
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 400.w),
+          constraints: BoxConstraints(
+            maxWidth: context.isDesktop
+                ? 500.w
+                : context.isTablet
+                    ? 450.w
+                    : 400.w,
+          ),
           child: Form(
             key: authBloc.loginFormKey,
             child: Column(
@@ -49,8 +59,13 @@ class LoginScreen extends StatelessWidget {
                   txt: context.tr('email_address'),
                   hint: context.tr('email_hint'),
                   prefixIcon: Icons.alternate_email_rounded,
-                  validator: validateEmail,
-                  w: 400.w,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return context.tr('please_enter_email');
+                    }
+                    return validateEmail(value);
+                  },
+                  w: double.infinity,
                 ),
                 SizedBox(height: 16.h),
                 CustomTextFormField(
@@ -59,19 +74,24 @@ class LoginScreen extends StatelessWidget {
                   hint: context.tr('password_hint'),
                   prefixIcon: Icons.lock_outline_rounded,
                   isPassword: true,
-                  ///TODO: Add password validation
-                  // validator: validatePassword,
-                  w: 400.w,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return context.tr('please_enter_password');
+                    }
+                    return validatePassword(value);
+                  },
+                  w: double.infinity,
                 ),
                 SizedBox(height: 32.h),
                 CustomPrimaryButton(
                   text: context.tr('sign_in'),
                   onTap: () {
+                    FocusScope.of(context).unfocus();
                     if (authBloc.loginFormKey.currentState?.validate() ?? false) {
-                      
+                      // Proceed with login
                     }
                   },
-                  width: 400.w,
+                  width: double.infinity,
                 ),
               ],
             ),
