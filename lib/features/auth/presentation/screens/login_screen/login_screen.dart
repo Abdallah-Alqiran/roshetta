@@ -75,14 +75,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 32.h),
                   CustomPrimaryButton(
-                    text: "Sign In",
+                    text: context.tr('sign_in'),
                     onTap: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        
-                      }
+                      if (_formKey.currentState?.validate() ?? false) {}
                     },
                     width: 400.w,
-                  )
+                  ),
                 ],
               ),
             ),
