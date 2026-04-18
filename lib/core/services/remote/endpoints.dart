@@ -1,8 +1,12 @@
 class EndPoint {
   static String localUrl = "";
-  static String remoteUrl = "";
+  static String remoteUrl = "http://roshetta.runasp.net/";
 
   static String baseUrl = remoteUrl;
+
+  // auth
+  static String login = "auth/login/";
+  static String register = "auth/doctor-registration/";
 }
 
 class ApiKey {

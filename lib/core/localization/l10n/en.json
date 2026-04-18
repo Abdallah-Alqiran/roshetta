@@ -20,5 +20,6 @@
   "dashboard": "Dashboard",
   "booked": "Booked",
   "patient_data": "Patient Data",
-  "profile": "Profile"
+  "profile": "Profile",
+  "availability": "Timetable"
 }
