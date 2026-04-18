@@ -21,30 +21,24 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.circular(12.r),
-      child: CachedNetworkImage(
-        imageUrl:
-            imagePath ??
+    // حساب نصف القطر (نصف أصغر قيمة بين العرض والارتفاع)
+    final double size = (width ?? height ?? 50);
+    final double radius = size / 2;
+
+    return CircleAvatar(
+      radius: radius.r,
+      backgroundImage: CachedNetworkImageProvider(
+        imagePath ??
             'https://i.pinimg.com/736x/77/97/7e/77977e0f51ec76e51b1360e5f0685d13.jpg',
-        width: width?.w,
-        height: height?.h,
-        fit: BoxFit.cover,
-        placeholder: (context, url) => Container(
-          color: context.colorScheme.surfaceVariant,
-          child: const Center(child: CircularProgressIndicator()),
-        ),
-        errorWidget: (context, url, error) {
-          return Container(
-            color: context.colorScheme.onSurfaceVariant,
-            child: Icon(
-              Icons.broken_image,
-              color: context.colorScheme.outline,
-              size: 40,
-            ),
-          );
-        },
       ),
+      onBackgroundImageError: (_, __) {},
+      child: (imagePath == null || imagePath!.isEmpty)
+          ? Icon(
+              Icons.person,
+              color: context.colorScheme.outline,
+              size: radius.r,
+            )
+          : null,
     );
   }
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:roshetta/features/clinic/availability_feature/presentation/screens/availability_clinic_screen.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/booked_clinic_screen.dart';
+<<<<<<< HEAD
+import 'package:roshetta/features/patients/presentation/screens/patients_screen.dart';
+=======
 import 'package:roshetta/features/clinic/profile_feature/presentation/screens/profile_clinic_screen.dart';
+>>>>>>> 5b39032304ab7663d376b147df6615265e321edb
 
 class NavItemModel {
   final IconData icon;
@@ -30,10 +34,10 @@ final List<NavItemModel> clinicNavItems = [
     screen: BookedClinicScreen(),
     index: 1,
   ),
-  const NavItemModel(
+  NavItemModel(
     icon: Icons.medical_information_outlined,
     label: 'patient_data',
-    screen: BookedClinicScreen(),
+    screen: PatientsScreen(),
     index: 2,
   ),
     const NavItemModel(
@@ -49,4 +53,3 @@ final List<NavItemModel> clinicNavItems = [
     index: 4,
   ),
 ];
-
