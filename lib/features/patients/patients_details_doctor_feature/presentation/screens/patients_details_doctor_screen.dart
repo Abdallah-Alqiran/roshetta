@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/screens/widgets/patient_list_item.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/screens/widgets/patient_record_app_bar_widget.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/screens/widgets/patient_statistics_card.dart';
@@ -82,14 +83,14 @@ class _PatientsDetailsDoctorScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'سجل المرضى',
+              context.tr('patients_record'),
               style: context.textTheme.headlineLarge!.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 8.h),
             Text(
-              "إدارة وتصفح بيانات المرضى المسجلين في العيادة.",
+              context.tr('patients_record_desc'),
               style: context.textTheme.labelLarge!.copyWith(
                 color: context.colorScheme.scrim.withValues(alpha: 0.5),
               ),
@@ -99,7 +100,7 @@ class _PatientsDetailsDoctorScreenState
               children: [
                 Expanded(
                   child: PatientStatisticsCard(
-                    title: 'إجمالي المرضى',
+                    title: context.tr('total_patients'),
                     count: '1,248',
                     icon: Icons.people_outline,
                     iconColor: Colors.teal.shade700,
@@ -109,7 +110,7 @@ class _PatientsDetailsDoctorScreenState
                 SizedBox(width: 24.w),
                 Expanded(
                   child: PatientStatisticsCard(
-                    title: 'مرضى اليوم',
+                    title: context.tr('today_patients'),
                     count: '24',
                     icon: Icons.person_add_alt_1_outlined,
                     iconColor: Colors.blue.shade700,
@@ -120,7 +121,7 @@ class _PatientsDetailsDoctorScreenState
             ),
             SizedBox(height: 32.h),
             Text(
-              'سجل المرضى',
+              context.tr('patients_record'),
               style: context.textTheme.headlineLarge!.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -148,7 +149,6 @@ class _PatientsDetailsDoctorScreenState
                     itemBuilder: (context, index) {
                       final item = _dummyPatients[index];
                       return PatientListItem(
-                        imagePath: item['image'],
                         name: item['name'],
                         genderAndAge: item['genderAndAge'],
                         lastVisit: item['lastVisit'],

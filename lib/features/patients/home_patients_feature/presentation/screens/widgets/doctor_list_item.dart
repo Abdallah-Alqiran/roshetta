@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/localization/app_localizations.dart';
 
 class DoctorListItem extends StatelessWidget {
   final String name;
@@ -105,7 +106,7 @@ class DoctorListItem extends StatelessWidget {
               elevation: 0,
             ),
             child: Text(
-              'احجز\nالآن',
+              context.tr('book_now_multiline'),
               textAlign: TextAlign.center,
               style: context.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,

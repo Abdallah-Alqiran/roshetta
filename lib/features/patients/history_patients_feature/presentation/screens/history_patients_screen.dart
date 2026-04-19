@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_bottom_filter.dart';
 import 'package:roshetta/features/patients/history_patients_feature/presentation/screens/widgets/history_list_item.dart';
 import 'package:roshetta/features/patients/history_patients_feature/presentation/screens/widgets/history_statistics_card.dart';
@@ -16,7 +17,7 @@ class HistoryPatientsScreen extends StatefulWidget {
 class _HistoryPatientsScreenState extends State<HistoryPatientsScreen> {
   int _selectedFilterIndex = 0;
 
-  final List<String> _filters = ['الكل'];
+  late final List<String> _filters = [context.tr('all')];
 
   final List<Map<String, dynamic>> _dummyHistory = [
     {
@@ -52,14 +53,14 @@ class _HistoryPatientsScreenState extends State<HistoryPatientsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'سجل المواعيد الطبية',
+              context.tr('medical_appointments_history'),
               style: context.textTheme.headlineLarge!.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 8.h),
             Text(
-              "تتبع مواعيدك القادمة واطلع على تاريخ زياراتك السابقة بكل سهولة.",
+              context.tr('medical_appointments_history_desc'),
               style: context.textTheme.labelLarge!.copyWith(
                 color: context.colorScheme.scrim.withValues(alpha: 0.5),
               ),
@@ -89,7 +90,10 @@ class _HistoryPatientsScreenState extends State<HistoryPatientsScreen> {
                 ),
                 SizedBox(width: 24.w),
                 Expanded(
-                  child: HistoryStatisticsCard(title: 'ملغاة', count: '24'),
+                  child: HistoryStatisticsCard(
+                    title: context.tr('canceled'),
+                    count: '24',
+                  ),
                 ),
               ],
             ),

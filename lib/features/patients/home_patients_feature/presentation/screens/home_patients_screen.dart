@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/doctor_search_filter_widget.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/doctor_list_item.dart';
 
@@ -58,9 +59,9 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                       height: 1.2,
                     ),
                     children: [
-                      const TextSpan(text: 'ابحث عن طبيبك الموثوق\n'),
+                      TextSpan(text: context.tr('find_trusted_doctor')),
                       TextSpan(
-                        text: 'واحجز موعدك الآن',
+                        text: context.tr('book_appointment_now'),
                         style: TextStyle(color: context.colorScheme.primary),
                       ),
                     ],
@@ -68,7 +69,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                 ),
                 SizedBox(height: 16.h),
                 Text(
-                  'منصة روشتة توفر لك وصولاً سريعاً لأفضل الأطباء في مختلف التخصصات، مع مراجعات\nحقيقية وتجربة حجز سهلة.',
+                  context.tr('roshetta_platform_desc'),
                   style: context.textTheme.titleMedium?.copyWith(
                     color: context.colorScheme.scrim.withValues(alpha: 0.5),
                     height: 1.5,
@@ -83,7 +84,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'الأطباء المتاحون (156 طبيب)',
+                  context.tr('available_doctors'),
                   style: context.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -91,13 +92,13 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                 Row(
                   children: [
                     Text(
-                      'ترتيب حسب: ',
+                      context.tr('sort_by'),
                       style: context.textTheme.titleSmall?.copyWith(
                         color: context.colorScheme.scrim.withValues(alpha: 0.5),
                       ),
                     ),
                     Text(
-                      'الأعلى تقييماً',
+                      context.tr('highest_rated'),
                       style: context.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

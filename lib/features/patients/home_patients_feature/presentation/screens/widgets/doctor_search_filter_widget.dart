@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/localization/app_localizations.dart';
 
 class DoctorSearchFilterWidget extends StatelessWidget {
   const DoctorSearchFilterWidget({super.key});
@@ -20,8 +21,8 @@ class DoctorSearchFilterWidget extends StatelessWidget {
             flex: 3,
             child: _buildInputColumn(
               context: context,
-              label: 'اسم الطبيب',
-              hint: 'ابحث بالاسم...',
+              label: context.tr('doctor_name'),
+              hint: context.tr('search_by_name'),
               icon: Icons.search,
             ),
           ),
@@ -30,8 +31,8 @@ class DoctorSearchFilterWidget extends StatelessWidget {
             flex: 2,
             child: _buildInputColumn(
               context: context,
-              label: 'المنطقة',
-              hint: 'اختر المنطقة',
+              label: context.tr('region'),
+              hint: context.tr('choose_region'),
               icon: Icons.location_on_outlined,
               isDropdown: true,
             ),
@@ -41,8 +42,8 @@ class DoctorSearchFilterWidget extends StatelessWidget {
             flex: 2,
             child: _buildInputColumn(
               context: context,
-              label: 'التخصص',
-              hint: 'اختر التخصص',
+              label: context.tr('specialization'),
+              hint: context.tr('choose_specialization'),
               icon: Icons.medical_services_outlined,
               isDropdown: true,
             ),
@@ -61,7 +62,7 @@ class DoctorSearchFilterWidget extends StatelessWidget {
             ),
             icon: Icon(Icons.search, size: 20.sp),
             label: Text(
-              'بحث',
+              context.tr('search'),
               style: context.textTheme.titleMedium?.copyWith(
                 color: context.colorScheme.onPrimary,
                 fontWeight: FontWeight.bold,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/localization/app_localizations.dart';
 
 class HistoryTableHeader extends StatelessWidget {
   const HistoryTableHeader({super.key});
@@ -21,7 +22,7 @@ class HistoryTableHeader extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Text(
-              'اسم الطبيب والتخصص',
+              context.tr('doctor_and_specialization'),
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: context.colorScheme.scrim.withValues(alpha: 0.6),
@@ -31,7 +32,7 @@ class HistoryTableHeader extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              'التاريخ',
+              context.tr('date'),
               textAlign: TextAlign.center,
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -42,7 +43,7 @@ class HistoryTableHeader extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              'الوقت',
+              context.tr('time'),
               textAlign: TextAlign.center,
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -53,7 +54,7 @@ class HistoryTableHeader extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              'الحالة',
+              context.tr('status'),
               textAlign: TextAlign.center,
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -64,7 +65,7 @@ class HistoryTableHeader extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              'الإجراءات',
+              context.tr('actions'),
               textAlign: TextAlign.center,
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
