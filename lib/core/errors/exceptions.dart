@@ -15,24 +15,24 @@ class DioExceptionHandler {
         
         switch (e.response?.statusCode) {
           case 400:
-            return 'Bad request: $serverMessage';
+            return serverMessage.isNotEmpty ? serverMessage : 'Bad request';
           case 401:
-            return 'Unauthorized: $serverMessage';
+            return serverMessage.isNotEmpty ? serverMessage : 'Unauthorized';
           case 403:
-            return 'Forbidden: $serverMessage';
+            return serverMessage.isNotEmpty ? serverMessage : 'Forbidden';
           case 404:
-            return 'Not found: $serverMessage';
+            return serverMessage.isNotEmpty ? serverMessage : 'Not found';
           case 409:
-            return 'Conflict: $serverMessage'; 
+            return serverMessage.isNotEmpty ? serverMessage : 'Conflict';
           case 422:
-            return 'Validation error: $serverMessage';
+            return serverMessage.isNotEmpty ? serverMessage : 'Validation error';
           case 500:
             return 'Server error, please try again later';
           case 502:
           case 503:
             return 'Service unavailable, please try again later';
           default:
-            return serverMessage;
+            return serverMessage.isNotEmpty ? serverMessage : 'Server error (${e.response?.statusCode})';
         }
       } catch (err) {
         
@@ -49,7 +49,6 @@ class DioExceptionHandler {
       }
     }
     
-    // network error handling
     switch (e.type) {
       case DioExceptionType.connectionError:
       case DioExceptionType.connectionTimeout:

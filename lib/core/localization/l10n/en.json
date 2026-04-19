@@ -21,6 +21,8 @@
   "password": "Password",
   "password_hint": "Enter your password",
   "sign_in": "Sign In",
+  "signing_in": "Signing in...",
+  "login_success": "Login successful!",
   "login": "Login",
   "gender": "Gender",
   "male": "Male",
