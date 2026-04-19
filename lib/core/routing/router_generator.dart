@@ -9,6 +9,7 @@ import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:roshetta/features/auth/presentation/screens/register_screen/register_screen.dart';
 import 'package:roshetta/features/auth/presentation/screens/widgets/auth_layout.dart';
 import 'package:roshetta/features/auth/presentation/screens/login_screen/login_screen.dart';
+import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_bloc.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/home_patients_screen.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/screens/patients_details_doctor_screen.dart';
 import 'package:roshetta/features/patients/history_patients_feature/presentation/screens/history_patients_screen.dart';
@@ -64,7 +65,7 @@ class RouterGenerator {
               sl<CacheHelper>().getDataString(key: ApiKey.role) ??
               '';
           return MultiBlocProvider(
-            providers: [BlocProvider.value(value: sl<RootBloc>())],
+            providers: [BlocProvider.value(value: sl<RootBloc>()), BlocProvider.value(value: sl<AvailabilityClinicBloc>())],
             child: CustomViewNavBar(role: role),
           );
         },

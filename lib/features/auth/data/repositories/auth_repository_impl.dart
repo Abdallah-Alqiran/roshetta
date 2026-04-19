@@ -27,7 +27,7 @@ class AuthRepositoryImpl implements AuthRepository {
         await cacheHelper.saveData(key: 'id', value: loginResponse.id);
         await cacheHelper.saveData(key: 'email', value: loginResponse.email);
         await cacheHelper.saveData(key: 'name', value: loginResponse.name);
-        await cacheHelper.saveData(key: 'token', value: loginResponse.token);
+        await cacheHelper.saveData(key: ApiKey.accessToken, value: loginResponse.token);
         await cacheHelper.saveData(key: 'role', value: loginResponse.role);
         await cacheHelper.saveData(key: 'gender', value: loginResponse.gender);
         await cacheHelper.saveData(key: 'isLoggedIn', value: true);
