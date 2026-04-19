@@ -11,7 +11,7 @@ class AvailabilityClinicRepositoryImpl implements AvailabilityClinicRepository {
   @override
   Future<Either<String, List<AvailabilityScheduleClinicModel>>> getAvailabilityClinicSchedule() async {
     final result = await apiConsumer.post<List<AvailabilityScheduleClinicModel>>(
-      EndPoint.clinicAvailability,
+      EndPoint.clinicAvailabilitySchedule,
       fromJson: (json) {
         final list = json as List;
         return list.map((item) => AvailabilityScheduleClinicModel.fromJson(item as Map<String, dynamic>)).toList();

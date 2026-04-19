@@ -10,7 +10,7 @@ class EndPoint {
   static String patientRegistration = "auth/patient-registration/";
 
   // clinic
-  static String clinicAvailability = "";
+  static String clinicAvailabilitySchedule = "doctorSchedule";
 
 }
 

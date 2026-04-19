@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_bottom_filter.dart';
-import 'package:roshetta/features/patients/presentation/screens/widgets/patient_list_item.dart';
-import 'package:roshetta/features/patients/presentation/screens/widgets/patient_record_app_bar_widget.dart';
-import 'package:roshetta/features/patients/presentation/screens/widgets/patient_statistics_card.dart';
-import 'package:roshetta/features/patients/presentation/screens/widgets/patient_table_header.dart';
+import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/patient_list_item.dart';
+import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/patient_record_app_bar_widget.dart';
+import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/patient_statistics_card.dart';
+import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/patient_table_header.dart';
 
-class PatientsScreen extends StatefulWidget {
-  PatientsScreen({super.key});
+class HomePatientsScreen extends StatefulWidget {
+  const HomePatientsScreen({super.key});
 
   @override
-  State<PatientsScreen> createState() => _PatientsScreenState();
+  State<HomePatientsScreen> createState() => _HomePatientsScreenState();
 }
 
-class _PatientsScreenState extends State<PatientsScreen> {
+class _HomePatientsScreenState extends State<HomePatientsScreen> {
   final TextEditingController _searchController = TextEditingController();
   int _selectedFilterIndex = 0;
 
