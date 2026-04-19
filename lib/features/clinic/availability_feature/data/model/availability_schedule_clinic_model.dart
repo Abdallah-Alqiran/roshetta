@@ -1,4 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
 
+part 'availability_schedule_clinic_model.g.dart';
+
+@JsonSerializable()
 class AvailabilityScheduleClinicModel {
   final String day;
   final String startTime;
@@ -15,4 +19,9 @@ class AvailabilityScheduleClinicModel {
     required this.averageConsultationTime,
     required this.maxVisits,
   });
+
+    factory AvailabilityScheduleClinicModel.fromJson(Map<String, dynamic> json) =>
+      _$AvailabilityScheduleClinicModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AvailabilityScheduleClinicModelToJson(this);
 }
