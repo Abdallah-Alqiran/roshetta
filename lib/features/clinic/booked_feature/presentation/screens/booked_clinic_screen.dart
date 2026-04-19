@@ -134,27 +134,14 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            CustomBottomFilter(
-                              text: "غداً",
-                              isSelected: selectedFilterIndex == 3,
-                              onTap: () => _onFilterTap(3),
-                            ),
-                            SizedBox(width: 8.w),
-                            CustomBottomFilter(
-                              text: "اليوم",
-                              isSelected: selectedFilterIndex == 1,
-                              onTap: () => _onFilterTap(1),
-                            ),
-                            SizedBox(width: 8.w),
-                            CustomBottomFilter(
-                              text: "الكل",
-                              number: "12",
-                              isSelected: selectedFilterIndex == 0,
-                              onTap: () => _onFilterTap(0),
-                            ),
-                          ],
+                        SizedBox(
+                          width: 100.w,
+                          child: CustomBottomFilter(
+                            text: "الكل",
+                            number: "12",
+                            isSelected: selectedFilterIndex == 0,
+                            onTap: () => _onFilterTap(0),
+                          ),
                         ),
                         SizedBox(height: 18.h),
                         ListView.builder(
