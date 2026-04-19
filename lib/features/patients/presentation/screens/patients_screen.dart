@@ -118,16 +118,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                     iconBackgroundColor: Colors.blue.shade50,
                   ),
                 ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: PatientStatisticsCard(
-                    title: '',
-                    count: null,
-                    icon: Icons.warning_amber_rounded,
-                    iconColor: Colors.red.shade700,
-                    iconBackgroundColor: Colors.red.shade50,
-                  ),
-                ),
               ],
             ),
             SizedBox(height: 32.h),
