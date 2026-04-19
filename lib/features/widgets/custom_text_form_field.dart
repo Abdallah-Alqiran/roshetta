@@ -17,6 +17,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool readOnly;
   final VoidCallback? onTap;
   final AutovalidateMode? autovalidateMode;
+  final int maxLines;
 
   const CustomTextFormField({
     super.key,
@@ -34,6 +35,7 @@ class CustomTextFormField extends StatefulWidget {
     this.readOnly = false,
     this.onTap,
     this.autovalidateMode,
+    this.maxLines = 1
   });
 
   @override
@@ -63,6 +65,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           readOnly: widget.readOnly,
           onTap: widget.onTap,
           autovalidateMode: widget.autovalidateMode,
+          maxLines: widget.maxLines,
           style: context.textTheme.labelMedium?.copyWith(
             color: context.colorScheme.onSurface,
             fontSize: 16.sp,
