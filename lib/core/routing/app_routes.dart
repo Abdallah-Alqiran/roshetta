@@ -4,6 +4,7 @@ class AppRoutes {
   static const String bookedClinicScreen = '/booked_clinic_screen';
   static const String registerScreen = '/register';
   static const String navBar = '/nav_bar';
-  static const String patientsScreen = '/home_patients_screen';
+  static const String patientsScreen = '/patients_screen';
   static const String historyPatientsScreen = '/history_patients_screen';
+  static const String homePatientsScreen = '/home_patients_screen';
 }
