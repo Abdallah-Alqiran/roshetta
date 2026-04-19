@@ -26,23 +26,30 @@ class DashboardClinicScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "مرحباً د. أحمد",
-              style: context.textTheme.displayMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "مرحباً د. أحمد",
+                  style: context.textTheme.headlineLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28.sp,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                  "إليك ملخص العيادة لهذا اليوم.",
+                  style: context.textTheme.labelLarge?.copyWith(
+                    color: Colors.grey[600],
+                    fontSize: 14.sp,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 8.h),
-            Text(
-              "إليك ملخص العيادة لهذا اليوم.",
-              style: context.textTheme.labelLarge?.copyWith(color: Colors.grey),
-            ),
-            SizedBox(height: 40.h),
+            SizedBox(height: 32.h),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // SizedBox(width: 300.w, child: const QuickActionsWidget()),
-                SizedBox(width: 40.w),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,25 +57,25 @@ class DashboardClinicScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const ClinicStatCard(
+                          ClinicStatCard(
                             label: "المرضى اليوم",
                             count: "24",
                             icon: Icons.people_outline,
                             backgroundColor: Colors.white,
-                            contentColor: Colors.black,
+                            contentColor: context.colorScheme.primary,
                           ),
                           SizedBox(width: 24.w),
-                          const ClinicStatCard(
+                          ClinicStatCard(
                             label: "المواعيد القادمة",
                             count: "12",
                             icon: Icons.calendar_today_outlined,
-                            backgroundColor: Color(0xFF00A78E),
+                            backgroundColor: const Color(0xFF00A78E),
                             contentColor: Colors.white,
                           ),
                         ],
                       ),
-                      SizedBox(height: 32.h),
-                      const RecentVisitsWidget(),
+                      SizedBox(height: 40.h),
+                      SizedBox(width: 800.w, child: const RecentVisitsWidget()),
                     ],
                   ),
                 ),

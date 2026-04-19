@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
-import 'package:roshetta/features/patients/presentation/screens/widgets/patient_status_pill.dart';
 import 'package:roshetta/features/widgets/custom_img.dart';
 
 class PatientListItem extends StatelessWidget {
   final String imagePath;
   final String name;
   final String genderAndAge;
-  final String fileNumber;
   final String lastVisit;
   final String phone;
   final String email;
-  final String status;
   final VoidCallback onActionTap;
 
   const PatientListItem({
@@ -20,11 +17,9 @@ class PatientListItem extends StatelessWidget {
     required this.imagePath,
     required this.name,
     required this.genderAndAge,
-    required this.fileNumber,
     required this.lastVisit,
     required this.phone,
     required this.email,
-    required this.status,
     required this.onActionTap,
   });
 
@@ -86,15 +81,6 @@ class PatientListItem extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: Text(
-              fileNumber,
-              style: context.textTheme.labelMedium?.copyWith(
-                color: context.colorScheme.scrim.withValues(alpha: 0.8),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
             child: Row(
               children: [
                 Icon(
@@ -136,13 +122,6 @@ class PatientListItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: PatientStatusPill(status: status),
             ),
           ),
           Expanded(

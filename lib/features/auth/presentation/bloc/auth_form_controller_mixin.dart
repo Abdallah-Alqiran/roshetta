@@ -1,47 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:roshetta/features/auth/data/model/login_request_model.dart';
+import 'package:roshetta/features/auth/data/model/register_request_model.dart';
 
 mixin AuthFormControllersMixin {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
+  final nameController = TextEditingController();
   final phoneController = TextEditingController();
+  final dateOfBirthController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
   
   final registerFormKey = GlobalKey<FormState>();
   final loginFormKey = GlobalKey<FormState>();
 
-  //Register
   bool validateRegisterForm() {
     return registerFormKey.currentState?.validate() ?? false;
   }
 
-  // RegisterRequestModel getRegisterRequest() {
-  //   return RegisterRequestModel(
-  //     firstName: firstNameController.text.trim(),
-  //     lastName: lastNameController.text.trim(),
-  //     email: emailController.text.trim(),
-  //     password: passwordController.text.trim(),
-  //   );
-  // }
+  RegisterRequestModel getRegisterRequest(String gender) {
+    return RegisterRequestModel(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+      name: nameController.text.trim(),
+      phoneNumber: phoneController.text.trim(),
+      gender: gender,
+      dateOfBirth: dateOfBirthController.text.trim(),
+    );
+  }
 
   void clearRegisterControllers() {
-    firstNameController.clear();
-    lastNameController.clear();
+    nameController.clear();
     emailController.clear();
     passwordController.clear();
     phoneController.clear();
+    dateOfBirthController.clear();
     confirmPasswordController.clear();
   }
-
 
   bool validateLoginForm() {
     return loginFormKey.currentState?.validate() ?? false;
   }
-
-
+ 
   LoginRequestModel getLoginRequest() {
     return LoginRequestModel(
       email: emailController.text.trim(),
@@ -54,15 +54,12 @@ mixin AuthFormControllersMixin {
     passwordController.clear();
   }
 
-  
-
-  // Dispose all
-  void disposeControllers() {
+    void disposeControllers() {
     emailController.dispose();
     passwordController.dispose();
-    firstNameController.dispose();
-    lastNameController.dispose();
+    nameController.dispose();
     phoneController.dispose();
+    dateOfBirthController.dispose();
     confirmPasswordController.dispose();
   }
 }

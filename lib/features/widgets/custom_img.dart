@@ -7,37 +7,51 @@ class CustomImage extends StatelessWidget {
   final String? imagePath;
   final double? width;
   final double? height;
-  final double? aspectRatio;
-  final BorderRadiusGeometry? borderRadius;
 
-  const CustomImage({
-    super.key,
-    this.imagePath,
-    this.width,
-    this.height,
-    this.aspectRatio,
-    this.borderRadius,
-  });
+  const CustomImage({super.key, this.imagePath, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
     final double size = (width ?? height ?? 50);
-    final double radius = size / 2;
 
-    return CircleAvatar(
-      radius: radius.r,
-      backgroundImage: CachedNetworkImageProvider(
-        imagePath ??
-            'https://i.pinimg.com/736x/77/97/7e/77977e0f51ec76e51b1360e5f0685d13.jpg',
+    if (imagePath == null || imagePath!.trim().isEmpty) {
+      return _buildPlaceholder(context, size);
+    }
+
+    return ClipOval(
+      child: CachedNetworkImage(
+        imageUrl: imagePath!,
+        width: size.w,
+        height: size.w,
+        fit: BoxFit.cover,
+
+        placeholder: (context, url) => SizedBox(
+          width: size.w,
+          height: size.w,
+          child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+        ),
+
+        errorWidget: (context, url, error) {
+          print("IMAGE ERROR: $error");
+          return _buildPlaceholder(context, size);
+        },
       ),
-      onBackgroundImageError: (_, __) {},
-      child: (imagePath == null || imagePath!.isEmpty)
-          ? Icon(
-              Icons.person,
-              color: context.colorScheme.outline,
-              size: radius.r,
-            )
-          : null,
+    );
+  }
+
+  Widget _buildPlaceholder(BuildContext context, double size) {
+    return Container(
+      width: size.w,
+      height: size.w,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: context.colorScheme.surface,
+      ),
+      child: Icon(
+        Icons.person,
+        color: context.colorScheme.outline,
+        size: (size / 2).r,
+      ),
     );
   }
 }

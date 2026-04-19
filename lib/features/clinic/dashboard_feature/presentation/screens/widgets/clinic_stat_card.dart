@@ -21,50 +21,51 @@ class ClinicStatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 180.w,
-      padding: EdgeInsets.all(24.w),
+      width: 220.w,
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.all(8.w),
+                padding: EdgeInsets.all(10.w),
                 decoration: BoxDecoration(
-                  color: contentColor.withValues(alpha: 0.1),
+                  color: contentColor.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, color: contentColor, size: 20.sp),
+                child: Icon(icon, color: contentColor, size: 22.sp),
               ),
-              const SizedBox(), // Placeholder for any top-right element if needed
+              const SizedBox(),
             ],
           ),
           SizedBox(height: 24.h),
           Text(
             label,
             style: context.textTheme.labelMedium?.copyWith(
-              color: contentColor.withValues(alpha: 0.7),
-              fontWeight: FontWeight.bold,
+              color: contentColor.withValues(alpha: 0.8),
+              fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 10.h),
           Text(
             count,
-            style: context.textTheme.displayMedium?.copyWith(
+            style: context.textTheme.displaySmall?.copyWith(
               color: contentColor,
               fontWeight: FontWeight.bold,
+              fontSize: 32.sp,
             ),
           ),
         ],
