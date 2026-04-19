@@ -22,13 +22,6 @@ class RegisterScreen extends StatefulWidget {
 
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _dateController = TextEditingController();
-
-  @override
-  void dispose() {
-    _dateController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +30,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          
-          
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(context.tr('account_created_successfully')),
+              backgroundColor: context.colorScheme.secondary,
+            ),
+          );
+          context.go(AppRoutes.navBar);
         } else if (state is AuthError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -89,15 +87,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(height: 32.h),
                   CustomTextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: authBloc.firstNameController,
+                    controller: authBloc.nameController,
                     txt: context.tr('name'),
                     hint: context.tr('name'),
                     prefixIcon: Icons.person_outline_rounded,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return context.tr('please_enter_name');
-                      }
-                      return validateName(value);
+                      final error = validateName(value);
+                      return error != null ? context.tr(error) : null;
                     },
                     w: double.infinity,
                   ),
@@ -110,10 +106,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hint: context.tr('email_hint'),
                     prefixIcon: Icons.alternate_email_rounded,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return context.tr('please_enter_email');
-                      }
-                      return validateEmail(value);
+                      final error = validateEmail(value);
+                      return error != null ? context.tr(error) : null;
                     },
                     keyboardType: TextInputType.emailAddress,
                     w: double.infinity,
@@ -128,10 +122,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     isPassword: true,
                     prefixIcon: Icons.lock_outline_rounded,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return context.tr('please_enter_password');
-                      }
-                      return validatePassword(value);
+                      final error = validatePassword(value);
+                      return error != null ? context.tr(error) : null;
                     },
                     w: double.infinity,
                   ),
@@ -164,18 +156,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hint: context.tr('phone_number'),
                     prefixIcon: Icons.phone_android_outlined,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return context.tr('please_enter_phone');
-                      }
-                      return null;
+                      final error = validatePhoneNumber(value);
+                      return error != null ? context.tr(error) : null;
                     },
+                    keyboardType: TextInputType.phone,
                     w: double.infinity,
                   ),
 
                   SizedBox(height: 16.h),
                   CustomTextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: _dateController,
+                    controller: authBloc.dateOfBirthController,
                     txt: context.tr('birth_date'),
                     hint: context.tr('birth_date'),
                     prefixIcon: Icons.calendar_today,
@@ -195,7 +186,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         lastDate: DateTime.now(),
                       );
                       if (picked != null) {
-                        _dateController.text = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+                        authBloc.dateOfBirthController.text = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
                       }
                     },
                     w: double.infinity,
