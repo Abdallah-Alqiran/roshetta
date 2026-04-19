@@ -156,11 +156,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hint: context.tr('phone_number'),
                     prefixIcon: Icons.phone_android_outlined,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return context.tr('please_enter_phone');
-                      }
-                      return null;
+                      final error = validatePhoneNumber(value);
+                      return error != null ? context.tr(error) : null;
                     },
+                    keyboardType: TextInputType.phone,
                     w: double.infinity,
                   ),
 

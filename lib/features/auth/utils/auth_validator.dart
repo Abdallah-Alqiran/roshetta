@@ -90,3 +90,18 @@ String? validatePassword(String? value) {
   }
   return null;
 }
+
+String? validatePhoneNumber(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'phone_is_required';
+  }
+  final phone = value.trim();
+  if (phone.length != 11) {
+    return 'phone_length';
+  }
+  final phoneRegex = RegExp(r'^[0-9]{11}$');
+  if (!phoneRegex.hasMatch(phone)) {
+    return 'invalid_phone_format';
+  }
+  return null;
+}
