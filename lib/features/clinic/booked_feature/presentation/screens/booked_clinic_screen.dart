@@ -4,6 +4,7 @@ import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_app_bar.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_bottom_filter.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_request_widget.dart';
+import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_today_summary.dart';
 
 class BookedClinicScreen extends StatefulWidget {
   const BookedClinicScreen({super.key});
@@ -91,7 +92,7 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 32.h),
+        padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 24.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -101,62 +102,91 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16.h),
+            SizedBox(height: 4.h),
+            Text(
+              'مراجعة وتأكيد المواعيد الجديدة',
+              style: context.textTheme.labelLarge!.copyWith(
+                color: Colors.grey[600],
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            SizedBox(height: 18.h),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "مراجعه وتأكيد طلبات الحجز ",
-                  style: context.textTheme.labelLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: context.colorScheme.scrim.withValues(alpha: 0.5),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 8,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24.w,
+                      vertical: 24.h,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            CustomBottomFilter(
+                              text: "غداً",
+                              isSelected: selectedFilterIndex == 3,
+                              onTap: () => _onFilterTap(3),
+                            ),
+                            SizedBox(width: 8.w),
+                            CustomBottomFilter(
+                              text: "اليوم",
+                              isSelected: selectedFilterIndex == 1,
+                              onTap: () => _onFilterTap(1),
+                            ),
+                            SizedBox(width: 8.w),
+                            CustomBottomFilter(
+                              text: "الكل",
+                              number: "12",
+                              isSelected: selectedFilterIndex == 0,
+                              onTap: () => _onFilterTap(0),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 18.h),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            final item = requests[index];
+                            return CustomRequestWidget(
+                              orderNumber: index + 1,
+                              name: item['name']!,
+                              time: item['time']!,
+                              phone: item['phone']!,
+                              onAccept: () {},
+                              onReject: () {},
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                const Spacer(),
-                CustomBottomFilter(
-                  text: "الكل",
-                  // number: "12",
-                  isSelected: selectedFilterIndex == 0,
-                  onTap: () => _onFilterTap(0),
+                SizedBox(width: 24.w),
+                SizedBox(
+                  width: 200.w,
+                  child: CustomTodaySummary(
+                    newRequests: 3,
+                    confirmed: 8,
+                    available: 4,
+                  ),
                 ),
-                SizedBox(width: 8.w),
-                CustomBottomFilter(
-                  text: "اليوم",
-                  // number: "5",
-                  isSelected: selectedFilterIndex == 1,
-                  onTap: () => _onFilterTap(1),
-                ),
-                SizedBox(width: 8.w),
-                CustomBottomFilter(
-                  text: "الكل",
-                  number: "8",
-                  isSelected: selectedFilterIndex == 2,
-                  onTap: () => _onFilterTap(2),
-                ),
-                SizedBox(width: 8.w),
               ],
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.topRight,
-                child: SizedBox(
-                  width: 622.w,
-                  child: ListView.builder(
-                    itemCount: requests.length,
-                    itemBuilder: (context, index) {
-                      final item = requests[index];
-                      return CustomRequestWidget(
-                        orderNumber: index + 1,
-                        name: item['name']!,
-                        time: item['time']!,
-                        phone: item['phone']!,
-                        onAccept: () {},
-                        onReject: () {},
-                      );
-                    },
-                  ),
-                ),
-              ),
             ),
           ],
         ),
