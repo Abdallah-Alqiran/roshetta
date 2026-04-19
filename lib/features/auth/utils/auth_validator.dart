@@ -1,92 +1,92 @@
 String? validateEmail(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Email is required';
+    return 'email_is_required';
   }
   final email = value.trim();
   if (email.length < 5) {
-    return 'Email must be at least 5 characters';
+    return 'email_min_length';
   }
   if (email.length > 50) {
-    return 'Email must not exceed 50 characters';
+    return 'email_max_length';
   }
   final emailRegex = RegExp(
     r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$",
   );
   if (!emailRegex.hasMatch(email)) {
-    return 'Please enter a valid email address (e.g., name@example.com)';
+    return 'invalid_email_format';
   }
   if (email.contains('..')) {
-    return 'Email cannot contain consecutive dots';
+    return 'email_consecutive_dots';
   }
   if (email.startsWith('.') || email.endsWith('.')) {
-    return 'Email cannot start or end with a dot';
+    return 'email_dot_position';
   }
   final parts = email.split('@');
   if (parts.length != 2) {
-    return 'Email must contain exactly one @ symbol';
+    return 'email_one_at_symbol';
   }
   final domain = parts[1];
   if (!domain.contains('.')) {
-    return 'Email domain must contain a dot (e.g., .com)';
+    return 'email_domain_dot';
   }
   if (domain.startsWith('.') || domain.endsWith('.')) {
-    return 'Email domain cannot start or end with a dot';
+    return 'email_domain_dot_position';
   }
   return null;
 }
 
 String? validateName(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Name is required';
+    return 'name_is_required';
   }
   final name = value.trim();
   if (name.length < 2) {
-    return 'Name must be at least 2 characters';
+    return 'name_min_length';
   }
   if (name.length > 30) {
-    return 'Name must not exceed 30 characters';
+    return 'name_max_length';
   }
-  final nameRegex = RegExp(r'^[a-zA-Z\s]+$');
+  // Allow both English and Arabic characters
+  final nameRegex = RegExp(r'^[a-zA-Z\u0600-\u06FF\s]+$');
   if (!nameRegex.hasMatch(name)) {
-    return 'Name can only contain letters and spaces';
+    return 'name_letters_only';
   }
   if (name.startsWith(' ') || name.endsWith(' ')) {
-    return 'Name cannot start or end with a space';
+    return 'name_space_position';
   }
   if (name.contains(RegExp(r'\s{2,}'))) {
-    return 'Name cannot contain consecutive spaces';
+    return 'name_consecutive_spaces';
   }
   return null;
 }
 
-
 String? validatePassword(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Password is required';
+    return 'password_is_required';
   }
   if (value.length < 8) {
-    return 'Password must be at least 8 characters';
+    return 'password_min_length';
   }
   if (value.length > 32) {
-    return 'Password must not exceed 32 characters';
+    return 'password_max_length';
   }
   final passwordRegex = RegExp(
     r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,32}$',
   );
   if (!passwordRegex.hasMatch(value)) {
     if (!value.contains(RegExp(r'[A-Z]'))) {
-      return 'Password must contain at least one uppercase letter';
+      return 'password_uppercase_required';
     }
     if (!value.contains(RegExp(r'[a-z]'))) {
-      return 'Password must contain at least one lowercase letter';
+      return 'password_lowercase_required';
     }
     if (!value.contains(RegExp(r'[0-9]'))) {
-      return 'Password must contain at least one number';
+      return 'password_number_required';
     }
     if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-      return 'Password must contain at least one special character (!@#\$%^&*)';
+      return 'password_special_char_required';
     }
-    return 'Password must be 8-32 characters long';
+    return 'password_invalid';
   }
   return null;
 }
