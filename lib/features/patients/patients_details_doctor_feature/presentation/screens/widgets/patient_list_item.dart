@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
-import 'package:roshetta/features/widgets/custom_img.dart';
 
 class PatientListItem extends StatelessWidget {
-  final String imagePath;
   final String name;
   final String genderAndAge;
   final String lastVisit;
@@ -14,7 +12,6 @@ class PatientListItem extends StatelessWidget {
 
   const PatientListItem({
     super.key,
-    required this.imagePath,
     required this.name,
     required this.genderAndAge,
     required this.lastVisit,
@@ -39,42 +36,26 @@ class PatientListItem extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ClipOval(
-                  child: CustomImage(
-                    imagePath: imagePath,
-                    width: 50,
-                    height: 50,
+                Text(
+                  name,
+                  style: context.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(width: 16.w),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        name,
-                        style: context.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        genderAndAge,
-                        style: context.textTheme.labelMedium?.copyWith(
-                          color: context.colorScheme.scrim.withValues(
-                            alpha: 0.6,
-                          ),
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+                SizedBox(height: 4.h),
+                Text(
+                  genderAndAge,
+                  style: context.textTheme.labelMedium?.copyWith(
+                    color: context.colorScheme.scrim.withValues(alpha: 0.6),
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

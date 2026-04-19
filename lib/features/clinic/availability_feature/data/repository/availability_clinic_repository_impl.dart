@@ -10,11 +10,23 @@ class AvailabilityClinicRepositoryImpl implements AvailabilityClinicRepository {
   
   @override
   Future<Either<String, List<AvailabilityScheduleClinicModel>>> getAvailabilityClinicSchedule() async {
-    final result = await apiConsumer.post<List<AvailabilityScheduleClinicModel>>(
+    final result = await apiConsumer.getRaw<List<AvailabilityScheduleClinicModel>>(
       EndPoint.clinicAvailabilitySchedule,
       fromJson: (json) {
-        final list = json as List;
-        return list.map((item) => AvailabilityScheduleClinicModel.fromJson(item as Map<String, dynamic>)).toList();
+        if (json is List) {
+          final list = json as List;
+          return list.map((item) {
+            return AvailabilityScheduleClinicModel.fromJson(item as Map<String, dynamic>);
+          }).toList();
+        } else if (json is Map<String, dynamic>) {
+          final data = json['data'];
+          if (data is List) {
+            return data.map((item) => AvailabilityScheduleClinicModel.fromJson(item as Map<String, dynamic>)).toList();
+          }
+          throw Exception("Expected 'data' key to contain a list");
+        } else {
+          throw Exception("Expected List or Map");
+        }
       },
     );
 
@@ -23,5 +35,21 @@ class AvailabilityClinicRepositoryImpl implements AvailabilityClinicRepository {
       (availabilitySchedule) => Right(availabilitySchedule),
     );
   }
+  
+  @override
+  Future<Either<String, List<AvailabilityScheduleClinicModel>>> updateAvailabilityClinicSchedule(List<AvailabilityScheduleClinicModel> availabilitySchedules) async {
+    final result = await apiConsumer.put<List<AvailabilityScheduleClinicModel>>(
+      EndPoint.clinicAvailabilitySchedule,
+      data: availabilitySchedules.map((schedule) => schedule.toJson()).toList(),
+      fromJson: (json) {
+        final list = json as List;
+        return list.map((item) => AvailabilityScheduleClinicModel.fromJson(item as Map<String, dynamic>)).toList();
+      },
+    );
 
+    return result.fold(
+      (error) => Left(error),
+      (updatedSchedule) => Right(updatedSchedule),
+    );
+  }
 }

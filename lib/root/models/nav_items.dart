@@ -6,6 +6,7 @@ import 'package:roshetta/features/clinic/profile_feature/presentation/screens/pr
 import 'package:roshetta/features/patients/history_patients_feature/presentation/screens/history_patients_screen.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/home_patients_screen.dart';
 import 'package:roshetta/features/patients/profile_patients_feature/presentation/screens/profile_patients_screen.dart';
+import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/screens/patients_details_doctor_screen.dart';
 
 class NavItemModel {
   final IconData icon;
@@ -37,7 +38,7 @@ final List<NavItemModel> clinicNavItems = [
   NavItemModel(
     icon: Icons.medical_information_outlined,
     label: 'patient_data',
-    screen: HomePatientsScreen(),
+    screen: PatientsDetailsDoctorScreen(),
     index: 2,
   ),
   const NavItemModel(

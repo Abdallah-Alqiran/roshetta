@@ -3,4 +3,7 @@ import 'package:roshetta/features/clinic/availability_feature/data/model/availab
 
 abstract class AvailabilityClinicRepository {
   Future<Either<String, List<AvailabilityScheduleClinicModel>>> getAvailabilityClinicSchedule();
+
+  Future<Either<String, List<AvailabilityScheduleClinicModel>>> updateAvailabilityClinicSchedule(List<AvailabilityScheduleClinicModel> availabilitySchedules);
+  
 }

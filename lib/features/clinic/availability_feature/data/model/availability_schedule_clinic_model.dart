@@ -4,14 +4,16 @@ part 'availability_schedule_clinic_model.g.dart';
 
 @JsonSerializable()
 class AvailabilityScheduleClinicModel {
+  final int scheduleId;
   final String day;
   final String startTime;
   final String endTime;
-  final String isVacation;
-  final String averageConsultationTime;
-  final String maxVisits;
+  final bool isVacation;
+  final int averageConsultationTime;
+  final int maxVisits;
 
   AvailabilityScheduleClinicModel({
+    required this.scheduleId,
     required this.day,
     required this.startTime,
     required this.endTime,

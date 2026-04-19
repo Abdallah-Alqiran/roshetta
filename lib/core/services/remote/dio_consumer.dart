@@ -147,7 +147,6 @@ class DioConsumer extends ApiConsumer {
     Response response,
     T Function(Map<String, dynamic>)? fromJson,
   ) {
-    log("The Response: $response");
     try {
       final responseData = response.data;
 
