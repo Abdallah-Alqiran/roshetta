@@ -3,7 +3,9 @@ import 'package:roshetta/features/clinic/availability_feature/presentation/scree
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/booked_clinic_screen.dart';
 import 'package:roshetta/features/clinic/dashboard_feature/presentation/screens/dashboard_clinic_screen.dart';
 import 'package:roshetta/features/clinic/profile_feature/presentation/screens/profile_clinic_screen.dart';
+import 'package:roshetta/features/patients/history_patients_feature/presentation/screens/history_patients_screen.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/home_patients_screen.dart';
+import 'package:roshetta/features/patients/profile_patients_feature/presentation/screens/profile_patients_screen.dart';
 
 class NavItemModel {
   final IconData icon;
@@ -49,5 +51,26 @@ final List<NavItemModel> clinicNavItems = [
     label: 'profile',
     screen: ProfileClinicScreen(),
     index: 4,
+  ),
+];
+
+final List<NavItemModel> patientNavItems = [
+  const NavItemModel(
+    icon: Icons.home_outlined,
+    label: 'الرئيسية',
+    screen: HomePatientsScreen(),
+    index: 0,
+  ),
+  const NavItemModel(
+    icon: Icons.history_outlined,
+    label: 'السجل',
+    screen: HistoryPatientsScreen(),
+    index: 1,
+  ),
+  const NavItemModel(
+    icon: Icons.person_outline,
+    label: 'الملف الشخصي',
+    screen: ProfilePatientsScreen(),
+    index: 2,
   ),
 ];

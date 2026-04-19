@@ -9,13 +9,12 @@ import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:roshetta/features/auth/presentation/screens/register_screen/register_screen.dart';
 import 'package:roshetta/features/auth/presentation/screens/widgets/auth_layout.dart';
 import 'package:roshetta/features/auth/presentation/screens/login_screen/login_screen.dart';
-import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/home_patients_screen.dart';
 import 'package:roshetta/root/bloc/root_bloc.dart';
 import 'package:roshetta/root/custom_view_nav_bar.dart';
 
 class RouterGenerator {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRoutes.loginScreen,
+    initialLocation: AppRoutes.patientsScreen,
     routes: [
       ShellRoute(
         builder: (context, state, child) {
@@ -69,7 +68,10 @@ class RouterGenerator {
       GoRoute(
         path: AppRoutes.patientsScreen,
         name: AppRoutes.patientsScreen,
-        builder: (context, state) => HomePatientsScreen(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [BlocProvider.value(value: sl<RootBloc>())],
+          child: CustomViewNavBar(role: 'Patient'),
+        ),
       ),
     ],
   );

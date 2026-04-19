@@ -16,8 +16,14 @@ class _CustomViewNavBarState extends State<CustomViewNavBar> {
   @override
   Widget build(BuildContext context) {
     log("Role is: ${widget.role}");
+    if (widget.role == 'Patient') {
+      return RootScreen(
+        navItems: patientNavItems,
+        useTopNavBar: true,
+      );
+    }
     return RootScreen(
-      navItems: widget.role == 'Doctor' ? clinicNavItems : clinicNavItems,
+      navItems: clinicNavItems,
     );
   }
 }
