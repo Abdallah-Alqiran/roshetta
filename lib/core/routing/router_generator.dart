@@ -9,6 +9,7 @@ import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:roshetta/features/auth/presentation/screens/register_screen/register_screen.dart';
 import 'package:roshetta/features/auth/presentation/screens/widgets/auth_layout.dart';
 import 'package:roshetta/features/auth/presentation/screens/login_screen/login_screen.dart';
+import 'package:roshetta/features/patients/presentation/screens/patients_screen.dart';
 import 'package:roshetta/root/bloc/root_bloc.dart';
 import 'package:roshetta/root/custom_view_nav_bar.dart';
 
@@ -64,6 +65,11 @@ class RouterGenerator {
             child: CustomViewNavBar(role: role),
           );
         },
+      ),
+      GoRoute(
+        path: AppRoutes.patientsScreen,
+        name: AppRoutes.patientsScreen,
+        builder: (context, state) => PatientsScreen(),
       ),
     ],
   );
