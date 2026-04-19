@@ -83,8 +83,10 @@ class ApiErrorHandler {
         }
         
         if (decoded['errors'] is List) {
+          final errors = decoded['errors'] as List;
+          final message = errors.length > 1 ? errors[1].toString() : errors.first.toString();
           return ApiErrorResponse(
-            message: (decoded['errors'] as List).join('\n'),
+            message: message,
             type: ErrorType.general,
           );
         }
