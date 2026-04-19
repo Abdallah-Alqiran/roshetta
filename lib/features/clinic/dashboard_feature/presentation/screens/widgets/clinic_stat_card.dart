@@ -48,7 +48,7 @@ class ClinicStatCard extends StatelessWidget {
                 ),
                 child: Icon(icon, color: contentColor, size: 20.sp),
               ),
-              const SizedBox(), // Placeholder for any top-right element if needed
+              const SizedBox(),
             ],
           ),
           SizedBox(height: 24.h),
