@@ -13,5 +13,6 @@ class AuthSuccess<T> extends AuthState {
 
 class AuthError extends AuthState {
   final String message;
-  AuthError({required this.message});
+  final Map<String, List<String>>? fieldErrors;
+  AuthError({required this.message, this.fieldErrors});
 }
