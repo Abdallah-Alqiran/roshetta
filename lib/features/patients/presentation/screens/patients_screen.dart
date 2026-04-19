@@ -20,8 +20,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
 
   final List<Map<String, dynamic>> _dummyPatients = [
     {
-      'image':
-          'https://i.pinimg.com/1200x/7d/cb/a1/7dcba1185f62ae8e7ee801a1de182c77.jpg',
+      'image': 'https://picsum.photos/200',
       'name': 'فاطمة الزهراء',
       'genderAndAge': 'أنثى، 32 سنة',
       'fileNumber': 'PT - 2023 - 0451',
@@ -31,8 +30,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
       'status': 'مستقر',
     },
     {
-      'image':
-          'https://i.pinimg.com/1200x/7d/cb/a1/7dcba1185f62ae8e7ee801a1de182c77.jpg',
+      'image': 'https://picsum.photos/200?random=2',
       'name': 'محمد عبد الله',
       'genderAndAge': 'ذكر، 54 سنة',
       'fileNumber': 'PT - 2022 - 1102',
@@ -42,8 +40,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
       'status': 'متابعة ضرورية',
     },
     {
-      'image':
-          'https://i.pinimg.com/1200x/7d/cb/a1/7dcba1185f62ae8e7ee801a1de182c77.jpg',
+      'image': 'https://picsum.photos/200?random=3',
       'name': 'يوسف منصور',
       'genderAndAge': 'ذكر، 41 سنة',
       'fileNumber': 'PT - 2023 - 0899',
@@ -116,16 +113,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                     icon: Icons.person_add_alt_1_outlined,
                     iconColor: Colors.blue.shade700,
                     iconBackgroundColor: Colors.blue.shade50,
-                  ),
-                ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: PatientStatisticsCard(
-                    title: '',
-                    count: null,
-                    icon: Icons.warning_amber_rounded,
-                    iconColor: Colors.red.shade700,
-                    iconBackgroundColor: Colors.red.shade50,
                   ),
                 ),
               ],
@@ -202,11 +189,9 @@ class _PatientsScreenState extends State<PatientsScreen> {
                         imagePath: item['image'],
                         name: item['name'],
                         genderAndAge: item['genderAndAge'],
-                        fileNumber: item['fileNumber'],
                         lastVisit: item['lastVisit'],
                         phone: item['phone'],
                         email: item['email'],
-                        status: item['status'],
                         onActionTap: () {},
                       );
                     },

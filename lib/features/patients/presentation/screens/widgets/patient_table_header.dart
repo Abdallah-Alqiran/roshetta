@@ -30,18 +30,6 @@ class PatientTableHeader extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Text(
-              "رقم الملف",
-              style: context.textTheme.labelMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: context.colorScheme.scrim.withValues(alpha: 0.7),
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(
               "آخر زيارة",
               style: context.textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -61,21 +49,6 @@ class PatientTableHeader extends StatelessWidget {
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "الحالة",
-                style: context.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.colorScheme.scrim.withValues(alpha: 0.7),
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
             ),
           ),
           Expanded(
