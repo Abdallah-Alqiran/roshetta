@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:roshetta/features/auth/data/model/login_request_model.dart';
 
 mixin AuthFormControllersMixin {
   final emailController = TextEditingController();
@@ -35,17 +36,18 @@ mixin AuthFormControllersMixin {
     confirmPasswordController.clear();
   }
 
-  // login
+
   bool validateLoginForm() {
     return loginFormKey.currentState?.validate() ?? false;
   }
 
-  // LoginRequestModel getLoginRequest() {
-  //   return LoginRequestModel(
-  //     email: emailController.text.trim(),
-  //     password: passwordController.text.trim(),
-  //   );
-  // }
+
+  LoginRequestModel getLoginRequest() {
+    return LoginRequestModel(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+  }
 
   void clearLoginControllers() {
     emailController.clear();

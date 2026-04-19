@@ -21,7 +21,6 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // حساب نصف القطر (نصف أصغر قيمة بين العرض والارتفاع)
     final double size = (width ?? height ?? 50);
     final double radius = size / 2;
 
