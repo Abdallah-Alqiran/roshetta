@@ -118,50 +118,11 @@ class _PatientsScreenState extends State<PatientsScreen> {
               ],
             ),
             SizedBox(height: 32.h),
-            Row(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        CustomBottomFilter(
-                          text: "الكل",
-                          isSelected: _selectedFilterIndex == 0,
-                          onTap: () => _onFilterTap(0),
-                        ),
-                        SizedBox(width: 12.w),
-                        CustomBottomFilter(
-                          text: "مراجعات حديثة",
-                          isSelected: _selectedFilterIndex == 1,
-                          onTap: () => _onFilterTap(1),
-                        ),
-                        SizedBox(width: 12.w),
-                        CustomBottomFilter(
-                          text: "أمراض مزمنة",
-                          isSelected: _selectedFilterIndex == 2,
-                          onTap: () => _onFilterTap(2),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                TextButton.icon(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.filter_list,
-                    color: context.colorScheme.primary,
-                    size: 20.sp,
-                  ),
-                  label: Text(
-                    "تصفية متقدمة",
-                    style: context.textTheme.labelMedium?.copyWith(
-                      color: context.colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
+            Text(
+              'سجل المرضى',
+              style: context.textTheme.headlineLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 24.h),
             Container(
@@ -195,67 +156,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                         onActionTap: () {},
                       );
                     },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 16.h,
-                      horizontal: 24.w,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "عرض 1 إلى 3 من أصل 1248 مريض",
-                          style: context.textTheme.labelMedium?.copyWith(
-                            color: context.colorScheme.scrim.withValues(
-                              alpha: 0.6,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 24.w),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.chevron_left,
-                              color: context.colorScheme.scrim.withValues(
-                                alpha: 0.4,
-                              ),
-                            ),
-                            SizedBox(width: 8.w),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12.w,
-                                vertical: 8.h,
-                              ),
-                              decoration: BoxDecoration(
-                                color: context.colorScheme.primary,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: Text(
-                                "1",
-                                style: TextStyle(
-                                  color: context.colorScheme.onPrimary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 8.w),
-                            Text("2"),
-                            SizedBox(width: 16.w),
-                            Text("3"),
-                            SizedBox(width: 16.w),
-                            Text("..."),
-                            SizedBox(width: 16.w),
-                            Icon(
-                              Icons.chevron_right,
-                              color: context.colorScheme.scrim.withValues(
-                                alpha: 0.8,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
                   ),
                 ],
               ),
