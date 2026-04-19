@@ -7,81 +7,67 @@ class RecentVisitsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(24.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "عرض الكل",
-                style: context.textTheme.labelMedium?.copyWith(
-                  color: context.colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "الزيارات الأخيرة",
+              style: context.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
               ),
-              Text(
-                "الزيارات الأخيرة",
-                style: context.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            Text(
+              "عرض الكل",
+              style: context.textTheme.labelMedium?.copyWith(
+                color: context.colorScheme.primary,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
-          SizedBox(height: 24.h),
-          _buildVisitItem(
-            context,
-            name: "خالد عبدالله",
-            id: "#ID-4829",
-            type: "فحص دوري",
-            time: "09:00 ص",
-            status: "مكتمل",
-            statusColor: Colors.grey,
-            avatarLabel: "خ",
-            avatarColor: Colors.blue.withValues(alpha: 0.1),
-            avatarTextColor: Colors.blue,
-          ),
-          SizedBox(height: 16.h),
-          _buildVisitItem(
-            context,
-            name: "منى طارق",
-            id: "#ID-5102",
-            type: "استشارة باطنية",
-            time: "10:00 ص",
-            status: "في الانتظار",
-            statusColor: Colors.teal,
-            avatarLabel: "م",
-            avatarColor: Colors.teal.withValues(alpha: 0.1),
-            avatarTextColor: Colors.teal,
-          ),
-          SizedBox(height: 16.h),
-          _buildVisitItem(
-            context,
-            name: "يوسف جمال",
-            id: "#ID-3391",
-            type: "متابعة تحاليل",
-            time: "11:30 ص",
-            status: "ملغى",
-            statusColor: Colors.red,
-            avatarLabel: "ي",
-            avatarColor: Colors.red.withValues(alpha: 0.1),
-            avatarTextColor: Colors.red,
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        SizedBox(height: 24.h),
+        _buildVisitItem(
+          context,
+          name: "خالد عبدالله",
+          id: "ID-4829",
+          type: "فحص دوري",
+          time: "09:00 ص",
+          status: "مكتمل",
+          statusColor: const Color(0xFF6C757D),
+          avatarLabel: "خ",
+          avatarColor: Colors.blue.withValues(alpha: 0.1),
+          avatarTextColor: Colors.blue,
+        ),
+        SizedBox(height: 12.h),
+        _buildVisitItem(
+          context,
+          name: "منى طارق",
+          id: "ID-5102",
+          type: "فحص دوري",
+          time: "10:00 ص",
+          status: "في الانتظار",
+          statusColor: const Color(0xFF28A745),
+          avatarLabel: "م",
+          avatarColor: Colors.teal.withValues(alpha: 0.1),
+          avatarTextColor: Colors.teal,
+        ),
+        SizedBox(height: 12.h),
+        _buildVisitItem(
+          context,
+          name: "يوسف جمال",
+          id: "ID-3391",
+          type: "فحص دوري",
+          time: "11:30 ص",
+          status: "ملغى",
+          statusColor: const Color(0xFFDC3545),
+          avatarLabel: "ي",
+          avatarColor: Colors.red.withValues(alpha: 0.1),
+          avatarTextColor: Colors.red,
+        ),
+      ],
     );
   }
 
@@ -98,50 +84,16 @@ class RecentVisitsWidget extends StatelessWidget {
     required Color avatarTextColor,
   }) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: const Color(0xFFF8F9FA),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
         children: [
-          _buildStatusTag(status, statusColor),
-          const Spacer(),
-          Text(
-            time,
-            style: context.textTheme.labelMedium?.copyWith(
-              color: Colors.grey[600],
-            ),
-          ),
-          SizedBox(width: 24.w),
-          Text(
-            type,
-            style: context.textTheme.labelMedium?.copyWith(
-              color: Colors.grey[600],
-            ),
-          ),
-          const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                name,
-                style: context.textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                id,
-                style: context.textTheme.labelSmall?.copyWith(
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(width: 16.w),
           Container(
-            width: 40.w,
-            height: 40.w,
+            width: 36.w,
+            height: 36.w,
             decoration: BoxDecoration(
               color: avatarColor,
               shape: BoxShape.circle,
@@ -152,10 +104,40 @@ class RecentVisitsWidget extends StatelessWidget {
                 style: TextStyle(
                   color: avatarTextColor,
                   fontWeight: FontWeight.bold,
+                  fontSize: 14.sp,
                 ),
               ),
             ),
           ),
+          SizedBox(width: 16.w),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: context.textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14.sp,
+                ),
+              ),
+              Text(
+                "#$id",
+                style: context.textTheme.labelSmall?.copyWith(
+                  color: Colors.grey,
+                  fontSize: 11.sp,
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          Text(
+            "$time $type",
+            style: context.textTheme.labelMedium?.copyWith(
+              color: Colors.grey[600],
+            ),
+          ),
+          const Spacer(),
+          _buildStatusTag(status, statusColor),
         ],
       ),
     );
@@ -163,16 +145,16 @@ class RecentVisitsWidget extends StatelessWidget {
 
   Widget _buildStatusTag(String status, Color color) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(6.r),
       ),
       child: Text(
         status,
         style: TextStyle(
           color: color,
-          fontSize: 12.sp,
+          fontSize: 11.sp,
           fontWeight: FontWeight.bold,
         ),
       ),

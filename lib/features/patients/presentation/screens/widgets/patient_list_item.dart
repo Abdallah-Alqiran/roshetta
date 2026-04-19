@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
-import 'package:roshetta/features/patients/presentation/screens/widgets/patient_status_pill.dart';
 import 'package:roshetta/features/widgets/custom_img.dart';
 
 class PatientListItem extends StatelessWidget {
