@@ -21,41 +21,44 @@ class AdminSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 280.w,
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        border: Border(
-          right: BorderSide(
-            color: context.colorScheme.onSurface.withValues(alpha: 0.1),
-            width: 1,
-          ),
-        ),
-      ),
+      width: 220.w,
+      color: const Color(0xFFE5E5E5),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(28.w, 32.h, 28.w, 24.h),
-            child: Text(
-              context.tr('roshetta'),
-              style: context.textTheme.displaySmall?.copyWith(
-                color: context.colorScheme.primary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          SizedBox(height: 32.h),
+          CircleAvatar(
+            radius: 36.r,
+            backgroundColor: Colors.white,
+            child: Icon(Icons.person, size: 48.sp, color: Colors.teal),
           ),
-          Divider(
-            color: context.colorScheme.onSurface.withValues(alpha: 0.1),
-            height: 1,
-            thickness: 1,
+          SizedBox(height: 12.h),
+
+          Text(
+            'عيادة الشفاء',
+            style: context.textTheme.titleMedium?.copyWith(
+              color: Colors.teal[800],
+              fontWeight: FontWeight.bold,
+              fontSize: 18.sp,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 4.h),
+          Text(
+            'د. أحمد علي',
+            style: context.textTheme.bodySmall?.copyWith(
+              color: Colors.grey[700],
+              fontWeight: FontWeight.w500,
+              fontSize: 14.sp,
+            ),
+            textAlign: TextAlign.center,
           ),
           SizedBox(height: 24.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              children: navItems.take(5).map((item) {
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: navItems.map((item) {
                 return Padding(
-                  padding: EdgeInsets.only(bottom: 8.h),
+                  padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 8.w),
                   child: ResponsiveNavItem(
                     icon: item.icon,
                     label: item.label,
@@ -67,29 +70,7 @@ class AdminSidebar extends StatelessWidget {
               }).toList(),
             ),
           ),
-          const Spacer(),
-          Divider(
-            color: context.colorScheme.onSurface.withValues(alpha: 0.1),
-            height: 1,
-            thickness: 1,
-          ),
-          // Padding(
-          //   padding: EdgeInsets.symmetric(horizontal: 16.w),
-          //   child: Column(
-          //     children: [
-          //       SizedBox(height: 16.h),
-          //       ResponsiveNavItem(
-          //         icon: navItems[5].icon,
-          //         label: navItems[5].label,
-          //         index: navItems[5].index,
-          //         isSelected: selectedIndex == navItems[5].index,
-          //         onTap: () => onItemTap(navItems[5].index),
-          //       ),
-          //       const AdminProfileWidget(),
-          //     ],
-          //   ),
-          // ),
-          // SizedBox(height: 16.h),
+          SizedBox(height: 16.h),
         ],
       ),
     );
@@ -147,7 +128,9 @@ class ResponsiveNavItem extends StatelessWidget {
                           : context.colorScheme.onSurface.withValues(
                               alpha: 0.7,
                             ),
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.w500,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -200,7 +183,9 @@ class AdminProfileWidget extends StatelessWidget {
                   Text(
                     'admin@lms.com',
                     style: context.textTheme.bodySmall?.copyWith(
-                      color: context.colorScheme.onSurface.withValues(alpha: 0.5),
+                      color: context.colorScheme.onSurface.withValues(
+                        alpha: 0.5,
+                      ),
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
