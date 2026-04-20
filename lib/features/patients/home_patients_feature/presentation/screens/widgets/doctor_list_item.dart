@@ -8,6 +8,7 @@ class DoctorListItem extends StatelessWidget {
   final String specialization;
   final String location;
   final String price;
+  final String phone;
   final String description;
   final VoidCallback onBookTap;
 
@@ -17,6 +18,7 @@ class DoctorListItem extends StatelessWidget {
     required this.specialization,
     required this.location,
     required this.price,
+    required this.phone,
     required this.description,
     required this.onBookTap,
   });
@@ -62,32 +64,60 @@ class DoctorListItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 12.h),
-                Row(
+                Wrap(
+                  spacing: 24.w,
+                  runSpacing: 8.h,
                   children: [
-                    Icon(
-                      Icons.location_on_outlined,
-                      size: 18.sp,
-                      color: context.colorScheme.scrim.withValues(alpha: 0.6),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          size: 18.sp,
+                          color: context.colorScheme.scrim.withValues(alpha: 0.6),
+                        ),
+                        SizedBox(width: 4.w),
+                        Text(
+                          location,
+                          style: context.textTheme.labelLarge?.copyWith(
+                            color: context.colorScheme.scrim.withValues(alpha: 0.6),
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 4.w),
-                    Text(
-                      location,
-                      style: context.textTheme.labelLarge?.copyWith(
-                        color: context.colorScheme.scrim.withValues(alpha: 0.6),
-                      ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.payments_outlined,
+                          size: 18.sp,
+                          color: context.colorScheme.scrim.withValues(alpha: 0.6),
+                        ),
+                        SizedBox(width: 4.w),
+                        Text(
+                          price,
+                          style: context.textTheme.labelLarge?.copyWith(
+                            color: context.colorScheme.scrim.withValues(alpha: 0.6),
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 24.w),
-                    Icon(
-                      Icons.payments_outlined,
-                      size: 18.sp,
-                      color: context.colorScheme.scrim.withValues(alpha: 0.6),
-                    ),
-                    SizedBox(width: 4.w),
-                    Text(
-                      price,
-                      style: context.textTheme.labelLarge?.copyWith(
-                        color: context.colorScheme.scrim.withValues(alpha: 0.6),
-                      ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.phone_outlined,
+                          size: 18.sp,
+                          color: context.colorScheme.scrim.withValues(alpha: 0.6),
+                        ),
+                        SizedBox(width: 4.w),
+                        Text(
+                          phone,
+                          style: context.textTheme.labelLarge?.copyWith(
+                            color: context.colorScheme.scrim.withValues(alpha: 0.6),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

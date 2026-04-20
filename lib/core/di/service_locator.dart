@@ -19,11 +19,17 @@ import 'package:roshetta/features/patients/doctor_details_patient_feature/data/r
 import 'package:roshetta/features/patients/doctor_details_patient_feature/domain/repositories/doctor_detials_patient_repo.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/bloc/doctor_details_patient_bloc.dart';
 
+import 'package:roshetta/features/patients/home_patients_feature/data/repositories/home_patients_repository_impl.dart';
+import 'package:roshetta/features/patients/home_patients_feature/domain/repositories/home_patients_repository.dart';
+import 'package:roshetta/features/patients/home_patients_feature/presentation/bloc/home_patients_bloc.dart';
+import 'package:roshetta/features/patients/profile_patients_feature/data/repositories/profile_patient_repository_impl.dart';
+import 'package:roshetta/features/patients/profile_patients_feature/domain/repositories/profile_patient_repository.dart';
+import 'package:roshetta/features/patients/profile_patients_feature/presentation/bloc/profile_patient_bloc.dart';
 import 'package:roshetta/root/bloc/root_bloc.dart';
+
 final sl = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
-  // Services
   final cacheHelper = CacheHelper();
   await cacheHelper.init();
   sl.registerLazySingleton<CacheHelper>(() => cacheHelper);
@@ -36,33 +42,49 @@ Future<void> setupServiceLocator() async {
     () => AuthRepositoryImpl(apiConsumer: sl(), cacheHelper: sl()),
   );
 
-  sl.registerLazySingleton(() => AuthBloc(authRepository: sl(), cacheHelper: sl()));
+  sl.registerLazySingleton(
+    () => AuthBloc(authRepository: sl(), cacheHelper: sl()),
+  );
 
   sl.registerLazySingleton<AvailabilityClinicRepository>(
     () => AvailabilityClinicRepositoryImpl(apiConsumer: sl()),
   );
-  sl.registerLazySingleton(() => AvailabilityClinicBloc(availabilityClinicRepository: sl()));
+  sl.registerLazySingleton(
+    () => AvailabilityClinicBloc(availabilityClinicRepository: sl()),
+  );
 
   sl.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(apiConsumer: sl()),
   );
   sl.registerLazySingleton(() => ProfileClinicBloc(profileRepository: sl()));
 
-
   sl.registerLazySingleton<BookedClinicRepository>(
     () => BookedClinicRepositoryImpl(apiConsumer: sl()),
   );
-  sl.registerLazySingleton(() => BookedClinicBloc(bookedClinicRepository: sl()));
+  sl.registerLazySingleton(
+    () => BookedClinicBloc(bookedClinicRepository: sl()),
+  );
 
   sl.registerLazySingleton<DoctorDetailsPatientRepo>(
     () => DoctorDetailsPatientRepoImpl(apiConsumer: sl()),
   );
-  sl.registerFactory(() => DoctorDetailsPatientBloc(
-        doctorDetailsPatientRepo: sl(),
-      ));
+  sl.registerFactory(
+    () => DoctorDetailsPatientBloc(doctorDetailsPatientRepo: sl()),
+  );
+
+  sl.registerLazySingleton<ProfilePatientRepository>(
+    () => ProfilePatientRepositoryImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton(
+    () => ProfilePatientBloc(profilePatientRepository: sl()),
+  );
+
+  sl.registerLazySingleton<HomePatientsRepository>(
+    () => HomePatientsRepositoryImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton(
+    () => HomePatientsBloc(homePatientsRepository: sl()),
+  );
 
   sl.registerLazySingleton(() => RootBloc());
-
-  
- 
 }

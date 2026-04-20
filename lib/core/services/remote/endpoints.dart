@@ -15,6 +15,10 @@ class EndPoint {
 
   // clinic profile
   static String profileDoctor = '/profile/doctor';
+  static String homePatient = "Home/";
+
+  //patient profile
+  static String profilePatient = '/profile/patient';
 }
 
 class ApiKey {

@@ -8,9 +8,9 @@ part of 'book_doctor_model.dart';
 
 BookDoctorModel _$BookDoctorModelFromJson(Map<String, dynamic> json) =>
     BookDoctorModel(
-      date: json['Date'] as String,
-      doctorId: json['DoctorId'] as String,
+      date: json['date'] as String,
+      doctorId: json['doctorId'] as String,
     );
 
 Map<String, dynamic> _$BookDoctorModelToJson(BookDoctorModel instance) =>
-    <String, dynamic>{'Date': instance.date, 'DoctorId': instance.doctorId};
+    <String, dynamic>{'date': instance.date, 'doctorId': instance.doctorId};
