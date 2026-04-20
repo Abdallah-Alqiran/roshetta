@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'home_doctor_model.g.dart';
 
 @JsonSerializable()
-class HomeDoctorModel {
+class HomeDoctorModel extends Equatable {
   final String userId;
   final String name;
   final String department;
@@ -12,7 +13,7 @@ class HomeDoctorModel {
   final String info;
   final String phoneNumber;
 
-  HomeDoctorModel({
+  const HomeDoctorModel({
     required this.userId,
     required this.name,
     required this.department,
@@ -26,4 +27,8 @@ class HomeDoctorModel {
       _$HomeDoctorModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$HomeDoctorModelToJson(this);
+
+  @override
+  List<Object?> get props =>
+      [userId, name, department, location, price, info, phoneNumber];
 }

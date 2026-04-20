@@ -9,13 +9,13 @@ class HomePatientsBloc extends Bloc<HomePatientsEvent, HomePatientsState> {
   List<HomeDoctorModel> _allDoctors = [];
 
   HomePatientsBloc({required this.homeRepository})
-      : super(HomePatientsInitial()) {
-    on<GetDoctorsEvent>(_onGetDoctorsEvent);
+    : super(HomePatientsInitial()) {
+    on<GetHomeDoctorsEvent>(_onGetHomeDoctorsEvent);
     on<SearchDoctorsEvent>(_onSearchDoctorsEvent);
   }
 
-  void _onGetDoctorsEvent(
-    GetDoctorsEvent event,
+  void _onGetHomeDoctorsEvent(
+    GetHomeDoctorsEvent event,
     Emitter<HomePatientsState> emit,
   ) async {
     emit(HomePatientsLoading());
@@ -23,31 +23,40 @@ class HomePatientsBloc extends Bloc<HomePatientsEvent, HomePatientsState> {
     final result = await homeRepository.getDoctors();
     result.fold(
       (error) => emit(HomePatientsError(message: error)),
-      (doctors) {
-        _allDoctors = doctors;
-        emit(HomePatientsLoaded(doctors: doctors));
-      },
+      (doctors) => emit(HomePatientsLoaded(doctors: doctors)),
     );
   }
 
   void _onSearchDoctorsEvent(
     SearchDoctorsEvent event,
     Emitter<HomePatientsState> emit,
-  ) {
-    if (_allDoctors.isEmpty && state is! HomePatientsLoaded) return;
-
+  ) async {
     emit(HomePatientsLoading());
 
-    final filteredDoctors = _allDoctors.where((doctor) {
-      final matchesName = event.name == null ||
-          event.name!.isEmpty ||
-          doctor.name.toLowerCase().contains(event.name!.toLowerCase());
-      final matchesSpecialization = event.specialization == null ||
-          event.specialization!.isEmpty ||
-          doctor.department == event.specialization;
-      return matchesName && matchesSpecialization;
-    }).toList();
+    final result = await homeRepository.getDoctors();
+    result.fold((error) => emit(HomePatientsError(message: error)), (doctors) {
+      var filteredList = doctors;
 
-    emit(HomePatientsLoaded(doctors: filteredDoctors));
+      if (event.name != null && event.name!.isNotEmpty) {
+        filteredList = filteredList
+            .where(
+              (doc) =>
+                  doc.name.toLowerCase().contains(event.name!.toLowerCase()),
+            )
+            .toList();
+      }
+
+      if (event.specialization != null && event.specialization!.isNotEmpty) {
+        filteredList = filteredList
+            .where(
+              (doc) =>
+                  doc.department.toLowerCase() ==
+                  event.specialization!.toLowerCase(),
+            )
+            .toList();
+      }
+
+      emit(HomePatientsLoaded(doctors: filteredList));
+    });
   }
 }

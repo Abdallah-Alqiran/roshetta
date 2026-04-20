@@ -23,7 +23,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<HomePatientsBloc>().add(GetDoctorsEvent());
+    context.read<HomePatientsBloc>().add(GetHomeDoctorsEvent());
   }
 
   @override
@@ -126,7 +126,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                         description: doc.info,
                         onBookTap: () => context.push(
                           AppRoutes.doctorDetailsPatientScreen,
-                          extra: doc.userId,
+                          extra: doc,
                         ),
                       );
                     }, childCount: state.doctors.length),

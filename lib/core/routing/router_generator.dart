@@ -8,6 +8,7 @@ import 'package:roshetta/core/services/remote/endpoints.dart';
 import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:roshetta/features/auth/presentation/screens/register_screen/register_screen.dart';
 import 'package:roshetta/features/auth/presentation/screens/widgets/auth_layout.dart';
+import 'package:roshetta/features/patients/home_patients_feature/data/models/home_doctor_model.dart';
 import 'package:roshetta/features/auth/presentation/screens/login_screen/login_screen.dart';
 import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_bloc.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_bloc.dart';
@@ -117,11 +118,10 @@ class RouterGenerator {
         path: AppRoutes.doctorDetailsPatientScreen,
         name: AppRoutes.doctorDetailsPatientScreen,
         builder: (context, state) {
-          final doctorId =
-              state.extra as String? ?? '971e6d38-ef9c-49cc-b122-e13be73365ac';
+          final HomeDoctorModel doctorData = state.extra as HomeDoctorModel;
           return BlocProvider(
             create: (_) => sl<DoctorDetailsPatientBloc>(),
-            child: DoctorDetailsPatientScreen(doctorId: doctorId),
+            child: DoctorDetailsPatientScreen(doctorData: doctorData),
           );
         },
       ),

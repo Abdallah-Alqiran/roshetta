@@ -69,11 +69,11 @@ class _DoctorSearchFilterWidgetState extends State<DoctorSearchFilterWidget> {
           ElevatedButton.icon(
             onPressed: () {
               context.read<HomePatientsBloc>().add(
-                    SearchDoctorsEvent(
-                      name: _doctorNameController.text,
-                      specialization: _selectedSpecialization,
-                    ),
-                  );
+                SearchDoctorsEvent(
+                  name: _doctorNameController.text,
+                  specialization: _selectedSpecialization,
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: context.colorScheme.primary,

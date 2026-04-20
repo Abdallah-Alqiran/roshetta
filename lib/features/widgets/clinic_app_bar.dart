@@ -8,6 +8,7 @@ class SharedClinicAppBar extends StatelessWidget {
   final VoidCallback? onLogout;
   final VoidCallback? onSettings;
   final VoidCallback? onProfile;
+  final ValueChanged<String>? onChanged;
 
   const SharedClinicAppBar({
     super.key,
@@ -15,6 +16,7 @@ class SharedClinicAppBar extends StatelessWidget {
     this.onLogout,
     this.onSettings,
     this.onProfile,
+    this.onChanged,
   });
 
   @override
@@ -51,6 +53,7 @@ class SharedClinicAppBar extends StatelessWidget {
         CustomSearchBarr(
           hint: "البحث عن مريض...",
           controller: effectiveController,
+          onChanged: onChanged,
           prefixIcon: Icons.search,
           w: 240.w,
           h: 40.h,
