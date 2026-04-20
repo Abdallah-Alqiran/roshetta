@@ -17,6 +17,7 @@ class HomePatientsScreen extends StatefulWidget {
 class _HomePatientsScreenState extends State<HomePatientsScreen> {
   final List<Map<String, dynamic>> _dummyDoctors = [
     {
+      'id': '971e6d38-ef9c-49cc-b122-e13be73365ac',
       'name': 'دكتور باسم خليل',
       'specialization': 'استشاري أمراض القلب والأوعية الدموية',
       'location': 'القاهرة، المعادي',
@@ -25,6 +26,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
           'متخصص في جراحات القلب المفتوح والقسطرة التداخلية، حاصل على البورد الأمريكي.',
     },
     {
+      'id': '1a5fced2-2bb3-43ca-9269-8c87d78f3995',
       'name': 'دكتورة سارة محمود',
       'specialization': 'أخصائية طب وتجميل الأسنان',
       'location': 'الجيزة، الدقي',
@@ -33,6 +35,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
           'متخصصة في فينير الأسنان وتبييض الأسنان بالليزر، خبرة أكثر من 10 سنوات.',
     },
     {
+      'id': 'af88c1b4-6fab-42f4-a1b6-28f60695b64f',
       'name': 'دكتور علي حسن',
       'specialization': 'استشاري الأمراض الجلدية والتناسلية',
       'location': 'القاهرة، التجمع الخامس',
@@ -41,20 +44,22 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
           'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
     },
     {
-      'name': 'دكتور علي حسن',
-      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
-      'location': 'القاهرة، التجمع الخامس',
-      'price': 'سعر الكشف: 600 ج.م',
+      'id': '6e9137af-a9c4-465e-8518-f5c7a47fcc12',
+      'name': 'دكتور سامي فؤاد',
+      'specialization': 'استشاري الأنف والأذن والحنجرة',
+      'location': 'المنصورة، الجامعة',
+      'price': 'سعر الكشف: 320 ج.م',
       'description':
-          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+          'خبرة واسعة في جراحات الأذن الوسطى وتقويم الحنجرة وعلاج حساسية الأنف.',
     },
     {
-      'name': 'دكتور علي حسن',
-      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
-      'location': 'القاهرة، التجمع الخامس',
-      'price': 'سعر الكشف: 600 ج.م',
+      'id': 'bdc0fdae-9ddc-4eda-a9c7-a4a0f63d7f60',
+      'name': 'دكتور كريم نبيل',
+      'specialization': 'استشاري الجهاز الهضمي والكبد',
+      'location': 'الإسكندرية، سموحة',
+      'price': 'سعر الكشف: 450 ج.م',
       'description':
-          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+          'أخصائي علاج القولون العصبي والتهابات الكبد، حاصل على شهادة الإندوسكوبي المتقدمة.',
     },
   ];
 
@@ -140,6 +145,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                     description: doc['description'],
                     onBookTap: () => context.push(
                       AppRoutes.doctorDetailsPatientScreen,
+                      extra: doc['id'] as String,
                     ),
                   );
                 },

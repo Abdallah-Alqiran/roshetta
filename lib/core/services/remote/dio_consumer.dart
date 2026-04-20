@@ -150,6 +150,14 @@ class DioConsumer extends ApiConsumer {
     try {
       final responseData = response.data;
 
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (fromJson != null && responseData is Map<String, dynamic>) {
+          return Right(fromJson(responseData));
+        } else {
+          return Right(responseData as T);
+        }
+      }
+
       if (responseData is Map<String, dynamic>) {
         final hasSuccessKey = responseData.containsKey('success');
         final bool success = hasSuccessKey ? (responseData['success'] ?? false) : true;

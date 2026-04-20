@@ -6,8 +6,17 @@ import 'package:roshetta/features/widgets/custom_primary_button.dart';
 
 class DoctorDetailsBookingSummary extends StatelessWidget {
   final VoidCallback onConfirm;
+  final String bookingDate;
+  final bool isLoading;
+  final bool isSuccess;
 
-  const DoctorDetailsBookingSummary({super.key, required this.onConfirm});
+  const DoctorDetailsBookingSummary({
+    super.key,
+    required this.onConfirm,
+    required this.bookingDate,
+    this.isLoading = false,
+    this.isSuccess = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +46,7 @@ class DoctorDetailsBookingSummary extends StatelessWidget {
             isBold: true,
           ),
           SizedBox(height: 24.h),
-          _SummaryRow(title: context.tr('date'), value: '12 أكتوبر 2023'),
+          _SummaryRow(title: context.tr('date'), value: bookingDate),
           SizedBox(height: 24.h),
           _SummaryRow(title: context.tr('time'), value: '11:15 صباحاً'),
           SizedBox(height: 24.h),
@@ -48,23 +57,47 @@ class DoctorDetailsBookingSummary extends StatelessWidget {
             isBold: true,
           ),
           SizedBox(height: 70.h),
-          CustomPrimaryButton(
-            width: double.infinity,
-            height: 54.h,
-            onTap: onConfirm,
-            text: context.tr('confirm_booking_now'),
-            textStyle: context.textTheme.titleMedium?.copyWith(
-              color: context.colorScheme.onPrimary,
-              fontWeight: FontWeight.bold,
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: context.colorScheme.primary,
-              shape: RoundedRectangleBorder(
+          if (!isSuccess)
+            CustomPrimaryButton(
+              width: double.infinity,
+              height: 54.h,
+              onTap: isLoading ? null : onConfirm,
+              text: isLoading ? 'Loading...' : context.tr('confirm_booking_now'),
+              textStyle: context.textTheme.titleMedium?.copyWith(
+                color: context.colorScheme.onPrimary,
+                fontWeight: FontWeight.bold,
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: context.colorScheme.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                elevation: 0,
+              ),
+            )
+          else
+            Container(
+              width: double.infinity,
+              height: 54.h,
+              decoration: BoxDecoration(
+                color: Colors.green,
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              elevation: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.check_circle, color: Colors.white),
+                  SizedBox(width: 12.w),
+                  Text(
+                    'تم تأكيد الحجز',
+                    style: context.textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
           SizedBox(height: 16.h),
           Text(
             context.tr('booking_terms_agree'),

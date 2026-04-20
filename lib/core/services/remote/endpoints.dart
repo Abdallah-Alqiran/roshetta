@@ -12,6 +12,9 @@ class EndPoint {
   // clinic
   static String clinicAvailabilitySchedule = "doctorSchedule";
   static String clinicBooked = "Visit";
+
+  //patinet
+  // static String bookDoctor = "Visit";
 }
 
 class ApiKey {
