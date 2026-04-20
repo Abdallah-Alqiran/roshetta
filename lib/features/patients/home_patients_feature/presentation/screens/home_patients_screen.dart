@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
+import 'package:roshetta/core/routing/app_routes.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/doctor_search_filter_widget.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/doctor_list_item.dart';
 
@@ -153,29 +155,24 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 18.h),
-            Expanded(
-              child: Align(
-                alignment: AlignmentDirectional.topStart,
-                child: FractionallySizedBox(
-                  widthFactor: 0.75,
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: _dummyDoctors.length,
-                    itemBuilder: (context, index) {
-                      final doc = _dummyDoctors[index];
-                      return DoctorListItem(
-                        name: doc['name'],
-                        specialization: doc['specialization'],
-                        location: doc['location'],
-                        price: doc['price'],
-                        description: doc['description'],
-                        onBookTap: () {},
-                      );
-                    },
-                  ),
-                ),
-              ),
+            SizedBox(height: 24.h),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _dummyDoctors.length,
+              itemBuilder: (context, index) {
+                final doc = _dummyDoctors[index];
+                return DoctorListItem(
+                  name: doc['name'],
+                  specialization: doc['specialization'],
+                  location: doc['location'],
+                  price: doc['price'],
+                  description: doc['description'],
+                  onBookTap: () {
+                    context.push(AppRoutes.doctorDetailsPatientScreen);
+                  },
+                );
+              },
             ),
           ],
         ),

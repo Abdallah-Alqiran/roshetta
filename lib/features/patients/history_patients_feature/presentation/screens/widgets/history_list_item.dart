@@ -8,7 +8,6 @@ class HistoryListItem extends StatelessWidget {
   final String date;
   final String time;
   final String status;
-  final List<Widget> actions;
 
   const HistoryListItem({
     super.key,
@@ -17,7 +16,6 @@ class HistoryListItem extends StatelessWidget {
     required this.date,
     required this.time,
     required this.status,
-    required this.actions,
   });
 
   @override
@@ -106,13 +104,7 @@ class HistoryListItem extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: actions,
-            ),
-          ),
+          Expanded(flex: 2, child: Icon(Icons.info_outline)),
         ],
       ),
     );

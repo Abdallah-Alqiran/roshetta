@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/core/utils/get_responsive_size.dart';
 import 'package:roshetta/root/models/nav_items.dart';
 
@@ -50,7 +51,7 @@ class PatientTopNavBar extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Roshetta',
+            context.tr('roshetta'),
             style: TextStyle(
               fontSize: getResponsiveSize(
                 context: context,
