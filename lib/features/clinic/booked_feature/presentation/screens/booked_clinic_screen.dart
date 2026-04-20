@@ -26,51 +26,6 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
       'time': '11:15 صباحاً',
       'phone': '+966 55 987 6543',
     },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
   ];
 
   void _onFilterTap(int index) {
@@ -134,27 +89,14 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            CustomBottomFilter(
-                              text: "غداً",
-                              isSelected: selectedFilterIndex == 3,
-                              onTap: () => _onFilterTap(3),
-                            ),
-                            SizedBox(width: 8.w),
-                            CustomBottomFilter(
-                              text: "اليوم",
-                              isSelected: selectedFilterIndex == 1,
-                              onTap: () => _onFilterTap(1),
-                            ),
-                            SizedBox(width: 8.w),
-                            CustomBottomFilter(
-                              text: "الكل",
-                              number: "12",
-                              isSelected: selectedFilterIndex == 0,
-                              onTap: () => _onFilterTap(0),
-                            ),
-                          ],
+                        SizedBox(
+                          width: 100.w,
+                          child: CustomBottomFilter(
+                            text: "الكل",
+                            number: "12",
+                            isSelected: selectedFilterIndex == 0,
+                            onTap: () => _onFilterTap(0),
+                          ),
                         ),
                         SizedBox(height: 18.h),
                         ListView.builder(

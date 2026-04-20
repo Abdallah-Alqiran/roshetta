@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
+import 'package:roshetta/core/localization/app_localizations.dart';
 
 class PatientTableHeader extends StatelessWidget {
   const PatientTableHeader({super.key});
@@ -18,7 +19,7 @@ class PatientTableHeader extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              "المريض",
+              context.tr('patient'),
               style: context.textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: context.colorScheme.scrim.withValues(alpha: 0.7),
@@ -30,7 +31,7 @@ class PatientTableHeader extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Text(
-              "آخر زيارة",
+              context.tr('last_visit'),
               style: context.textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: context.colorScheme.scrim.withValues(alpha: 0.7),
@@ -42,7 +43,7 @@ class PatientTableHeader extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Text(
-              "معلومات الاتصال",
+              context.tr('contact_info'),
               style: context.textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: context.colorScheme.scrim.withValues(alpha: 0.7),
@@ -56,7 +57,7 @@ class PatientTableHeader extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                "الإجراءات",
+                context.tr('actions'),
                 style: context.textTheme.labelMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: context.colorScheme.scrim.withValues(alpha: 0.7),

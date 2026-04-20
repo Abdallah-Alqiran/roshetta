@@ -11,12 +11,14 @@ import 'package:roshetta/features/auth/presentation/screens/widgets/auth_layout.
 import 'package:roshetta/features/auth/presentation/screens/login_screen/login_screen.dart';
 import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_bloc.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/home_patients_screen.dart';
+import 'package:roshetta/features/patients/history_patients_feature/presentation/screens/history_patients_screen.dart';
+import 'package:roshetta/features/patients/profile_patients_feature/presentation/screens/profile_patients_screen.dart';
 import 'package:roshetta/root/bloc/root_bloc.dart';
 import 'package:roshetta/root/custom_view_nav_bar.dart';
 
 class RouterGenerator {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRoutes.loginScreen,
+    initialLocation: AppRoutes.patientsScreen,
     routes: [
       ShellRoute(
         builder: (context, state, child) {
@@ -25,6 +27,7 @@ class RouterGenerator {
             child: AuthLayout(child: child),
           );
         },
+
         routes: [
           GoRoute(
             path: AppRoutes.loginScreen,
@@ -62,7 +65,10 @@ class RouterGenerator {
               sl<CacheHelper>().getDataString(key: ApiKey.role) ??
               '';
           return MultiBlocProvider(
-            providers: [BlocProvider.value(value: sl<RootBloc>()), BlocProvider.value(value: sl<AvailabilityClinicBloc>())],
+            providers: [
+              BlocProvider.value(value: sl<RootBloc>()),
+              BlocProvider.value(value: sl<AvailabilityClinicBloc>()),
+            ],
             child: CustomViewNavBar(role: role),
           );
         },
@@ -70,7 +76,25 @@ class RouterGenerator {
       GoRoute(
         path: AppRoutes.patientsScreen,
         name: AppRoutes.patientsScreen,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [BlocProvider.value(value: sl<RootBloc>())],
+          child: CustomViewNavBar(role: 'Patient'),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.historyPatientsScreen,
+        name: AppRoutes.historyPatientsScreen,
+        builder: (context, state) => HistoryPatientsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.homePatientsScreen,
+        name: AppRoutes.homePatientsScreen,
         builder: (context, state) => HomePatientsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.profilePatientsScreen,
+        name: AppRoutes.profilePatientsScreen,
+        builder: (context, state) => ProfilePatientsScreen(),
       ),
     ],
   );
