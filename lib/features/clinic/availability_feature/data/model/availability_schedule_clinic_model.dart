@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'availability_schedule_clinic_model.g.dart';
 
 @JsonSerializable()
-class AvailabilityScheduleClinicModel {
+class AvailabilityScheduleClinicModel extends Equatable {
   final int scheduleId;
   final String day;
   final String startTime;
@@ -12,7 +13,7 @@ class AvailabilityScheduleClinicModel {
   final int averageConsultationTime;
   final int maxVisits;
 
-  AvailabilityScheduleClinicModel({
+  const AvailabilityScheduleClinicModel({
     required this.scheduleId,
     required this.day,
     required this.startTime,
@@ -22,8 +23,19 @@ class AvailabilityScheduleClinicModel {
     required this.maxVisits,
   });
 
-    factory AvailabilityScheduleClinicModel.fromJson(Map<String, dynamic> json) =>
+  factory AvailabilityScheduleClinicModel.fromJson(Map<String, dynamic> json) =>
       _$AvailabilityScheduleClinicModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$AvailabilityScheduleClinicModelToJson(this);
+
+  @override
+  List<Object?> get props => [
+        scheduleId,
+        day,
+        startTime,
+        endTime,
+        isVacation,
+        averageConsultationTime,
+        maxVisits,
+      ];
 }

@@ -15,3 +15,5 @@ class RoleSelectedEvent extends AuthEvent {
   final String role;
   RoleSelectedEvent(this.role);
 }
+
+class LogoutEvent extends AuthEvent {}

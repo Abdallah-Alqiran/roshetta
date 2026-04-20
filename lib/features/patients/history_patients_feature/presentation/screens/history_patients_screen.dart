@@ -66,36 +66,19 @@ class _HistoryPatientsScreenState extends State<HistoryPatientsScreen> {
               ),
             ),
             SizedBox(height: 32.h),
-            Row(
-              children: [
-                Expanded(
-                  child: HistoryStatisticsCard(
-                    title: 'إجمالي المواعيد',
-                    count: '24',
+            SizedBox(
+              width: 200.w,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: HistoryStatisticsCard(
+                      title: 'إجمالي المواعيد',
+                      count: '24',
+                    ),
                   ),
-                ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: HistoryStatisticsCard(
-                    title: 'المواعيد القادمة',
-                    count: '3',
-                  ),
-                ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: HistoryStatisticsCard(
-                    title: 'الزيارات المكتملة',
-                    count: '24',
-                  ),
-                ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: HistoryStatisticsCard(
-                    title: context.tr('canceled'),
-                    count: '24',
-                  ),
-                ),
-              ],
+                 
+                ],
+              ),
             ),
             SizedBox(height: 32.h),
             Row(
@@ -133,32 +116,14 @@ class _HistoryPatientsScreenState extends State<HistoryPatientsScreen> {
                     itemCount: _dummyHistory.length,
                     itemBuilder: (context, index) {
                       final item = _dummyHistory[index];
-                      final actionsData = item['actions'] as List<IconData>;
 
                       return HistoryListItem(
                         doctorName: item['doctorName'],
                         specialization: item['specialization'],
                         date: item['date'],
-                        time: item['time'],
                         status: item['status'],
-                        actions: [
-                          IconButton(
-                            icon: Icon(
-                              actionsData[0],
-                              color: context.colorScheme.scrim.withValues(
-                                alpha: 0.8,
-                              ),
-                            ),
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              actionsData[1],
-                              color: context.colorScheme.primary,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ],
+                       
+                         
                       );
                     },
                   ),
