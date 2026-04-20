@@ -126,7 +126,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                         description: doc.info,
                         onBookTap: () => context.push(
                           AppRoutes.doctorDetailsPatientScreen,
-                          extra: doc.userId,
+                          extra: doc,
                         ),
                       );
                     }, childCount: state.doctors.length),

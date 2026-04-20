@@ -1,13 +1,12 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roshetta/core/extensions/context_extensions.dart';
-import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/core/utils/get_responsive_size.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/bloc/doctor_details_patient_bloc.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/screens/widgets/doctor_details_back_row.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/screens/widgets/doctor_details_booking_summary.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/screens/widgets/doctor_details_doctor_info.dart';
+import 'package:roshetta/features/patients/home_patients_feature/data/models/home_doctor_model.dart';
 
 const Map<int, String> arabicDays = {
   1: 'الاثنين',
@@ -35,9 +34,9 @@ const Map<int, String> arabicMonths = {
 };
 
 class DoctorDetailsPatientScreen extends StatefulWidget {
-  final String doctorId;
+  final HomeDoctorModel doctorData;
 
-  const DoctorDetailsPatientScreen({super.key, required this.doctorId});
+  const DoctorDetailsPatientScreen({super.key, required this.doctorData});
 
   @override
   State<DoctorDetailsPatientScreen> createState() =>
@@ -82,7 +81,7 @@ class _DoctorDetailsPatientScreenState
     context.read<DoctorDetailsPatientBloc>().add(
           BookDoctorEvent(
             date: _selectedBookingDate,
-            doctorId: widget.doctorId,
+            doctorId: widget.doctorData.userId,
           ),
         );
   }
@@ -135,6 +134,7 @@ class _DoctorDetailsPatientScreenState
                                             CrossAxisAlignment.center,
                                         children: [
                                           DoctorDetailsDoctorInfo(
+                                            doctorData: widget.doctorData,
                                             dates: _dates,
                                             selectedDateIndex:
                                                 _selectedDateIndex,
@@ -147,6 +147,7 @@ class _DoctorDetailsPatientScreenState
                                           SizedBox(height: 48.h),
                                           DoctorDetailsBookingSummary(
                                             bookingDate: _formatDate(_selectedBookingDate),
+                                            price: widget.doctorData.price?.toString() ?? '0',
                                             isLoading: isLoading,
                                             isSuccess: _isBookingSuccess,
                                             onConfirm: _onConfirmBooking,
@@ -160,6 +161,7 @@ class _DoctorDetailsPatientScreenState
                                           Expanded(
                                             flex: 3,
                                             child: DoctorDetailsDoctorInfo(
+                                              doctorData: widget.doctorData,
                                               dates: _dates,
                                               selectedDateIndex:
                                                   _selectedDateIndex,
@@ -176,6 +178,7 @@ class _DoctorDetailsPatientScreenState
                                             child: DoctorDetailsBookingSummary(
                                               bookingDate:
                                                   _formatDate(_selectedBookingDate),
+                                              price: widget.doctorData.price?.toString() ?? '0',
                                               isLoading: isLoading,
                                               isSuccess: _isBookingSuccess,
                                               onConfirm: _onConfirmBooking,
