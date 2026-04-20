@@ -153,5 +153,21 @@
   "full_name": "Full Name",
   "role": "Role",
   "home": "Home",
-  "history": "History"
+  "history": "History",
+  "please_enter_phone_number": "Please enter phone number",
+  "date_of_birth": "Date of Birth",
+  "yyyy_mm_dd": "YYYY-MM-DD",
+  "please_enter_date_of_birth": "Please enter date of birth",
+  "professional_information": "Professional Information",
+  "department": "Department",
+  "enter_department": "Enter department",
+  "please_enter_department": "Please enter department",
+  "consultation_price": "Consultation Price",
+  "enter_price": "Enter price",
+  "please_enter_price": "Please enter price",
+  "please_enter_valid_price": "Please enter a valid price",
+  "bio_and_description": "Bio & Description",
+  "saving": "Saving...",
+  "retry": "Retry"
+
 }
