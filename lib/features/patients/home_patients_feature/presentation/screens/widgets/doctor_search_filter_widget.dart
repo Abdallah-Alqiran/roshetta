@@ -13,13 +13,35 @@ class DoctorSearchFilterWidget extends StatefulWidget {
 
 class _DoctorSearchFilterWidgetState extends State<DoctorSearchFilterWidget> {
   final TextEditingController _doctorNameController = TextEditingController();
-  final TextEditingController _specializationController =
-      TextEditingController();
+
+  String? _selectedSpecialization;
+
+  final List<String> _specializations = [
+    "الطب الباطني",
+    "طب الأطفال",
+    "الجراحة العامة",
+    "طب القلب والأوعية الدموية",
+    "طب العظام",
+    "طب النساء والتوليد",
+    "الأمراض الجلدية",
+    "طب الأنف والأذن والحنجرة",
+    "طب العيون",
+    "المخ والأعصاب",
+    "طب الأسنان",
+    "طب الأورام",
+    "طب المسالك البولية",
+    "طب النفسية والعصبية",
+    "طب التخدير",
+    "طب الطوارئ",
+    "طب الأسرة",
+    "الأشعة والتصوير الطبي",
+    "الطب الطبيعي وإعادة التأهيل",
+    "أمراض الدم",
+  ];
 
   @override
   void dispose() {
     _doctorNameController.dispose();
-    _specializationController.dispose();
     super.dispose();
   }
 
@@ -52,13 +74,19 @@ class _DoctorSearchFilterWidgetState extends State<DoctorSearchFilterWidget> {
               label: context.tr('specialization'),
               hint: context.tr('choose_specialization'),
               icon: Icons.medical_services_outlined,
-              controller: _specializationController,
+              isDropdown: true,
+              items: _specializations,
+              value: _selectedSpecialization,
+              onChanged: (value) {
+                setState(() {
+                  _selectedSpecialization = value;
+                });
+              },
             ),
           ),
           SizedBox(width: 16.w),
           ElevatedButton.icon(
             onPressed: () {
-              // TODO: Implement search functionality
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: context.colorScheme.primary,
@@ -90,7 +118,9 @@ class _DoctorSearchFilterWidgetState extends State<DoctorSearchFilterWidget> {
     required IconData icon,
     bool isDropdown = false,
     TextEditingController? controller,
-    VoidCallback? onTap,
+    List<String>? items,
+    String? value,
+    ValueChanged<String?>? onChanged,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,38 +137,49 @@ class _DoctorSearchFilterWidgetState extends State<DoctorSearchFilterWidget> {
           ),
         ),
         isDropdown
-            ? InkWell(
-                onTap: onTap,
-                borderRadius: BorderRadius.circular(12.r),
-                child: Container(
-                  height: 56.h,
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
+            ? DropdownButtonFormField<String>(
+                value: value,
+                onChanged: onChanged,
+                items: items?.map((item) {
+                  return DropdownMenuItem<String>(
+                    value: item,
+                    child: Text(item),
+                  );
+                }).toList(),
+                decoration: InputDecoration(
+                  hintText: hint,
+                  hintStyle: context.textTheme.labelLarge?.copyWith(
+                    color: context.colorScheme.scrim.withValues(alpha: 0.4),
+                  ),
+                  suffixIcon: Icon(
+                    icon,
+                    color: context.colorScheme.scrim.withValues(alpha: 0.4),
+                    size: 20.sp,
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 16.h,
+                  ),
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(
+                    borderSide: BorderSide(
                       color: context.colorScheme.scrim.withValues(alpha: 0.1),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          hint,
-                          overflow: TextOverflow.ellipsis,
-                          style: context.textTheme.labelLarge?.copyWith(
-                            color: context.colorScheme.scrim.withValues(
-                              alpha: 0.4,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Icon(
-                        icon,
-                        color: context.colorScheme.scrim.withValues(alpha: 0.4),
-                        size: 20.sp,
-                      ),
-                    ],
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide(
+                      color: context.colorScheme.scrim.withValues(alpha: 0.1),
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide(
+                      color: context.colorScheme.primary.withValues(alpha: 0.5),
+                      width: 1.5,
+                    ),
                   ),
                 ),
               )
