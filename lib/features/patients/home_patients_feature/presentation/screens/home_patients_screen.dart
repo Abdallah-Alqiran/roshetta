@@ -129,7 +129,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                   price: doc['price'],
                   description: doc['description'],
                   onBookTap: () {
-                    context.go(AppRoutes.doctorDetailsPatientScreen);
+                    context.push(AppRoutes.doctorDetailsPatientScreen);
                   },
                 );
               },

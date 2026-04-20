@@ -148,5 +148,9 @@
   "booking_terms_agree": "By clicking confirm booking, you agree to the clinic's cancellation policy and terms and conditions.",
   "choose_visit_date": "Choose Visit Date",
   "people_before_you": "People before you in the queue",
-  "expected_time_for_checkup": "Expected time for checkup"
+  "expected_time_for_checkup": "Expected time for checkup",
+  "personal_information": "Personal Information",
+  "personal_information_desc": "View your medical and personal data easily",
+  "full_name": "Full Name",
+  "role": "Role"
 }
