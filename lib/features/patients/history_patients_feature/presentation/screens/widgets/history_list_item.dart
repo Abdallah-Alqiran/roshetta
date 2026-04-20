@@ -6,7 +6,6 @@ class HistoryListItem extends StatelessWidget {
   final String doctorName;
   final String specialization;
   final String date;
-  final String time;
   final String status;
 
   const HistoryListItem({
@@ -14,7 +13,6 @@ class HistoryListItem extends StatelessWidget {
     required this.doctorName,
     required this.specialization,
     required this.date,
-    required this.time,
     required this.status,
   });
 
@@ -67,26 +65,6 @@ class HistoryListItem extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Text(
                   date,
-                  style: context.textTheme.titleSmall?.copyWith(
-                    color: context.colorScheme.scrim.withValues(alpha: 0.8),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.access_time,
-                  size: 16.sp,
-                  color: context.colorScheme.primary,
-                ),
-                SizedBox(width: 8.w),
-                Text(
-                  time,
                   style: context.textTheme.titleSmall?.copyWith(
                     color: context.colorScheme.scrim.withValues(alpha: 0.8),
                   ),

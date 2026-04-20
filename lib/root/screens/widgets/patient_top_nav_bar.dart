@@ -60,7 +60,7 @@ class PatientTopNavBar extends StatelessWidget {
               context.go(AppRoutes.loginScreen);
             },
             child: Text(
-              'Roshetta',
+              context.tr('roshetta'),
               style: TextStyle(
                 fontSize: getResponsiveSize(
                   context: context,

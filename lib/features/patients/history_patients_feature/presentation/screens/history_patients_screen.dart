@@ -66,36 +66,18 @@ class _HistoryPatientsScreenState extends State<HistoryPatientsScreen> {
               ),
             ),
             SizedBox(height: 32.h),
-            Row(
-              children: [
-                Expanded(
-                  child: HistoryStatisticsCard(
-                    title: 'إجمالي المواعيد',
-                    count: '24',
+            SizedBox(
+              width: 200.w,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: HistoryStatisticsCard(
+                      title: 'إجمالي المواعيد',
+                      count: '24',
+                    ),
                   ),
-                ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: HistoryStatisticsCard(
-                    title: 'المواعيد القادمة',
-                    count: '3',
-                  ),
-                ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: HistoryStatisticsCard(
-                    title: 'الزيارات المكتملة',
-                    count: '24',
-                  ),
-                ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: HistoryStatisticsCard(
-                    title: context.tr('canceled'),
-                    count: '24',
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
             SizedBox(height: 32.h),
             Row(
@@ -138,7 +120,6 @@ class _HistoryPatientsScreenState extends State<HistoryPatientsScreen> {
                         doctorName: item['doctorName'],
                         specialization: item['specialization'],
                         date: item['date'],
-                        time: item['time'],
                         status: item['status'],
                       );
                     },

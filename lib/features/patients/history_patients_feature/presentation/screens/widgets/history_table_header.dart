@@ -40,17 +40,7 @@ class HistoryTableHeader extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              context.tr('time'),
-              textAlign: TextAlign.center,
-              style: context.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: context.colorScheme.scrim.withValues(alpha: 0.6),
-              ),
-            ),
-          ),
+         
           Expanded(
             flex: 2,
             child: Text(
