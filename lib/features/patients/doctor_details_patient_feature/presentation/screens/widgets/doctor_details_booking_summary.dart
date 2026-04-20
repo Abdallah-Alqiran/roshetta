@@ -7,6 +7,7 @@ import 'package:roshetta/features/widgets/custom_primary_button.dart';
 class DoctorDetailsBookingSummary extends StatelessWidget {
   final VoidCallback onConfirm;
   final String bookingDate;
+  final String price;
   final bool isLoading;
   final bool isSuccess;
 
@@ -14,6 +15,7 @@ class DoctorDetailsBookingSummary extends StatelessWidget {
     super.key,
     required this.onConfirm,
     required this.bookingDate,
+    required this.price,
     this.isLoading = false,
     this.isSuccess = false,
   });
@@ -48,11 +50,9 @@ class DoctorDetailsBookingSummary extends StatelessWidget {
           SizedBox(height: 24.h),
           _SummaryRow(title: context.tr('date'), value: bookingDate),
           SizedBox(height: 24.h),
-          _SummaryRow(title: context.tr('time'), value: '11:15 صباحاً'),
-          SizedBox(height: 24.h),
           _SummaryRow(
             title: context.tr('checkup_fee'),
-            value: '350 جم',
+            value: '$price جم',
             valueColor: context.colorScheme.primary,
             isBold: true,
           ),
