@@ -37,19 +37,15 @@ class AvailabilityClinicRepositoryImpl implements AvailabilityClinicRepository {
   }
   
   @override
-  Future<Either<String, List<AvailabilityScheduleClinicModel>>> updateAvailabilityClinicSchedule(List<AvailabilityScheduleClinicModel> availabilitySchedules) async {
+  Future<Either<String, void>> updateAvailabilityClinicSchedule(List<AvailabilityScheduleClinicModel> availabilitySchedules) async {
     final result = await apiConsumer.put<List<AvailabilityScheduleClinicModel>>(
       EndPoint.clinicAvailabilitySchedule,
       data: availabilitySchedules.map((schedule) => schedule.toJson()).toList(),
-      fromJson: (json) {
-        final list = json as List;
-        return list.map((item) => AvailabilityScheduleClinicModel.fromJson(item as Map<String, dynamic>)).toList();
-      },
     );
 
     return result.fold(
       (error) => Left(error),
-      (updatedSchedule) => Right(updatedSchedule),
+      (updatedSchedule) => Right(null),
     );
   }
 }

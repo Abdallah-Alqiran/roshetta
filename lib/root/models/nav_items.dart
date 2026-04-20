@@ -58,19 +58,19 @@ final List<NavItemModel> clinicNavItems = [
 final List<NavItemModel> patientNavItems = [
   const NavItemModel(
     icon: Icons.home_outlined,
-    label: 'الرئيسية',
+    label: 'home',
     screen: HomePatientsScreen(),
     index: 0,
   ),
   const NavItemModel(
     icon: Icons.history_outlined,
-    label: 'السجل',
+    label: 'history',
     screen: HistoryPatientsScreen(),
     index: 1,
   ),
   const NavItemModel(
     icon: Icons.person_outline,
-    label: 'الملف الشخصي',
+    label: 'profile',
     screen: ProfilePatientsScreen(),
     index: 2,
   ),

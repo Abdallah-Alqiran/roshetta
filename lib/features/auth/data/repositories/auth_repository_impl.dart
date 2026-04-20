@@ -24,13 +24,13 @@ class AuthRepositoryImpl implements AuthRepository {
     return result.fold(
       (error) => Left(error),
       (loginResponse) async {
-        await cacheHelper.saveData(key: 'id', value: loginResponse.id);
-        await cacheHelper.saveData(key: 'email', value: loginResponse.email);
-        await cacheHelper.saveData(key: 'name', value: loginResponse.name);
+        await cacheHelper.saveData(key: ApiKey.id, value: loginResponse.id);
+        await cacheHelper.saveData(key: ApiKey.email, value: loginResponse.email);
+        await cacheHelper.saveData(key: ApiKey.name, value: loginResponse.name);
         await cacheHelper.saveData(key: ApiKey.accessToken, value: loginResponse.token);
-        await cacheHelper.saveData(key: 'role', value: loginResponse.role);
-        await cacheHelper.saveData(key: 'gender', value: loginResponse.gender);
-        await cacheHelper.saveData(key: 'isLoggedIn', value: true);
+        await cacheHelper.saveData(key: ApiKey.role, value: loginResponse.role);
+        await cacheHelper.saveData(key: ApiKey.gender, value: loginResponse.gender);
+        await cacheHelper.saveData(key: ApiKey.isLoggedIn, value: true);
         return Right(loginResponse);
       },
     );
@@ -49,16 +49,27 @@ class AuthRepositoryImpl implements AuthRepository {
     return result.fold(
       (error) => Left(error),
       (registerResponse) async {
-        await cacheHelper.saveData(key: 'id', value: registerResponse.id);
-        await cacheHelper.saveData(key: 'email', value: registerResponse.email);
-        await cacheHelper.saveData(key: 'name', value: registerResponse.name);
-        await cacheHelper.saveData(key: 'token', value: registerResponse.token);
-        await cacheHelper.saveData(key: 'role', value: registerResponse.role);
-        await cacheHelper.saveData(key: 'gender', value: registerResponse.gender);
-        await cacheHelper.saveData(key: 'isLoggedIn', value: true);
+        await cacheHelper.saveData(key: ApiKey.id, value: registerResponse.id);
+        await cacheHelper.saveData(key: ApiKey.email, value: registerResponse.email);
+        await cacheHelper.saveData(key: ApiKey.name, value: registerResponse.name);
+        await cacheHelper.saveData(key: ApiKey.accessToken, value: registerResponse.token);
+        await cacheHelper.saveData(key: ApiKey.role, value: registerResponse.role);
+        await cacheHelper.saveData(key: ApiKey.gender, value: registerResponse.gender);
+        await cacheHelper.saveData(key: ApiKey.isLoggedIn, value: true);
         return Right(registerResponse);
       },
     );
+  }
+
+  @override
+  Future<void> logout() async {
+    await cacheHelper.removeData(key: ApiKey.id);
+    await cacheHelper.removeData(key: ApiKey.email);
+    await cacheHelper.removeData(key: ApiKey.name);
+    await cacheHelper.removeData(key: ApiKey.accessToken);
+    await cacheHelper.removeData(key: ApiKey.role);
+    await cacheHelper.removeData(key: ApiKey.gender);
+    await cacheHelper.removeData(key: ApiKey.isLoggedIn);
   }
 
 }

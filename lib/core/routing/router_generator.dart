@@ -67,6 +67,7 @@ class RouterGenerator {
               '';
           return MultiBlocProvider(
             providers: [
+              BlocProvider.value(value: sl<AuthBloc>()),
               BlocProvider.value(value: sl<RootBloc>()),
               BlocProvider.value(value: sl<AvailabilityClinicBloc>()),
             ],
@@ -78,7 +79,10 @@ class RouterGenerator {
         path: AppRoutes.patientsScreen,
         name: AppRoutes.patientsScreen,
         builder: (context, state) => MultiBlocProvider(
-          providers: [BlocProvider.value(value: sl<RootBloc>())],
+          providers: [
+            BlocProvider.value(value: sl<AuthBloc>()),
+            BlocProvider.value(value: sl<RootBloc>()),
+          ],
           child: CustomViewNavBar(role: 'Patient'),
         ),
       ),
@@ -104,4 +108,11 @@ class RouterGenerator {
       ),
     ],
   );
+
+  static String _getInitialRoute() {
+    final role = sl<CacheHelper>().getDataString(key: ApiKey.role);
+    return (role == null || role.isEmpty)
+        ? AppRoutes.loginScreen
+        : AppRoutes.navBar;
+  }
 }
