@@ -12,6 +12,9 @@ import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/
 import 'package:roshetta/features/clinic/booked_feature/data/repository/booked_clinic_repository_impl.dart';
 import 'package:roshetta/features/clinic/booked_feature/domain/repository/booked_clinic_repository.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_bloc.dart';
+import 'package:roshetta/features/clinic/profile_feature/data/repository/profile_repository_impl.dart';
+import 'package:roshetta/features/clinic/profile_feature/domain/repository/profile_repository.dart';
+import 'package:roshetta/features/clinic/profile_feature/presentation/bloc/profile_clinic_bloc.dart';
 import 'package:roshetta/root/bloc/root_bloc.dart';
 final sl = GetIt.instance;
 
@@ -35,6 +38,12 @@ Future<void> setupServiceLocator() async {
     () => AvailabilityClinicRepositoryImpl(apiConsumer: sl()),
   );
   sl.registerLazySingleton(() => AvailabilityClinicBloc(availabilityClinicRepository: sl()));
+
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton(() => ProfileClinicBloc(profileRepository: sl()));
+
 
   sl.registerLazySingleton<BookedClinicRepository>(
     () => BookedClinicRepositoryImpl(apiConsumer: sl()),
