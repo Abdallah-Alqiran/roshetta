@@ -101,8 +101,8 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
                         SizedBox(height: 18.h),
                         ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: 3,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: requests.length,
                           itemBuilder: (context, index) {
                             final item = requests[index];
                             return CustomRequestWidget(
@@ -119,15 +119,15 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 24.w),
-                SizedBox(
-                  width: 200.w,
-                  child: CustomTodaySummary(
-                    newRequests: 3,
-                    confirmed: 8,
-                    available: 4,
-                  ),
-                ),
+                // SizedBox(width: 24.w),
+                // SizedBox(
+                //   width: 200.w,
+                //   child: CustomTodaySummary(
+                //     newRequests: 3,
+                //     confirmed: 8,
+                //     available: 4,
+                //   ),
+                // ),
               ],
             ),
           ],

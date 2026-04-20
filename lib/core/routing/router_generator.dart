@@ -10,6 +10,7 @@ import 'package:roshetta/features/auth/presentation/screens/register_screen/regi
 import 'package:roshetta/features/auth/presentation/screens/widgets/auth_layout.dart';
 import 'package:roshetta/features/auth/presentation/screens/login_screen/login_screen.dart';
 import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_bloc.dart';
+import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/screens/doctor_details_patient_screen.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/home_patients_screen.dart';
 import 'package:roshetta/features/patients/history_patients_feature/presentation/screens/history_patients_screen.dart';
 import 'package:roshetta/features/patients/profile_patients_feature/presentation/screens/profile_patients_screen.dart';
@@ -99,6 +100,11 @@ class RouterGenerator {
         path: AppRoutes.profilePatientsScreen,
         name: AppRoutes.profilePatientsScreen,
         builder: (context, state) => ProfilePatientsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.doctorDetailsPatientScreen,
+        name: AppRoutes.doctorDetailsPatientScreen,
+        builder: (context, state) => DoctorDetailsPatientScreen(),
       ),
     ],
   );

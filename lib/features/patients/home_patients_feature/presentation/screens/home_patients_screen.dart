@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
+import 'package:roshetta/core/routing/app_routes.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/doctor_search_filter_widget.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/doctor_list_item.dart';
 
@@ -38,13 +40,69 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
       'description':
           'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
     },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 40.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -77,9 +135,15 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 48.h),
-            const DoctorSearchFilterWidget(),
-            SizedBox(height: 32.h),
+            SizedBox(height: 20.h),
+            Align(
+              alignment: AlignmentDirectional.topStart,
+              child: FractionallySizedBox(
+                widthFactor: 0.75,
+                child: const DoctorSearchFilterWidget(),
+              ),
+            ),
+            SizedBox(height: 20.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -88,28 +152,6 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                   style: context.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      context.tr('sort_by'),
-                      style: context.textTheme.titleSmall?.copyWith(
-                        color: context.colorScheme.scrim.withValues(alpha: 0.5),
-                      ),
-                    ),
-                    Text(
-                      context.tr('highest_rated'),
-                      style: context.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(width: 4.w),
-                    Icon(
-                      Icons.keyboard_arrow_down,
-                      color: context.colorScheme.scrim.withValues(alpha: 0.5),
-                      size: 20.sp,
-                    ),
-                  ],
                 ),
               ],
             ),
@@ -126,7 +168,9 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                   location: doc['location'],
                   price: doc['price'],
                   description: doc['description'],
-                  onBookTap: () {},
+                  onBookTap: () {
+                    context.push(AppRoutes.doctorDetailsPatientScreen);
+                  },
                 );
               },
             ),

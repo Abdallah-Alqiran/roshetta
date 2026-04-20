@@ -1,3 +1,5 @@
+
+
 {
   "please_enter_email": "يرجى إدخال البريد الإلكتروني",
   "please_enter_password": "يرجى إدخال كلمة المرور",
@@ -102,7 +104,6 @@
   "invalid_number": "رقم غير صحيح",
   "availability_updated_successfully": "تم تحديث المتاحية بنجاح",
   "save_availability": "حفظ المتاحية",
-  "patient": "المريض",
   "last_visit": "آخر زيارة",
   "contact_info": "معلومات الاتصال",
   "patients_record": "سجل المرضى",
@@ -140,6 +141,19 @@
   "available_doctors": "الأطباء المتاحون",
   "sort_by": "ترتيب حسب: ",
   "highest_rated": "الأعلى تقييماً",
+  "back_to_search": "العودة للبحث عن الأطباء",
+  "booking_summary": "ملخص الحجز",
+  "service_type": "نوع الخدمة",
+  "checkup_fee": "رسوم الكشف",
+  "confirm_booking_now": "تأكيد الحجز الآن",
+  "booking_terms_agree": "بالنقر على تأكيد الحجز، فإنك توافق على سياسة الإلغاء والشروط والأحكام الخاصة بالعيادة.",
+  "choose_visit_date": "اختر موعد الزيارة",
+  "people_before_you": "الناس اللي قبلك في الدور",
+  "expected_time_for_checkup": "الوقت المتوقع للكشف",
+   "personal_information": "المعلومات الشخصية",
+  "personal_information_desc": "اطلع على بياناتك الطبية والشخصية بسهولة",
+  "full_name": "الاسم الكامل",
+  "role": "الدور",
   "home": "الرئيسية",
   "history": "السجل"
 }
