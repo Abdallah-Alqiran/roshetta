@@ -27,8 +27,18 @@ class DoctorListItem extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 16.h),
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8F8F8),
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(
+          color: context.colorScheme.outline.withValues(alpha: 0.16),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: context.colorScheme.onSurface.withValues(alpha: 0.04),
+            blurRadius: 14,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

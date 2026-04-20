@@ -96,13 +96,15 @@ class CustomRequestWidget extends StatelessWidget {
 
           SizedBox(width: 12),
 
-          Row(
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: [
               CustomPrimaryButton(
                 text: 'قبول',
                 onTap: onAccept,
-                width: 130,
-                height: 40,
+                width: 110,
+                height: 36,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.teal,
                   foregroundColor: Colors.white,
@@ -111,14 +113,13 @@ class CustomRequestWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                suffixIcon: Icon(Icons.check, size: 16),
+                suffixIcon: const Icon(Icons.check, size: 16),
               ),
-              SizedBox(width: 8),
               CustomPrimaryButton(
                 text: 'رفض',
                 onTap: onReject,
-                width: 130,
-                height: 40,
+                width: 110,
+                height: 36,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey.shade300,
                   foregroundColor: Colors.black,
@@ -127,7 +128,7 @@ class CustomRequestWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                suffixIcon: Icon(Icons.close, size: 16),
+                suffixIcon: const Icon(Icons.close, size: 16),
               ),
             ],
           ),
