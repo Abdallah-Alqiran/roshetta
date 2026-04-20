@@ -19,7 +19,7 @@ import 'package:roshetta/root/custom_view_nav_bar.dart';
 
 class RouterGenerator {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRoutes.patientsScreen,
+    initialLocation: AppRoutes.navBar,
     routes: [
       ShellRoute(
         builder: (context, state, child) {
