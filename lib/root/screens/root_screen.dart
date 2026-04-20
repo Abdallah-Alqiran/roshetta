@@ -6,10 +6,12 @@ import 'package:roshetta/root/bloc/root_bloc.dart';
 import 'package:roshetta/root/models/nav_items.dart';
 import 'package:roshetta/root/screens/widgets/admin_bottom_bar.dart';
 import 'package:roshetta/root/screens/widgets/admin_sidebar.dart';
+import 'package:roshetta/root/screens/widgets/patient_top_nav_bar.dart';
 
 class RootScreen extends StatefulWidget {
   final List<NavItemModel> navItems;
-  const RootScreen({super.key, required this.navItems});
+  final bool useTopNavBar;
+  const RootScreen({super.key, required this.navItems, this.useTopNavBar = false});
 
   @override
   State<RootScreen> createState() => _RootScreenState();
@@ -65,26 +67,38 @@ class _RootScreenState extends State<RootScreen> {
 
           return Scaffold(
             backgroundColor: context.colorScheme.background,
-            body: Row(
+            body: Column(
               children: [
-                if (isDesktop)
-                  AdminSidebar(
+                if (widget.useTopNavBar)
+                  PatientTopNavBar(
                     navItems: widget.navItems,
-                    selectedIndex: currentIndex,
-                    onItemTap: _onNavigationChanged,
+                    currentIndex: currentIndex,
+                    onItemSelected: _onNavigationChanged,
                   ),
                 Expanded(
-                  child: PageView(
-                    controller: _pageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: widget.navItems
-                        .map((item) => item.screen)
-                        .toList(),
+                  child: Row(
+                    children: [
+                      if (isDesktop && !widget.useTopNavBar)
+                        AdminSidebar(
+                          navItems: widget.navItems,
+                          selectedIndex: currentIndex,
+                          onItemTap: _onNavigationChanged,
+                        ),
+                      Expanded(
+                        child: PageView(
+                          controller: _pageController,
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: widget.navItems
+                              .map((item) => item.screen)
+                              .toList(),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-            bottomNavigationBar: isDesktop
+            bottomNavigationBar: isDesktop || widget.useTopNavBar
                 ? null
                 : AdminBottomBar(
                     navItems: widget.navItems,

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/features/clinic/availability_feature/data/model/availability_schedule_clinic_model.dart';
+import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_bloc.dart';
+import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_event.dart';
+import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_state.dart';
+import 'package:roshetta/features/clinic/availability_feature/presentation/widgets/availability_day_card.dart';
 import 'package:roshetta/features/widgets/custom_primary_button.dart';
-import 'package:roshetta/features/widgets/custom_text_form_field.dart';
 
 class AvailabilityClinicScreen extends StatefulWidget {
   const AvailabilityClinicScreen({super.key});
 
   @override
-  State<AvailabilityClinicScreen> createState() => _AvailabilityClinicScreenState();
+  State<AvailabilityClinicScreen> createState() =>
+      _AvailabilityClinicScreenState();
 }
 
 class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
@@ -18,28 +23,17 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
   late List<TextEditingController> _avgTimeControllers;
   late List<TextEditingController> _maxPatientsControllers;
 
+  bool _initialized = false;
+
   @override
   void initState() {
     super.initState();
+    days = [];
+    _avgTimeControllers = [];
+    _maxPatientsControllers = [];
 
-    days = [
-      AvailabilityScheduleClinicModel(
-        day: 'monday',
-        startTime: '09:00',
-        endTime: '17:00',
-        isVacation: 'false',
-        averageConsultationTime: '30',
-        maxVisits: '10',
-      ),
-    ];
-
-    _avgTimeControllers = List.generate(
-      days.length, 
-      (index) => TextEditingController(text: days[index].averageConsultationTime)
-    );
-    _maxPatientsControllers = List.generate(
-      days.length, 
-      (index) => TextEditingController(text: days[index].maxVisits)
+    context.read<AvailabilityClinicBloc>().add(
+      GetAvailabilityClinicScheduleEvent(),
     );
   }
 
@@ -54,16 +48,41 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
     super.dispose();
   }
 
-  
+  void _initializeControllers(List<AvailabilityScheduleClinicModel> schedules) {
+    if (_avgTimeControllers.isNotEmpty) {
+      for (var c in _avgTimeControllers) {
+        c.dispose();
+      }
+    }
+    if (_maxPatientsControllers.isNotEmpty) {
+      for (var c in _maxPatientsControllers) {
+        c.dispose();
+      }
+    }
+
+    _avgTimeControllers = List.generate(
+      schedules.length,
+      (index) => TextEditingController(
+        text: schedules[index].averageConsultationTime.toString(),
+      ),
+    );
+    _maxPatientsControllers = List.generate(
+      schedules.length,
+      (index) =>
+          TextEditingController(text: schedules[index].maxVisits.toString()),
+    );
+  }
+
   AvailabilityScheduleClinicModel _copyWith(
     AvailabilityScheduleClinicModel old, {
     String? startTime,
     String? endTime,
-    String? isVacation,
-    String? avgTime,
-    String? maxVisits,
+    bool? isVacation,
+    int? avgTime,
+    int? maxVisits,
   }) {
     return AvailabilityScheduleClinicModel(
+      scheduleId: old.scheduleId,
       day: old.day,
       startTime: startTime ?? old.startTime,
       endTime: endTime ?? old.endTime,
@@ -73,10 +92,24 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
     );
   }
 
-  Future<void> _selectTime(BuildContext context, int index, bool isStart) async {
+  Future<void> _selectTime(
+    BuildContext context,
+    int index,
+    bool isStart,
+  ) async {
+    if (days[index].isVacation) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(context.tr('cannot_set_time_vacation_day')),
+          backgroundColor: context.colorScheme.error,
+        ),
+      );
+      return;
+    }
+
     final currentTime = isStart ? days[index].startTime : days[index].endTime;
     final timeParts = currentTime.split(':');
-    
+
     final TimeOfDay initialTime = TimeOfDay(
       hour: int.parse(timeParts[0]),
       minute: int.parse(timeParts[1]),
@@ -90,7 +123,7 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
     if (picked != null) {
       setState(() {
         final formatted = _formatTime(picked);
-        days[index] = isStart 
+        days[index] = isStart
             ? _copyWith(days[index], startTime: formatted)
             : _copyWith(days[index], endTime: formatted);
       });
@@ -98,25 +131,32 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
   }
 
   String _formatTime(TimeOfDay time) {
-    return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+    return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}:00';
   }
 
   void _saveAvailability() {
-    
     for (int i = 0; i < days.length; i++) {
-      days[i] = _copyWith(
-        days[i],
-        avgTime: _avgTimeControllers[i].text,
-        maxVisits: _maxPatientsControllers[i].text,
-      );
+      final avgTime =
+          int.tryParse(_avgTimeControllers[i].text) ??
+          days[i].averageConsultationTime;
+      final maxVisits =
+          int.tryParse(_maxPatientsControllers[i].text) ?? days[i].maxVisits;
+
+      if (days[i].isVacation) {
+        days[i] = _copyWith(
+          days[i],
+          startTime: '00:00:00',
+          endTime: '00:00:00',
+          avgTime: avgTime,
+          maxVisits: maxVisits,
+        );
+      } else {
+        days[i] = _copyWith(days[i], avgTime: avgTime, maxVisits: maxVisits);
+      }
     }
 
-    
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(context.tr('availability_updated_successfully')),
-        backgroundColor: context.colorScheme.primary,
-      ),
+    context.read<AvailabilityClinicBloc>().add(
+      UpdateAvailabilityClinicScheduleEvent(availabilitySchedules: days),
     );
   }
 
@@ -125,121 +165,132 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
     return Scaffold(
       backgroundColor: context.colorScheme.surface,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  context.tr('availability_settings'),
-                  style: context.textTheme.displaySmall!.copyWith(
-                    color: context.colorScheme.onSurface,
-                    fontWeight: FontWeight.bold,
+        child: BlocListener<AvailabilityClinicBloc, AvailabilityClinicState>(
+          listener: (context, state) {
+            if (state is AvailabilityClinicLoaded && _initialized) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    context.tr('availability_updated_successfully'),
                   ),
+                  backgroundColor: context.colorScheme.primary,
                 ),
-                SizedBox(height: 40.h),
-                ...List.generate(days.length, (index) {
-                  final day = days[index];
-                  final bool isActive = day.isVacation == 'false';
-
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 16.h),
-                    padding: EdgeInsets.all(20.w),
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.surfaceVariant.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              context.tr(day.day),
-                              style: context.textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600),
-                            ),
-                            Switch.adaptive(
-                              value: isActive,
-                              onChanged: (value) {
-                                setState(() {
-                                  days[index] = _copyWith(day, isVacation: value ? 'false' : 'true');
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        if (isActive) ...[
-                          SizedBox(height: 20.h),
-                          Row(
-                            children: [
-                              _timeTile(context, 'start_time', day.startTime, () => _selectTime(context, index, true)),
-                              SizedBox(width: 12.w),
-                              _timeTile(context, 'end_time', day.endTime, () => _selectTime(context, index, false)),
-                            ],
-                          ),
-                          SizedBox(height: 16.h),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: CustomTextFormField(
-                                  controller: _avgTimeControllers[index],
-                                  txt: context.tr('avg_time_per_patient'),
-                                  hint: '30',
-                                  prefixIcon: Icons.schedule,
-                                  keyboardType: TextInputType.number,
-                                ),
-                              ),
-                              SizedBox(width: 12.w),
-                              Expanded(
-                                child: CustomTextFormField(
-                                  controller: _maxPatientsControllers[index],
-                                  txt: context.tr('max_patients'),
-                                  hint: '10',
-                                  prefixIcon: Icons.groups,
-                                  keyboardType: TextInputType.number,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ],
-                    ),
-                  );
-                }),
-                SizedBox(height: 16.h),
-                CustomPrimaryButton(
-                  text: context.tr('save_availability'),
-                  onTap: _saveAvailability,
-                  width: double.infinity,
+              );
+            } else if (state is AvailabilityClinicError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                  backgroundColor: context.colorScheme.error,
                 ),
-              ],
-            ),
+              );
+            } else if (state is AvailabilityClinicLoaded && !_initialized) {
+              setState(() {
+                days = List.from(state.availabilitySchedule);
+                _initializeControllers(days);
+                _initialized = true;
+              });
+            }
+          },
+          child: BlocBuilder<AvailabilityClinicBloc, AvailabilityClinicState>(
+            builder: (context, state) => _buildContent(context, state),
           ),
         ),
       ),
     );
   }
 
-  Widget _timeTile(BuildContext context, String label, String time, VoidCallback onTap) {
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8.r),
-        child: Container(
-          padding: EdgeInsets.all(12.w),
-          decoration: BoxDecoration(
-            color: context.colorScheme.background,
-            borderRadius: BorderRadius.circular(8.r),
-            border: Border.all(color: context.colorScheme.outlineVariant),
+  Widget _buildContent(BuildContext context, AvailabilityClinicState state) {
+    if (state is AvailabilityClinicLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (state is AvailabilityClinicError) {
+      _initialized = false;
+      return _buildErrorState(context, state.message);
+    }
+
+    if (state is AvailabilityClinicLoaded) {
+      return _buildLoadedState(context);
+    }
+
+    return const Center(child: CircularProgressIndicator());
+  }
+
+  Widget _buildErrorState(BuildContext context, String message) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.error_outline,
+            color: context.colorScheme.error,
+            size: 48.w,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(context.tr(label), style: context.textTheme.labelSmall),
-              Text(time, style: context.textTheme.bodyLarge!.copyWith(color: context.colorScheme.primary, fontWeight: FontWeight.bold)),
-            ],
+          SizedBox(height: 16.h),
+          Text(
+            context.tr('error_loading_availability'),
+            style: context.textTheme.titleMedium,
+            textAlign: TextAlign.center,
           ),
+          SizedBox(height: 8.h),
+          Text(
+            message,
+            style: context.textTheme.bodySmall?.copyWith(
+              color: context.colorScheme.error,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 24.h),
+          CustomPrimaryButton(
+            text: context.tr('retry'),
+            onTap: () {
+              context.read<AvailabilityClinicBloc>().add(
+                GetAvailabilityClinicScheduleEvent(),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLoadedState(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.tr('availability_settings'),
+              style: context.textTheme.displaySmall!.copyWith(
+                color: context.colorScheme.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 40.h),
+            ...List.generate(days.length, (index) {
+              return AvailabilityDayCard(
+                day: days[index],
+                index: index,
+                avgTimeController: _avgTimeControllers[index],
+                maxPatientsController: _maxPatientsControllers[index],
+                onDayUpdated: (updatedDay) {
+                  setState(() {
+                    days[index] = updatedDay;
+                  });
+                },
+                onSelectTime: (dayIndex, isStart) =>
+                    _selectTime(context, dayIndex, isStart),
+              );
+            }),
+            SizedBox(height: 16.h),
+            CustomPrimaryButton(
+              text: context.tr('save_availability'),
+              onTap: _saveAvailability,
+              width: double.infinity,
+            ),
+          ],
         ),
       ),
     );

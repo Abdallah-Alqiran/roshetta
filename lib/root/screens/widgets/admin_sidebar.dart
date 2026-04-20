@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/core/routing/app_routes.dart';
+import 'package:roshetta/core/services/local/cache_helper.dart';
+import 'package:roshetta/core/services/remote/endpoints.dart';
+import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:roshetta/root/models/nav_items.dart';
 
 class AdminSidebar extends StatelessWidget {
@@ -20,35 +24,33 @@ class AdminSidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  final CacheHelper cacheHelper = CacheHelper();
+
     return Container(
       width: 220.w,
       color: const Color(0xFFE5E5E5),
       child: Column(
         children: [
           SizedBox(height: 32.h),
-          CircleAvatar(
-            radius: 36.r,
-            backgroundColor: Colors.white,
-            child: Icon(Icons.person, size: 48.sp, color: Colors.teal),
+          InkWell(
+            onTap: () {
+              context.read<AuthBloc>().add(LogoutEvent());
+              context.go(AppRoutes.loginScreen);
+            },
+            child: CircleAvatar(
+              radius: 36.r,
+              backgroundColor: Colors.white,
+              child: Icon(Icons.person, size: 48.sp, color: Colors.teal),
+            ),
           ),
           SizedBox(height: 12.h),
 
           Text(
-            'عيادة الشفاء',
+            cacheHelper.getData(key: ApiKey.name) ?? 'Doctor User',
             style: context.textTheme.titleMedium?.copyWith(
               color: Colors.teal[800],
               fontWeight: FontWeight.bold,
               fontSize: 18.sp,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 4.h),
-          Text(
-            'د. أحمد علي',
-            style: context.textTheme.bodySmall?.copyWith(
-              color: Colors.grey[700],
-              fontWeight: FontWeight.w500,
-              fontSize: 14.sp,
             ),
             textAlign: TextAlign.center,
           ),

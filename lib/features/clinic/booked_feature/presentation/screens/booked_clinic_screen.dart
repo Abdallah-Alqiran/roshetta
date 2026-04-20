@@ -4,7 +4,14 @@ import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_app_bar.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_bottom_filter.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_request_widget.dart';
-import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_today_summary.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:roshetta/core/routing/app_routes.dart';
+import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:roshetta/root/bloc/root_bloc.dart';
+import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_bloc.dart';
+import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_event.dart';
+import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_state.dart';
 
 class BookedClinicScreen extends StatefulWidget {
   const BookedClinicScreen({super.key});
@@ -15,63 +22,25 @@ class BookedClinicScreen extends StatefulWidget {
 
 class _BookedClinicScreenState extends State<BookedClinicScreen> {
   int selectedFilterIndex = 0;
-  final List<Map<String, String>> requests = const [
-    {
-      'name': 'محمد عبدالله محمود',
-      'time': '10:30 صباحاً',
-      'phone': '+966 50 123 4567',
-    },
-    {
-      'name': 'سارة خالد العتيبي',
-      'time': '11:15 صباحاً',
-      'phone': '+966 55 987 6543',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-    {
-      'name': 'فهد عبدالرحمن السالم',
-      'time': '01:00 ظهراً',
-      'phone': '+966 53 456 7890',
-    },
-  ];
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = "";
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<BookedClinicBloc>().add(GetBookedClinicEvent());
+    _searchController.addListener(() {
+      setState(() {
+        _searchQuery = _searchController.text.toLowerCase();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   void _onFilterTap(int index) {
     setState(() {
@@ -86,9 +55,21 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
         toolbarHeight: 80.h,
         titleSpacing: 0,
         automaticallyImplyLeading: false,
-        title: const Padding(
+        title: Padding(
           padding: EdgeInsets.symmetric(horizontal: 40.0),
-          child: CustomAppBarWidget(),
+          child: CustomAppBarWidget(
+            searchController: _searchController,
+            onProfile: () {
+              context.read<RootBloc>().add(ChangeIndexRootEvent(index: 4));
+            },
+            onSettings: () {
+              context.read<RootBloc>().add(ChangeIndexRootEvent(index: 4));
+            },
+            onLogout: () {
+              context.read<AuthBloc>().add(LogoutEvent());
+              context.go(AppRoutes.loginScreen);
+            },
+          ),
         ),
       ),
       body: Padding(
@@ -111,82 +92,121 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
               ),
             ),
             SizedBox(height: 18.h),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 8,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 24.w,
-                      vertical: 24.h,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            CustomBottomFilter(
-                              text: "غداً",
-                              isSelected: selectedFilterIndex == 3,
-                              onTap: () => _onFilterTap(3),
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16.r),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 8,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24.w,
+                        vertical: 24.h,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 100.w,
+                            child:
+                                BlocBuilder<
+                                  BookedClinicBloc,
+                                  BookedClinicState
+                                >(
+                                  builder: (context, state) {
+                                    final count = state is BookedClinicLoaded
+                                        ? state.bookedAppointments
+                                              .where(
+                                                (e) => e.name
+                                                    .toLowerCase()
+                                                    .contains(_searchQuery),
+                                              )
+                                              .length
+                                              .toString()
+                                        : "0";
+                                    return CustomBottomFilter(
+                                      text: "الكل",
+                                      number: count,
+                                      isSelected: selectedFilterIndex == 0,
+                                      onTap: () => _onFilterTap(0),
+                                    );
+                                  },
+                                ),
+                          ),
+                          SizedBox(height: 18.h),
+                          Expanded(
+                            child: BlocBuilder<BookedClinicBloc, BookedClinicState>(
+                              builder: (context, state) {
+                                if (state is BookedClinicLoading) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else if (state is BookedClinicError) {
+                                  return Center(child: Text(state.message));
+                                } else if (state is BookedClinicLoaded) {
+                                  final filteredList = state.bookedAppointments
+                                      .where(
+                                        (item) => item.name
+                                            .toLowerCase()
+                                            .contains(_searchQuery),
+                                      )
+                                      .toList();
+
+                                  if (filteredList.isEmpty) {
+                                    return const Center(
+                                      child: Text('لا يوجد طلبات حجز حالياً'),
+                                    );
+                                  }
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: filteredList.length,
+                                    itemBuilder: (context, index) {
+                                      final item = filteredList[index];
+                                      return CustomRequestWidget(
+                                        orderNumber: item.id,
+                                        name: item.name,
+                                        time: item.date,
+                                        phone: item.phoneNumber,
+                                        onAccept: () {
+                                          context.read<BookedClinicBloc>().add(
+                                            UpdateBookedClinicStatusEvent(
+                                              id: item.id,
+                                              status: "Approved",
+                                            ),
+                                          );
+                                        },
+                                        onReject: () {
+                                          context.read<BookedClinicBloc>().add(
+                                            UpdateBookedClinicStatusEvent(
+                                              id: item.id,
+                                              status: "Rejected",
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  );
+                                }
+                                return const SizedBox.shrink();
+                              },
                             ),
-                            SizedBox(width: 8.w),
-                            CustomBottomFilter(
-                              text: "اليوم",
-                              isSelected: selectedFilterIndex == 1,
-                              onTap: () => _onFilterTap(1),
-                            ),
-                            SizedBox(width: 8.w),
-                            CustomBottomFilter(
-                              text: "الكل",
-                              number: "12",
-                              isSelected: selectedFilterIndex == 0,
-                              onTap: () => _onFilterTap(0),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 18.h),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            final item = requests[index];
-                            return CustomRequestWidget(
-                              orderNumber: index + 1,
-                              name: item['name']!,
-                              time: item['time']!,
-                              phone: item['phone']!,
-                              onAccept: () {},
-                              onReject: () {},
-                            );
-                          },
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(width: 24.w),
-                SizedBox(
-                  width: 200.w,
-                  child: CustomTodaySummary(
-                    newRequests: 3,
-                    confirmed: 8,
-                    available: 4,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

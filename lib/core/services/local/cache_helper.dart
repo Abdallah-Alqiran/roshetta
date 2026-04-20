@@ -9,11 +9,11 @@ class CacheHelper {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-   String? getDataString({required String key}) {
+  String? getDataString({required String key}) {
     return sharedPreferences.getString(key);
   }
 
-  //! this method to put data in local database using key
+  // ! this method to put data in local database using key
 
   Future<bool> saveData({required String key, required dynamic value}) async {
     if (value == null) {
