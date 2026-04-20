@@ -38,13 +38,69 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
       'description':
           'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
     },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
+    {
+      'name': 'دكتور علي حسن',
+      'specialization': 'استشاري الأمراض الجلدية والتناسلية',
+      'location': 'القاهرة، التجمع الخامس',
+      'price': 'سعر الكشف: 600 ج.م',
+      'description':
+          'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 40.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -77,9 +133,15 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 48.h),
-            const DoctorSearchFilterWidget(),
-            SizedBox(height: 32.h),
+            SizedBox(height: 20.h),
+            Align(
+              alignment: AlignmentDirectional.topStart,
+              child: FractionallySizedBox(
+                widthFactor: 0.75,
+                child: const DoctorSearchFilterWidget(),
+              ),
+            ),
+            SizedBox(height: 20.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -89,46 +151,31 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      context.tr('sort_by'),
-                      style: context.textTheme.titleSmall?.copyWith(
-                        color: context.colorScheme.scrim.withValues(alpha: 0.5),
-                      ),
-                    ),
-                    Text(
-                      context.tr('highest_rated'),
-                      style: context.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(width: 4.w),
-                    Icon(
-                      Icons.keyboard_arrow_down,
-                      color: context.colorScheme.scrim.withValues(alpha: 0.5),
-                      size: 20.sp,
-                    ),
-                  ],
-                ),
               ],
             ),
-            SizedBox(height: 24.h),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _dummyDoctors.length,
-              itemBuilder: (context, index) {
-                final doc = _dummyDoctors[index];
-                return DoctorListItem(
-                  name: doc['name'],
-                  specialization: doc['specialization'],
-                  location: doc['location'],
-                  price: doc['price'],
-                  description: doc['description'],
-                  onBookTap: () {},
-                );
-              },
+            SizedBox(height: 18.h),
+            Expanded(
+              child: Align(
+                alignment: AlignmentDirectional.topStart,
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: _dummyDoctors.length,
+                    itemBuilder: (context, index) {
+                      final doc = _dummyDoctors[index];
+                      return DoctorListItem(
+                        name: doc['name'],
+                        specialization: doc['specialization'],
+                        location: doc['location'],
+                        price: doc['price'],
+                        description: doc['description'],
+                        onBookTap: () {},
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
           ],
         ),
