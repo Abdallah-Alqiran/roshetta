@@ -22,6 +22,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
       'specialization': 'استشاري أمراض القلب والأوعية الدموية',
       'location': 'القاهرة، المعادي',
       'price': 'سعر الكشف: 400 ج.م',
+      'phone': '01012345678',
       'description':
           'متخصص في جراحات القلب المفتوح والقسطرة التداخلية، حاصل على البورد الأمريكي.',
     },
@@ -31,6 +32,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
       'specialization': 'أخصائية طب وتجميل الأسنان',
       'location': 'الجيزة، الدقي',
       'price': 'سعر الكشف: 250 ج.م',
+      'phone': '01123456789',
       'description':
           'متخصصة في فينير الأسنان وتبييض الأسنان بالليزر، خبرة أكثر من 10 سنوات.',
     },
@@ -40,6 +42,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
       'specialization': 'استشاري الأمراض الجلدية والتناسلية',
       'location': 'القاهرة، التجمع الخامس',
       'price': 'سعر الكشف: 600 ج.م',
+      'phone': '01234567890',
       'description':
           'متخصص في علاج الأمراض الجلدية المزمنة والعلاج بالليزر، أستاذ بجامعة عين شمس.',
     },
@@ -49,6 +52,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
       'specialization': 'استشاري الأنف والأذن والحنجرة',
       'location': 'المنصورة، الجامعة',
       'price': 'سعر الكشف: 320 ج.م',
+      'phone': '01098765432',
       'description':
           'خبرة واسعة في جراحات الأذن الوسطى وتقويم الحنجرة وعلاج حساسية الأنف.',
     },
@@ -58,6 +62,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
       'specialization': 'استشاري الجهاز الهضمي والكبد',
       'location': 'الإسكندرية، سموحة',
       'price': 'سعر الكشف: 450 ج.م',
+      'phone': '01187654321',
       'description':
           'أخصائي علاج القولون العصبي والتهابات الكبد، حاصل على شهادة الإندوسكوبي المتقدمة.',
     },
@@ -142,6 +147,7 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                     specialization: doc['specialization'],
                     location: doc['location'],
                     price: doc['price'],
+                    phone: doc['phone'],
                     description: doc['description'],
                     onBookTap: () => context.push(
                       AppRoutes.doctorDetailsPatientScreen,

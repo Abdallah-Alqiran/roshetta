@@ -13,8 +13,11 @@ class EndPoint {
   static String clinicAvailabilitySchedule = "doctorSchedule";
   static String clinicBooked = "Visit";
 
-  //patinet
-  // static String bookDoctor = "Visit";
+  // clinic profile
+  static String profileDoctor = '/profile/doctor';
+
+  //patient profile
+  static String profilePatient = '/profile/patient';
 }
 
 class ApiKey {
@@ -27,4 +30,29 @@ class ApiKey {
   static String name = "name";
   static String gender = "gender";
   static String isLoggedIn = "isLoggedIn";
+}
+
+class Constants {
+  static List<String> allDepartments = [
+    "الطب الباطني",
+    "طب الأطفال",
+    "الجراحة العامة",
+    "طب القلب والأوعية الدموية",
+    "طب العظام",
+    "طب النساء والتوليد",
+    "الأمراض الجلدية",
+    "طب الأنف والأذن والحنجرة",
+    "طب العيون",
+    "المخ والأعصاب",
+    "طب الأسنان",
+    "طب الأورام",
+    "طب المسالك البولية",
+    "طب النفسية والعصبية",
+    "طب التخدير",
+    "طب الطوارئ",
+    "طب الأسرة",
+    "الأشعة والتصوير الطبي",
+    "الطب الطبيعي وإعادة التأهيل",
+    "أمراض الدم",
+  ];
 }

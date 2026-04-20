@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
+import 'package:roshetta/core/services/remote/endpoints.dart';
 
 class DoctorSearchFilterWidget extends StatefulWidget {
   const DoctorSearchFilterWidget({super.key});
@@ -15,29 +16,6 @@ class _DoctorSearchFilterWidgetState extends State<DoctorSearchFilterWidget> {
   final TextEditingController _doctorNameController = TextEditingController();
 
   String? _selectedSpecialization;
-
-  final List<String> _specializations = [
-    "الطب الباطني",
-    "طب الأطفال",
-    "الجراحة العامة",
-    "طب القلب والأوعية الدموية",
-    "طب العظام",
-    "طب النساء والتوليد",
-    "الأمراض الجلدية",
-    "طب الأنف والأذن والحنجرة",
-    "طب العيون",
-    "المخ والأعصاب",
-    "طب الأسنان",
-    "طب الأورام",
-    "طب المسالك البولية",
-    "طب النفسية والعصبية",
-    "طب التخدير",
-    "طب الطوارئ",
-    "طب الأسرة",
-    "الأشعة والتصوير الطبي",
-    "الطب الطبيعي وإعادة التأهيل",
-    "أمراض الدم",
-  ];
 
   @override
   void dispose() {
@@ -75,7 +53,7 @@ class _DoctorSearchFilterWidgetState extends State<DoctorSearchFilterWidget> {
               hint: context.tr('choose_specialization'),
               icon: Icons.medical_services_outlined,
               isDropdown: true,
-              items: _specializations,
+              items: Constants.allDepartments,
               value: _selectedSpecialization,
               onChanged: (value) {
                 setState(() {
