@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
+import 'package:roshetta/core/routing/app_routes.dart';
 import 'package:roshetta/core/utils/get_responsive_size.dart';
+import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:roshetta/root/models/nav_items.dart';
 
 class PatientTopNavBar extends StatelessWidget {
@@ -50,16 +54,22 @@ class PatientTopNavBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(
-            context.tr('roshetta'),
-            style: TextStyle(
-              fontSize: getResponsiveSize(
-                context: context,
-                mobileSize: 18,
-                webSize: 24,
+          InkWell(
+            onTap: () {
+              context.read<AuthBloc>().add(LogoutEvent());
+              context.go(AppRoutes.loginScreen);
+            },
+            child: Text(
+              context.tr('roshetta'),
+              style: TextStyle(
+                fontSize: getResponsiveSize(
+                  context: context,
+                  mobileSize: 18,
+                  webSize: 24,
+                ),
+                color: context.colorScheme.primary,
+                fontWeight: FontWeight.bold,
               ),
-              color: context.colorScheme.primary,
-              fontWeight: FontWeight.bold,
             ),
           ),
 
@@ -89,7 +99,7 @@ class PatientTopNavBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              item.label,
+                              context.tr(item.label),
                               style: context.textTheme.titleMedium?.copyWith(
                                 fontSize: getResponsiveSize(
                                   context: context,

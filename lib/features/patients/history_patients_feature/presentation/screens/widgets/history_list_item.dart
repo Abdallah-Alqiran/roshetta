@@ -6,18 +6,14 @@ class HistoryListItem extends StatelessWidget {
   final String doctorName;
   final String specialization;
   final String date;
-  final String time;
   final String status;
-  final List<Widget> actions;
 
   const HistoryListItem({
     super.key,
     required this.doctorName,
     required this.specialization,
     required this.date,
-    required this.time,
     required this.status,
-    required this.actions,
   });
 
   @override
@@ -78,26 +74,6 @@ class HistoryListItem extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.access_time,
-                  size: 16.sp,
-                  color: context.colorScheme.primary,
-                ),
-                SizedBox(width: 8.w),
-                Text(
-                  time,
-                  style: context.textTheme.titleSmall?.copyWith(
-                    color: context.colorScheme.scrim.withValues(alpha: 0.8),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 2,
             child: Text(
               status,
               textAlign: TextAlign.center,
@@ -106,13 +82,7 @@ class HistoryListItem extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: actions,
-            ),
-          ),
+          Expanded(flex: 2, child: Icon(Icons.info_outline)),
         ],
       ),
     );

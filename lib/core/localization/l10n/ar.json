@@ -57,7 +57,6 @@
   "male": "ذكر",
   "female": "أنثى",
   "account_type": "نوع الحساب",
-  "patient": "مريض",
   "clinic": "عيادة",
   "birth_date": "تاريخ الميلاد",
   "roshetta": "روشته",  
@@ -154,5 +153,7 @@
    "personal_information": "المعلومات الشخصية",
   "personal_information_desc": "اطلع على بياناتك الطبية والشخصية بسهولة",
   "full_name": "الاسم الكامل",
-  "role": "الدور"
+  "role": "الدور",
+  "home": "الرئيسية",
+  "history": "السجل"
 }
