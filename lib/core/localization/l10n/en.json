@@ -154,6 +154,8 @@
   "role": "Role",
   "home": "Home",
   "history": "History",
+  "patient": "Patient",
+  "add_patient": "Add Patient",
   "please_enter_phone_number": "Please enter phone number",
   "date_of_birth": "Date of Birth",
   "yyyy_mm_dd": "YYYY-MM-DD",
@@ -169,5 +171,4 @@
   "bio_and_description": "Bio & Description",
   "saving": "Saving...",
   "retry": "Retry"
-
 }

@@ -1,23 +1,23 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roshetta/features/patients/home_patients_feature/domain/repositories/home_patients_repository.dart';
+import 'package:roshetta/features/patients/home_patients_feature/domain/repository/home_repository.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/bloc/home_patients_event.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/bloc/home_patients_state.dart';
 
 class HomePatientsBloc extends Bloc<HomePatientsEvent, HomePatientsState> {
-  final HomePatientsRepository homePatientsRepository;
+  final HomeRepository homeRepository;
 
-  HomePatientsBloc({required this.homePatientsRepository})
+  HomePatientsBloc({required this.homeRepository})
       : super(HomePatientsInitial()) {
-    on<GetHomeDoctorsEvent>(_onGetHomeDoctorsEvent);
+    on<GetDoctorsEvent>(_onGetDoctorsEvent);
   }
 
-  void _onGetHomeDoctorsEvent(
-    GetHomeDoctorsEvent event,
+  void _onGetDoctorsEvent(
+    GetDoctorsEvent event,
     Emitter<HomePatientsState> emit,
   ) async {
     emit(HomePatientsLoading());
 
-    await homePatientsRepository.getHomeDoctors().then((result) {
+    await homeRepository.getDoctors().then((result) {
       result.fold(
         (error) => emit(HomePatientsError(message: error)),
         (doctors) => emit(HomePatientsLoaded(doctors: doctors)),

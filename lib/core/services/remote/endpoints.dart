@@ -19,6 +19,8 @@ class EndPoint {
 
   //patient profile
   static String profilePatient = '/profile/patient';
+  //patinet
+  static String home = "Home";
 }
 
 class ApiKey {

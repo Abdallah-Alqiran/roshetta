@@ -1,5 +1,3 @@
-
-
 {
   "please_enter_email": "يرجى إدخال البريد الإلكتروني",
   "please_enter_password": "يرجى إدخال كلمة المرور",
@@ -59,7 +57,7 @@
   "account_type": "نوع الحساب",
   "clinic": "عيادة",
   "birth_date": "تاريخ الميلاد",
-  "roshetta": "روشته",  
+  "roshetta": "روشته",
   "dashboard": "لوحة التحكم",
   "booked": "الحجوزات",
   "patient_data": "بيانات المرضى",
@@ -150,12 +148,14 @@
   "choose_visit_date": "اختر موعد الزيارة",
   "people_before_you": "الناس اللي قبلك في الدور",
   "expected_time_for_checkup": "الوقت المتوقع للكشف",
-   "personal_information": "المعلومات الشخصية",
+  "personal_information": "المعلومات الشخصية",
   "personal_information_desc": "اطلع على بياناتك الطبية والشخصية بسهولة",
   "full_name": "الاسم الكامل",
   "role": "الدور",
   "home": "الرئيسية",
   "history": "السجل",
+  "patient": "المريض",
+  "add_patient": "إضافة مريض",
   "enter_phone_number": "أدخل رقم الهاتف",
   "please_enter_phone_number": "الرجاء إدخال رقم الهاتف",
   "date_of_birth": "تاريخ الميلاد",
@@ -172,5 +172,4 @@
   "bio_and_description": "النبذة والوصف",
   "saving": "جارٍ الحفظ...",
   "retry": "إعادة المحاولة"
-
 }

@@ -52,21 +52,6 @@ class PatientTableHeader extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                context.tr('actions'),
-                style: context.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.colorScheme.scrim.withValues(alpha: 0.7),
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ),
         ],
       ),
     );
