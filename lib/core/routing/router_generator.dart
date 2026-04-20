@@ -12,6 +12,7 @@ import 'package:roshetta/features/auth/presentation/screens/login_screen/login_s
 import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_bloc.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_bloc.dart';
 import 'package:roshetta/features/clinic/profile_feature/presentation/bloc/profile_clinic_bloc.dart';
+import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/bloc/doctor_details_patient_bloc.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/screens/doctor_details_patient_screen.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/home_patients_screen.dart';
 import 'package:roshetta/features/patients/history_patients_feature/presentation/screens/history_patients_screen.dart';
@@ -108,7 +109,14 @@ class RouterGenerator {
       GoRoute(
         path: AppRoutes.doctorDetailsPatientScreen,
         name: AppRoutes.doctorDetailsPatientScreen,
-        builder: (context, state) => DoctorDetailsPatientScreen(),
+        builder: (context, state) {
+          final doctorId = state.extra as String? ??
+              '971e6d38-ef9c-49cc-b122-e13be73365ac';
+          return BlocProvider(
+            create: (_) => sl<DoctorDetailsPatientBloc>(),
+            child: DoctorDetailsPatientScreen(doctorId: doctorId),
+          );
+        },
       ),
     ],
   );

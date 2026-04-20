@@ -15,7 +15,6 @@ class EndPoint {
 
   // clinic profile
   static String profileDoctor = '/profile/doctor';
-
 }
 
 class ApiKey {
