@@ -5,6 +5,8 @@ import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/features/clinic/availability_feature/data/model/availability_schedule_clinic_model.dart';
 import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_bloc.dart';
+import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_event.dart';
+import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_state.dart';
 import 'package:roshetta/features/clinic/availability_feature/presentation/widgets/availability_day_card.dart';
 import 'package:roshetta/features/widgets/custom_primary_button.dart';
 
@@ -47,11 +49,15 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
   }
 
   void _initializeControllers(List<AvailabilityScheduleClinicModel> schedules) {
-    for (var c in _avgTimeControllers) {
-      c.dispose();
+    if (_avgTimeControllers.isNotEmpty) {
+      for (var c in _avgTimeControllers) {
+        c.dispose();
+      }
     }
-    for (var c in _maxPatientsControllers) {
-      c.dispose();
+    if (_maxPatientsControllers.isNotEmpty) {
+      for (var c in _maxPatientsControllers) {
+        c.dispose();
+      }
     }
 
     _avgTimeControllers = List.generate(
@@ -89,6 +95,16 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
 
   Future<void> _selectTime(
       BuildContext context, int index, bool isStart) async {
+    if (days[index].isVacation) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(context.tr('cannot_set_time_vacation_day')),
+          backgroundColor: context.colorScheme.error,
+        ),
+      );
+      return;
+    }
+
     final currentTime =
         isStart ? days[index].startTime : days[index].endTime;
     final timeParts = currentTime.split(':');
@@ -124,11 +140,21 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
       final maxVisits =
           int.tryParse(_maxPatientsControllers[i].text) ?? days[i].maxVisits;
 
-      days[i] = _copyWith(
-        days[i],
-        avgTime: avgTime,
-        maxVisits: maxVisits,
-      );
+      if (days[i].isVacation) {
+        days[i] = _copyWith(
+          days[i],
+          startTime: '00:00:00',
+          endTime: '00:00:00',
+          avgTime: avgTime,
+          maxVisits: maxVisits,
+        );
+      } else {
+        days[i] = _copyWith(
+          days[i],
+          avgTime: avgTime,
+          maxVisits: maxVisits,
+        );
+      }
     }
 
     context.read<AvailabilityClinicBloc>().add(
@@ -159,6 +185,12 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
                   backgroundColor: context.colorScheme.error,
                 ),
               );
+            } else if (state is AvailabilityClinicLoaded && !_initialized) {
+              setState(() {
+                days = List.from(state.availabilitySchedule);
+                _initializeControllers(days);
+                _initialized = true;
+              });
             }
           },
           child: BlocBuilder<AvailabilityClinicBloc, AvailabilityClinicState>(
@@ -180,11 +212,6 @@ class _AvailabilityClinicScreenState extends State<AvailabilityClinicScreen> {
     }
 
     if (state is AvailabilityClinicLoaded) {
-      if (!_initialized) {
-        days = List.from(state.availabilitySchedule);
-        _initializeControllers(days);
-        _initialized = true;
-      }
       return _buildLoadedState(context);
     }
 

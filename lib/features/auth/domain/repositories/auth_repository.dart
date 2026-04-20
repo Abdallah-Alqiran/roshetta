@@ -6,5 +6,6 @@ import 'package:roshetta/features/auth/data/model/register_request_model.dart';
 abstract class AuthRepository {
   Future<Either<String, AuthResponseModel>> login(LoginRequestModel request);
   Future<Either<String, AuthResponseModel>> register(RegisterRequestModel request, String role);
+  Future<void> logout();
 }
 

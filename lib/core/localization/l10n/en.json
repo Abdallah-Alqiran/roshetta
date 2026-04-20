@@ -55,7 +55,6 @@
   "male": "Male",
   "female": "Female",
   "account_type": "Account Type",
-  "patient": "Patient",
   "clinic": "Clinic",
   "birth_date": "Birth Date",
   "roshetta": "Roshetta",
@@ -152,5 +151,7 @@
   "personal_information": "Personal Information",
   "personal_information_desc": "View your medical and personal data easily",
   "full_name": "Full Name",
-  "role": "Role"
+  "role": "Role",
+  "home": "Home",
+  "history": "History"
 }
