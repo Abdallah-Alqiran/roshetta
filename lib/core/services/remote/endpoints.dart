@@ -18,6 +18,7 @@ class EndPoint {
 
   //patinet
   static String home = "Home";
+  static String doctorPatientsData = "doctor/PatientsData";
 }
 
 class ApiKey {

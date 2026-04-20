@@ -21,6 +21,9 @@ import 'package:roshetta/features/patients/doctor_details_patient_feature/presen
 import 'package:roshetta/features/patients/home_patients_feature/data/repository/home_repository_impl.dart';
 import 'package:roshetta/features/patients/home_patients_feature/domain/repository/home_repository.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/bloc/home_patients_bloc.dart';
+import 'package:roshetta/features/patients/patients_details_doctor_feature/data/repository/patient_details_repository_impl.dart';
+import 'package:roshetta/features/patients/patients_details_doctor_feature/domain/repository/patient_details_repository.dart';
+import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/bloc/patient_details_bloc.dart';
 import 'package:roshetta/root/bloc/root_bloc.dart';
 
 final sl = GetIt.instance;
@@ -74,6 +77,13 @@ Future<void> setupServiceLocator() async {
   );
   sl.registerLazySingleton(
     () => HomePatientsBloc(homeRepository: sl()),
+  );
+
+  sl.registerLazySingleton<PatientDetailsRepository>(
+    () => PatientDetailsRepositoryImpl(apiConsumer: sl()),
+  );
+  sl.registerFactory(
+    () => PatientDetailsBloc(repository: sl()),
   );
 
   sl.registerLazySingleton(() => RootBloc());
