@@ -147,24 +147,33 @@ class DioConsumer extends ApiConsumer {
     Response response,
     T Function(Map<String, dynamic>)? fromJson,
   ) {
-    log("The Response: $response");
     try {
       final responseData = response.data;
+
       if (responseData is Map<String, dynamic>) {
-        final bool success = responseData['success'] ?? false;
+        final hasSuccessKey = responseData.containsKey('success');
+        final bool success = hasSuccessKey ? (responseData['success'] ?? false) : true;
         final int status = responseData['status'] ?? response.statusCode ?? 0;
         final String message = responseData['message'] ?? 'Unknown error';
 
-        if (success && (status == 200 || status == 201)) {
+        if ((status == 200 || status == 201) && success) {
           if (fromJson != null) {
             return Right(fromJson(responseData));
           } else {
             return Right(responseData as T);
           }
-        } else {
-          return Left(message);
         }
+
+        if (status == 200 || status == 201) {
+          if (fromJson != null) {
+            return Right(fromJson(responseData));
+          }
+          return Right(responseData as T);
+        }
+
+        return Left(message);
       }
+
       return Left('Unexpected response format');
     } catch (e) {
       return Left('Error parsing response: ${e.toString()}');
@@ -197,3 +206,4 @@ class DioConsumer extends ApiConsumer {
     }
   }
 }
+

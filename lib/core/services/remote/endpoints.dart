@@ -9,6 +9,9 @@ class EndPoint {
   static String doctorRegistration = "auth/doctor-registration/";
   static String patientRegistration = "auth/patient-registration/";
 
+  // clinic
+  static String clinicAvailabilitySchedule = "doctorSchedule";
+
 }
 
 class ApiKey {
