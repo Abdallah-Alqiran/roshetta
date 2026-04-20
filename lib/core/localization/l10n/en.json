@@ -103,7 +103,6 @@
   "invalid_number": "Invalid number",
   "availability_updated_successfully": "Availability updated successfully",
   "save_availability": "Save Availability",
-  "patient": "Patient",
   "last_visit": "Last Visit",
   "contact_info": "Contact Info",
   "patients_record": "Patients Record",
@@ -140,5 +139,14 @@
   "book_now_multiline": "Book\nNow",
   "available_doctors": "Available Doctors",
   "sort_by": "Sort by: ",
-  "highest_rated": "Highest rated"
+  "highest_rated": "Highest rated",
+  "back_to_search": "Back to Searching for Doctors",
+  "booking_summary": "Booking Summary",
+  "service_type": "Service Type",
+  "checkup_fee": "Checkup Fee",
+  "confirm_booking_now": "Confirm Booking Now",
+  "booking_terms_agree": "By clicking confirm booking, you agree to the clinic's cancellation policy and terms and conditions.",
+  "choose_visit_date": "Choose Visit Date",
+  "people_before_you": "People before you in the queue",
+  "expected_time_for_checkup": "Expected time for checkup"
 }

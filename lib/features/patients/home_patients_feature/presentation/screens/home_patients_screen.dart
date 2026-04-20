@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
+import 'package:roshetta/core/routing/app_routes.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/doctor_search_filter_widget.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/widgets/doctor_list_item.dart';
 
@@ -126,7 +128,9 @@ class _HomePatientsScreenState extends State<HomePatientsScreen> {
                   location: doc['location'],
                   price: doc['price'],
                   description: doc['description'],
-                  onBookTap: () {},
+                  onBookTap: () {
+                    context.go(AppRoutes.doctorDetailsPatientScreen);
+                  },
                 );
               },
             ),
