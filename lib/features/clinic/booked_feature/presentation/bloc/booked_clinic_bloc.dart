@@ -9,6 +9,7 @@ class BookedClinicBloc extends Bloc<BookedClinicEvent, BookedClinicState> {
   BookedClinicBloc({required this.bookedClinicRepository})
     : super(BookedClinicInitial()) {
     on<GetBookedClinicEvent>(_onGetBookedClinicEvent);
+    on<UpdateBookedClinicStatusEvent>(_onUpdateBookedClinicStatusEvent);
   }
 
   void _onGetBookedClinicEvent(
@@ -24,5 +25,19 @@ class BookedClinicBloc extends Bloc<BookedClinicEvent, BookedClinicState> {
             emit(BookedClinicLoaded(bookedAppointments: bookedAppointments)),
       );
     });
+  }
+
+  void _onUpdateBookedClinicStatusEvent(
+    UpdateBookedClinicStatusEvent event,
+    Emitter<BookedClinicState> emit,
+  ) async {
+    await bookedClinicRepository
+        .updateBookedClinicStatus(id: event.id, status: event.status)
+        .then((result) {
+          result.fold(
+            (error) => emit(BookedClinicError(message: error)),
+            (success) => add(GetBookedClinicEvent()),
+          );
+        });
   }
 }

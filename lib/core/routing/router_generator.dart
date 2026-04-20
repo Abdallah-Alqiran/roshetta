@@ -20,7 +20,6 @@ import 'package:roshetta/root/custom_view_nav_bar.dart';
 
 class RouterGenerator {
   static GoRouter goRouter = GoRouter(
-    // initialLocation: AppRoutes.navBar,
     initialLocation: _getInitialRoute(),
     routes: [
       ShellRoute(

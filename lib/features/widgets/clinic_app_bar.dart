@@ -5,11 +5,21 @@ import 'package:roshetta/features/widgets/search_bar.dart';
 
 class SharedClinicAppBar extends StatelessWidget {
   final TextEditingController? searchController;
-  const SharedClinicAppBar({super.key, this.searchController});
+  final VoidCallback? onLogout;
+  final VoidCallback? onSettings;
+  final VoidCallback? onProfile;
+
+  const SharedClinicAppBar({
+    super.key,
+    this.searchController,
+    this.onLogout,
+    this.onSettings,
+    this.onProfile,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController effectiveController = 
+    final TextEditingController effectiveController =
         searchController ?? TextEditingController();
 
     return Row(
@@ -24,11 +34,18 @@ class SharedClinicAppBar extends StatelessWidget {
         ),
         const Spacer(),
         // Action Icons and Search
-        _buildIconAction(context, Icons.logout_outlined, onPressed: () {}),
+        _buildIconAction(
+          context,
+          Icons.logout_outlined,
+          onPressed: onLogout ?? () {},
+        ),
         SizedBox(width: 8.w),
-        _buildIconAction(context, Icons.settings_outlined, onPressed: () {}),
-        SizedBox(width: 8.w),
-        _buildIconAction(context, Icons.notifications_none_outlined, onPressed: () {}),
+        _buildIconAction(
+          context,
+          Icons.settings_outlined,
+          onPressed: onSettings ?? () {},
+        ),
+
         SizedBox(width: 16.w),
         // Polished Search Bar
         CustomSearchBarr(
@@ -42,11 +59,10 @@ class SharedClinicAppBar extends StatelessWidget {
           color: Colors.grey[300],
         ),
         SizedBox(width: 16.w),
-        // User Profile Icon
         _buildIconAction(
-          context, 
-          Icons.person_outline, 
-          onPressed: () {},
+          context,
+          Icons.person_outline,
+          onPressed: onProfile ?? () {},
           isActive: true,
         ),
       ],
@@ -54,25 +70,22 @@ class SharedClinicAppBar extends StatelessWidget {
   }
 
   Widget _buildIconAction(
-    BuildContext context, 
+    BuildContext context,
     IconData icon, {
     required VoidCallback onPressed,
     bool isActive = false,
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: isActive 
-            ? context.colorScheme.primary.withValues(alpha: 0.1) 
+        color: isActive
+            ? context.colorScheme.primary.withValues(alpha: 0.1)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: IconButton(
         onPressed: onPressed,
         padding: EdgeInsets.zero,
-        constraints: BoxConstraints(
-          minWidth: 36.w,
-          minHeight: 36.w,
-        ),
+        constraints: BoxConstraints(minWidth: 36.w, minHeight: 36.w),
         icon: Icon(
           icon,
           color: context.colorScheme.scrim.withValues(alpha: 0.7),

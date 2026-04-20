@@ -5,7 +5,10 @@ import 'package:roshetta/features/clinic/booked_feature/presentation/screens/wid
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_bottom_filter.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/screens/widget/custom_request_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roshetta/core/di/service_locator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:roshetta/core/routing/app_routes.dart';
+import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:roshetta/root/bloc/root_bloc.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_bloc.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_event.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_state.dart';
@@ -19,11 +22,24 @@ class BookedClinicScreen extends StatefulWidget {
 
 class _BookedClinicScreenState extends State<BookedClinicScreen> {
   int selectedFilterIndex = 0;
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = "";
 
   @override
   void initState() {
     super.initState();
     context.read<BookedClinicBloc>().add(GetBookedClinicEvent());
+    _searchController.addListener(() {
+      setState(() {
+        _searchQuery = _searchController.text.toLowerCase();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   void _onFilterTap(int index) {
@@ -39,9 +55,21 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
         toolbarHeight: 80.h,
         titleSpacing: 0,
         automaticallyImplyLeading: false,
-        title: const Padding(
+        title: Padding(
           padding: EdgeInsets.symmetric(horizontal: 40.0),
-          child: CustomAppBarWidget(),
+          child: CustomAppBarWidget(
+            searchController: _searchController,
+            onProfile: () {
+              context.read<RootBloc>().add(ChangeIndexRootEvent(index: 4));
+            },
+            onSettings: () {
+              context.read<RootBloc>().add(ChangeIndexRootEvent(index: 4));
+            },
+            onLogout: () {
+              context.read<AuthBloc>().add(LogoutEvent());
+              context.go(AppRoutes.loginScreen);
+            },
+          ),
         ),
       ),
       body: Padding(
@@ -73,7 +101,7 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16.r),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Colors.black12,
                             blurRadius: 8,
@@ -97,7 +125,13 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
                                 >(
                                   builder: (context, state) {
                                     final count = state is BookedClinicLoaded
-                                        ? state.bookedAppointments.length
+                                        ? state.bookedAppointments
+                                              .where(
+                                                (e) => e.name
+                                                    .toLowerCase()
+                                                    .contains(_searchQuery),
+                                              )
+                                              .length
                                               .toString()
                                         : "0";
                                     return CustomBottomFilter(
@@ -111,55 +145,66 @@ class _BookedClinicScreenState extends State<BookedClinicScreen> {
                           ),
                           SizedBox(height: 18.h),
                           Expanded(
-                            child:
-                                BlocBuilder<
-                                  BookedClinicBloc,
-                                  BookedClinicState
-                                >(
-                                  builder: (context, state) {
-                                    if (state is BookedClinicLoading) {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    } else if (state is BookedClinicError) {
-                                      return Center(child: Text(state.message));
-                                    } else if (state is BookedClinicLoaded) {
-                                      if (state.bookedAppointments.isEmpty) {
-                                        return const Center(
-                                          child: Text(
-                                            'لا يوجد طلبات حجز حالياً',
-                                          ),
-                                        );
-                                      }
-                                      return ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount:
-                                            state.bookedAppointments.length,
-                                        itemBuilder: (context, index) {
-                                          final item =
-                                              state.bookedAppointments[index];
-                                          return CustomRequestWidget(
-                                            orderNumber: item.id,
-                                            name: item.name,
-                                            time: item.date,
-                                            phone: item.phoneNumber,
-                                            onAccept: () {},
-                                            onReject: () {},
+                            child: BlocBuilder<BookedClinicBloc, BookedClinicState>(
+                              builder: (context, state) {
+                                if (state is BookedClinicLoading) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else if (state is BookedClinicError) {
+                                  return Center(child: Text(state.message));
+                                } else if (state is BookedClinicLoaded) {
+                                  final filteredList = state.bookedAppointments
+                                      .where(
+                                        (item) => item.name
+                                            .toLowerCase()
+                                            .contains(_searchQuery),
+                                      )
+                                      .toList();
+
+                                  if (filteredList.isEmpty) {
+                                    return const Center(
+                                      child: Text('لا يوجد طلبات حجز حالياً'),
+                                    );
+                                  }
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: filteredList.length,
+                                    itemBuilder: (context, index) {
+                                      final item = filteredList[index];
+                                      return CustomRequestWidget(
+                                        orderNumber: item.id,
+                                        name: item.name,
+                                        time: item.date,
+                                        phone: item.phoneNumber,
+                                        onAccept: () {
+                                          context.read<BookedClinicBloc>().add(
+                                            UpdateBookedClinicStatusEvent(
+                                              id: item.id,
+                                              status: "Approved",
+                                            ),
+                                          );
+                                        },
+                                        onReject: () {
+                                          context.read<BookedClinicBloc>().add(
+                                            UpdateBookedClinicStatusEvent(
+                                              id: item.id,
+                                              status: "Rejected",
+                                            ),
                                           );
                                         },
                                       );
-                                    }
-                                    return const SizedBox.shrink();
-                                  },
-                                ),
+                                    },
+                                  );
+                                }
+                                return const SizedBox.shrink();
+                              },
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  // SizedBox(width: 24.w),
-                  // SizedBox(
-                  // ),
                 ],
               ),
             ),
