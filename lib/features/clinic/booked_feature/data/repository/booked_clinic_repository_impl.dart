@@ -14,7 +14,7 @@ class BookedClinicRepositoryImpl implements BookedClinicRepository {
       EndPoint.clinicBooked,
       fromJson: (json) {
         if (json is List) {
-          final list = json as List;
+          final list = json;
           return list.map((item) {
             return BookedClinicModel.fromJson(item as Map<String, dynamic>);
           }).toList();
@@ -38,6 +38,27 @@ class BookedClinicRepositoryImpl implements BookedClinicRepository {
     return result.fold(
       (error) => Left(error),
       (bookedAppointments) => Right(bookedAppointments),
+    );
+  }
+
+  @override
+  Future<Either<String, String>> updateBookedClinicStatus({
+    required int id,
+    required String status,
+  }) async {
+    final result = await apiConsumer.put(
+      "${EndPoint.clinicBooked}/$id",
+      data: {"status": status},
+    );
+
+    return result.fold(
+      (error) {
+        if (error == "Unexpected response format") {
+          return const Right("Success");
+        }
+        return Left(error);
+      },
+      (response) => const Right("Success"),
     );
   }
 }

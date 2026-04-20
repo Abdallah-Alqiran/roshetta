@@ -3,4 +3,8 @@ import 'package:roshetta/features/clinic/booked_feature/data/model/booked_clinic
 
 abstract class BookedClinicRepository {
   Future<Either<String, List<BookedClinicModel>>> getBookedClinic();
+  Future<Either<String, String>> updateBookedClinicStatus({
+    required int id,
+    required String status,
+  });
 }

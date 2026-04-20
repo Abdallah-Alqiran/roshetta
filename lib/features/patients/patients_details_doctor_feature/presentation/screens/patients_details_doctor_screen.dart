@@ -51,6 +51,56 @@ class _PatientsDetailsDoctorScreenState
       'email': 'y.mansour@email.com',
       'status': 'قيد العلاج',
     },
+    {
+      'image': 'https://picsum.photos/200?random=3',
+      'name': 'يوسف منصور',
+      'genderAndAge': 'ذكر، 41 سنة',
+      'fileNumber': 'PT - 2023 - 0899',
+      'lastVisit': '28 سبتمبر 2023',
+      'phone': '052 345 8765',
+      'email': 'y.mansour@email.com',
+      'status': 'قيد العلاج',
+    },
+    {
+      'image': 'https://picsum.photos/200?random=3',
+      'name': 'يوسف منصور',
+      'genderAndAge': 'ذكر، 41 سنة',
+      'fileNumber': 'PT - 2023 - 0899',
+      'lastVisit': '28 سبتمبر 2023',
+      'phone': '052 345 8765',
+      'email': 'y.mansour@email.com',
+      'status': 'قيد العلاج',
+    },
+    {
+      'image': 'https://picsum.photos/200?random=3',
+      'name': 'يوسف منصور',
+      'genderAndAge': 'ذكر، 41 سنة',
+      'fileNumber': 'PT - 2023 - 0899',
+      'lastVisit': '28 سبتمبر 2023',
+      'phone': '052 345 8765',
+      'email': 'y.mansour@email.com',
+      'status': 'قيد العلاج',
+    },
+    {
+      'image': 'https://picsum.photos/200?random=3',
+      'name': 'يوسف منصور',
+      'genderAndAge': 'ذكر، 41 سنة',
+      'fileNumber': 'PT - 2023 - 0899',
+      'lastVisit': '28 سبتمبر 2023',
+      'phone': '052 345 8765',
+      'email': 'y.mansour@email.com',
+      'status': 'قيد العلاج',
+    },
+    {
+      'image': 'https://picsum.photos/200?random=3',
+      'name': 'يوسف منصور',
+      'genderAndAge': 'ذكر، 41 سنة',
+      'fileNumber': 'PT - 2023 - 0899',
+      'lastVisit': '28 سبتمبر 2023',
+      'phone': '052 345 8765',
+      'email': 'y.mansour@email.com',
+      'status': 'قيد العلاج',
+    },
   ];
 
   @override
@@ -82,23 +132,37 @@ class _PatientsDetailsDoctorScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              context.tr('patients_record'),
-              style: context.textTheme.headlineLarge!.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              context.tr('patients_record_desc'),
-              style: context.textTheme.labelLarge!.copyWith(
-                color: context.colorScheme.scrim.withValues(alpha: 0.5),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      context.tr('patients_record'),
+                      style: context.textTheme.headlineSmall!.copyWith(
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      context.tr('patients_record_desc'),
+                      style: context.textTheme.labelMedium!.copyWith(
+                        color: context.colorScheme.scrim.withValues(alpha: 0.4),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
             SizedBox(height: 32.h),
-            Row(
+            Wrap(
+              spacing: 24.w,
+              runSpacing: 24.h,
               children: [
-                Expanded(
+                SizedBox(
+                  width: 320.w,
                   child: PatientStatisticsCard(
                     title: context.tr('total_patients'),
                     count: '1,248',
@@ -107,58 +171,61 @@ class _PatientsDetailsDoctorScreenState
                     iconBackgroundColor: Colors.teal.shade50,
                   ),
                 ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: PatientStatisticsCard(
-                    title: context.tr('today_patients'),
-                    count: '24',
-                    icon: Icons.person_add_alt_1_outlined,
-                    iconColor: Colors.blue.shade700,
-                    iconBackgroundColor: Colors.blue.shade50,
-                  ),
-                ),
               ],
             ),
-            SizedBox(height: 32.h),
-            Text(
-              context.tr('patients_record'),
-              style: context.textTheme.headlineLarge!.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 24.h),
+            SizedBox(height: 40.h),
             Container(
               decoration: BoxDecoration(
                 color: context.colorScheme.surface,
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(20.r),
+                border: Border.all(
+                  color: context.colorScheme.scrim.withValues(alpha: 0.05),
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: context.colorScheme.scrim.withValues(alpha: 0.05),
-                    offset: const Offset(0, 4),
-                    blurRadius: 16,
+                    color: context.colorScheme.scrim.withValues(alpha: 0.03),
+                    offset: const Offset(0, 10),
+                    blurRadius: 30,
                   ),
                 ],
               ),
-              child: Column(
-                children: [
-                  const PatientTableHeader(),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: _dummyPatients.length,
-                    itemBuilder: (context, index) {
-                      final item = _dummyPatients[index];
-                      return PatientListItem(
-                        name: item['name'],
-                        genderAndAge: item['genderAndAge'],
-                        lastVisit: item['lastVisit'],
-                        phone: item['phone'],
-                        email: item['email'],
-                        onActionTap: () {},
-                      );
-                    },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.r),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SizedBox(
+                    width: 1000
+                        .w, // Fixed width for horizontal scrolling on small screens
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const PatientTableHeader(),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: _dummyPatients.length,
+                          separatorBuilder: (context, index) => Divider(
+                            height: 1,
+                            color: context.colorScheme.scrim.withValues(
+                              alpha: 0.03,
+                            ),
+                          ),
+                          itemBuilder: (context, index) {
+                            final item = _dummyPatients[index];
+                            return PatientListItem(
+                              name: item['name'],
+                              genderAndAge: item['genderAndAge'],
+                              lastVisit: item['lastVisit'],
+                              phone: item['phone'],
+                              email: item['email'],
+                              onActionTap: () {},
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
             ),
           ],

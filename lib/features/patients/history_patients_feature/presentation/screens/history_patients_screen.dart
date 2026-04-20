@@ -76,7 +76,6 @@ class _HistoryPatientsScreenState extends State<HistoryPatientsScreen> {
                       count: '24',
                     ),
                   ),
-                 
                 ],
               ),
             ),
@@ -122,8 +121,6 @@ class _HistoryPatientsScreenState extends State<HistoryPatientsScreen> {
                         specialization: item['specialization'],
                         date: item['date'],
                         status: item['status'],
-                       
-                         
                       );
                     },
                   ),

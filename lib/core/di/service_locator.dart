@@ -12,18 +12,21 @@ import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/
 import 'package:roshetta/features/clinic/booked_feature/data/repository/booked_clinic_repository_impl.dart';
 import 'package:roshetta/features/clinic/booked_feature/domain/repository/booked_clinic_repository.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_bloc.dart';
-import 'package:roshetta/features/patients/doctor_details_patient_feature/data/repositories/doctor_details_patient_repo_impl.dart';
-import 'package:roshetta/features/patients/doctor_details_patient_feature/domain/repositories/doctor_detials_patient_repo.dart';
-import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/bloc/doctor_details_patient_bloc.dart';
 import 'package:roshetta/features/clinic/profile_feature/data/repository/profile_repository_impl.dart';
 import 'package:roshetta/features/clinic/profile_feature/domain/repository/profile_repository.dart';
 import 'package:roshetta/features/clinic/profile_feature/presentation/bloc/profile_clinic_bloc.dart';
+import 'package:roshetta/features/patients/doctor_details_patient_feature/data/repositories/doctor_details_patient_repo_impl.dart';
+import 'package:roshetta/features/patients/doctor_details_patient_feature/domain/repositories/doctor_detials_patient_repo.dart';
+import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/bloc/doctor_details_patient_bloc.dart';
+
 import 'package:roshetta/features/patients/home_patients_feature/data/repositories/home_patients_repository_impl.dart';
 import 'package:roshetta/features/patients/home_patients_feature/domain/repositories/home_patients_repository.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/bloc/home_patients_bloc.dart';
 import 'package:roshetta/features/patients/profile_patients_feature/data/repositories/profile_patient_repository_impl.dart';
 import 'package:roshetta/features/patients/profile_patients_feature/domain/repositories/profile_patient_repository.dart';
 import 'package:roshetta/features/patients/profile_patients_feature/presentation/bloc/profile_patient_bloc.dart';
+import 'package:roshetta/features/patients/home_patients_feature/data/repository/home_repository_impl.dart';
+import 'package:roshetta/features/patients/home_patients_feature/domain/repository/home_repository.dart';
 import 'package:roshetta/root/bloc/root_bloc.dart';
 
 final sl = GetIt.instance;
@@ -82,7 +85,10 @@ Future<void> setupServiceLocator() async {
     () => HomePatientsRepositoryImpl(apiConsumer: sl()),
   );
   sl.registerLazySingleton(
-    () => HomePatientsBloc(homePatientsRepository: sl()),
+    () => HomePatientsBloc(homeRepository: sl()),
+  );
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(apiConsumer: sl()),
   );
 
   sl.registerLazySingleton(() => RootBloc());

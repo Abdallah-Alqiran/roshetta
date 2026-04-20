@@ -88,6 +88,7 @@ class PatientListItem extends StatelessWidget {
                 Text(
                   phone,
                   style: context.textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
                     color: context.colorScheme.scrim.withValues(alpha: 0.8),
                   ),
                   maxLines: 1,
@@ -97,25 +98,12 @@ class PatientListItem extends StatelessWidget {
                 Text(
                   email,
                   style: context.textTheme.labelSmall?.copyWith(
-                    color: context.colorScheme.scrim.withValues(alpha: 0.6),
+                    color: context.colorScheme.scrim.withValues(alpha: 0.5),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Align(
-              alignment: Alignment.center,
-              child: IconButton(
-                onPressed: onActionTap,
-                icon: Icon(
-                  Icons.folder_outlined,
-                  color: context.colorScheme.primary,
-                ),
-              ),
             ),
           ),
         ],
