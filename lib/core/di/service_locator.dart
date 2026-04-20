@@ -18,6 +18,9 @@ import 'package:roshetta/features/patients/doctor_details_patient_feature/presen
 import 'package:roshetta/features/clinic/profile_feature/data/repository/profile_repository_impl.dart';
 import 'package:roshetta/features/clinic/profile_feature/domain/repository/profile_repository.dart';
 import 'package:roshetta/features/clinic/profile_feature/presentation/bloc/profile_clinic_bloc.dart';
+import 'package:roshetta/features/patients/home_patients_feature/data/repositories/home_patients_repository_impl.dart';
+import 'package:roshetta/features/patients/home_patients_feature/domain/repositories/home_patients_repository.dart';
+import 'package:roshetta/features/patients/home_patients_feature/presentation/bloc/home_patients_bloc.dart';
 import 'package:roshetta/features/patients/profile_patients_feature/data/repositories/profile_patient_repository_impl.dart';
 import 'package:roshetta/features/patients/profile_patients_feature/domain/repositories/profile_patient_repository.dart';
 import 'package:roshetta/features/patients/profile_patients_feature/presentation/bloc/profile_patient_bloc.dart';
@@ -73,6 +76,13 @@ Future<void> setupServiceLocator() async {
   );
   sl.registerLazySingleton(
     () => ProfilePatientBloc(profilePatientRepository: sl()),
+  );
+
+  sl.registerLazySingleton<HomePatientsRepository>(
+    () => HomePatientsRepositoryImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton(
+    () => HomePatientsBloc(homePatientsRepository: sl()),
   );
 
   sl.registerLazySingleton(() => RootBloc());

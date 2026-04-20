@@ -13,6 +13,8 @@ class EndPoint {
   static String clinicAvailabilitySchedule = "doctorSchedule";
   static String clinicBooked = "Visit";
 
+  static String homePatient = "Home/";
+
   // clinic profile
   static String profileDoctor = '/profile/doctor';
 
