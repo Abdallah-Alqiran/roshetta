@@ -155,5 +155,22 @@
   "full_name": "الاسم الكامل",
   "role": "الدور",
   "home": "الرئيسية",
-  "history": "السجل"
+  "history": "السجل",
+  "enter_phone_number": "أدخل رقم الهاتف",
+  "please_enter_phone_number": "الرجاء إدخال رقم الهاتف",
+  "date_of_birth": "تاريخ الميلاد",
+  "yyyy_mm_dd": "YYYY-MM-DD",
+  "please_enter_date_of_birth": "الرجاء إدخال تاريخ الميلاد",
+  "professional_information": "المعلومات المهنية",
+  "department": "التخصص",
+  "enter_department": "أدخل التخصص",
+  "please_enter_department": "الرجاء إدخال التخصص",
+  "consultation_price": "سعر الكشف",
+  "enter_price": "أدخل السعر",
+  "please_enter_price": "الرجاء إدخال السعر",
+  "please_enter_valid_price": "الرجاء إدخال سعر صحيح",
+  "bio_and_description": "النبذة والوصف",
+  "saving": "جارٍ الحفظ...",
+  "retry": "إعادة المحاولة"
+
 }

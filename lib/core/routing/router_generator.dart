@@ -11,6 +11,7 @@ import 'package:roshetta/features/auth/presentation/screens/widgets/auth_layout.
 import 'package:roshetta/features/auth/presentation/screens/login_screen/login_screen.dart';
 import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_bloc.dart';
 import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_bloc.dart';
+import 'package:roshetta/features/clinic/profile_feature/presentation/bloc/profile_clinic_bloc.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/bloc/doctor_details_patient_bloc.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/screens/doctor_details_patient_screen.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/home_patients_screen.dart';
@@ -72,6 +73,7 @@ class RouterGenerator {
               BlocProvider.value(value: sl<AuthBloc>()),
               BlocProvider.value(value: sl<RootBloc>()),
               BlocProvider.value(value: sl<AvailabilityClinicBloc>()),
+              BlocProvider.value(value: sl<ProfileClinicBloc>()),
               BlocProvider.value(value: sl<BookedClinicBloc>()),
             ],
             child: CustomViewNavBar(role: role),
