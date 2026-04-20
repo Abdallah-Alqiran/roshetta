@@ -11,6 +11,11 @@ import 'package:roshetta/core/di/service_locator.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/bloc/patient_details_bloc.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/bloc/patient_details_event.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/bloc/patient_details_state.dart';
+import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
+// import 'package:roshetta/features/auth/presentation/bloc/auth_event.dart';
+import 'package:roshetta/root/bloc/root_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:roshetta/core/routing/app_routes.dart';
 
 class PatientsDetailsDoctorScreen extends StatefulWidget {
   const PatientsDetailsDoctorScreen({super.key});
@@ -23,6 +28,7 @@ class PatientsDetailsDoctorScreen extends StatefulWidget {
 class _PatientsDetailsDoctorScreenState
     extends State<PatientsDetailsDoctorScreen> {
   final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
 
   @override
   void dispose() {
@@ -38,7 +44,8 @@ class _PatientsDetailsDoctorScreenState
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<PatientDetailsBloc>()..add(GetPatientDetailsEvent()),
+      create: (context) =>
+          sl<PatientDetailsBloc>()..add(GetPatientDetailsEvent()),
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 80.h,
@@ -46,7 +53,21 @@ class _PatientsDetailsDoctorScreenState
           automaticallyImplyLeading: false,
           title: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.w),
-            child: PatientRecordAppBarWidget(searchController: _searchController),
+            child: PatientRecordAppBarWidget(
+              searchController: _searchController,
+              onChanged: (value) {
+                setState(() {
+                  _searchQuery = value;
+                });
+              },
+              onLogout: () {
+                context.read<AuthBloc>().add(LogoutEvent());
+                context.go(AppRoutes.loginScreen);
+              },
+              onProfile: () {
+                context.read<RootBloc>().add(ChangeIndexRootEvent(index: 4));
+              },
+            ),
           ),
         ),
         body: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
@@ -78,7 +99,9 @@ class _PatientsDetailsDoctorScreenState
                             Text(
                               context.tr('patients_record_desc'),
                               style: context.textTheme.labelMedium!.copyWith(
-                                color: context.colorScheme.scrim.withValues(alpha: 0.4),
+                                color: context.colorScheme.scrim.withValues(
+                                  alpha: 0.4,
+                                ),
                               ),
                             ),
                           ],
@@ -108,11 +131,15 @@ class _PatientsDetailsDoctorScreenState
                         color: context.colorScheme.surface,
                         borderRadius: BorderRadius.circular(20.r),
                         border: Border.all(
-                          color: context.colorScheme.scrim.withValues(alpha: 0.05),
+                          color: context.colorScheme.scrim.withValues(
+                            alpha: 0.05,
+                          ),
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: context.colorScheme.scrim.withValues(alpha: 0.03),
+                            color: context.colorScheme.scrim.withValues(
+                              alpha: 0.03,
+                            ),
                             offset: const Offset(0, 10),
                             blurRadius: 30,
                           ),
@@ -131,7 +158,13 @@ class _PatientsDetailsDoctorScreenState
                                 ListView.separated(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: state.patients.length,
+                                  itemCount: state.patients
+                                      .where(
+                                        (p) => p.name.toLowerCase().contains(
+                                          _searchQuery.toLowerCase(),
+                                        ),
+                                      )
+                                      .length,
                                   separatorBuilder: (context, index) => Divider(
                                     height: 1,
                                     color: context.colorScheme.scrim.withValues(
@@ -139,7 +172,14 @@ class _PatientsDetailsDoctorScreenState
                                     ),
                                   ),
                                   itemBuilder: (context, index) {
-                                    final item = state.patients[index];
+                                    final filteredList = state.patients
+                                        .where(
+                                          (p) => p.name.toLowerCase().contains(
+                                            _searchQuery.toLowerCase(),
+                                          ),
+                                        )
+                                        .toList();
+                                    final item = filteredList[index];
                                     return PatientListItem(
                                       name: item.name,
                                       genderAndAge:

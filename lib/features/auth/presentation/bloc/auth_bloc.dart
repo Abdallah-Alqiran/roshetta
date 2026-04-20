@@ -84,7 +84,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with AuthFormControllersMixin 
   }
 
   Future<void> _onLogout(LogoutEvent event, Emitter<AuthState> emit) async {
-    await authRepository.logout();    
+    await authRepository.logout();
+    emit(AuthInitial());
   }
 
   @override

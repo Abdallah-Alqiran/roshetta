@@ -18,18 +18,25 @@ import 'package:roshetta/features/clinic/profile_feature/presentation/bloc/profi
 import 'package:roshetta/features/patients/doctor_details_patient_feature/data/repositories/doctor_details_patient_repo_impl.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/domain/repositories/doctor_detials_patient_repo.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/bloc/doctor_details_patient_bloc.dart';
+
+import 'package:roshetta/features/patients/home_patients_feature/data/repositories/home_patients_repository_impl.dart';
+import 'package:roshetta/features/patients/home_patients_feature/domain/repositories/home_patients_repository.dart';
+import 'package:roshetta/features/patients/home_patients_feature/presentation/bloc/home_patients_bloc.dart';
+import 'package:roshetta/features/patients/profile_patients_feature/data/repositories/profile_patient_repository_impl.dart';
+import 'package:roshetta/features/patients/profile_patients_feature/domain/repositories/profile_patient_repository.dart';
+import 'package:roshetta/features/patients/profile_patients_feature/presentation/bloc/profile_patient_bloc.dart';
 import 'package:roshetta/features/patients/home_patients_feature/data/repository/home_repository_impl.dart';
 import 'package:roshetta/features/patients/home_patients_feature/domain/repository/home_repository.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/bloc/home_patients_bloc.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/data/repository/patient_details_repository_impl.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/domain/repository/patient_details_repository.dart';
 import 'package:roshetta/features/patients/patients_details_doctor_feature/presentation/bloc/patient_details_bloc.dart';
+
 import 'package:roshetta/root/bloc/root_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
-  // Services
   final cacheHelper = CacheHelper();
   await cacheHelper.init();
   sl.registerLazySingleton<CacheHelper>(() => cacheHelper);
@@ -72,19 +79,25 @@ Future<void> setupServiceLocator() async {
     () => DoctorDetailsPatientBloc(doctorDetailsPatientRepo: sl()),
   );
 
-  sl.registerLazySingleton<HomeRepository>(
-    () => HomeRepositoryImpl(apiConsumer: sl()),
+  sl.registerLazySingleton<ProfilePatientRepository>(
+    () => ProfilePatientRepositoryImpl(apiConsumer: sl()),
   );
   sl.registerLazySingleton(
-    () => HomePatientsBloc(homeRepository: sl()),
+    () => ProfilePatientBloc(profilePatientRepository: sl()),
+  );
+
+  sl.registerLazySingleton<HomePatientsRepository>(
+    () => HomePatientsRepositoryImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton(() => HomePatientsBloc(homeRepository: sl()));
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(apiConsumer: sl()),
   );
 
   sl.registerLazySingleton<PatientDetailsRepository>(
     () => PatientDetailsRepositoryImpl(apiConsumer: sl()),
   );
-  sl.registerFactory(
-    () => PatientDetailsBloc(repository: sl()),
-  );
+  sl.registerFactory(() => PatientDetailsBloc(repository: sl()));
 
   sl.registerLazySingleton(() => RootBloc());
 }

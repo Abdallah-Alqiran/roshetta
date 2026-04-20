@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:roshetta/core/services/remote/api_consumer.dart';
 import 'package:roshetta/core/services/remote/endpoints.dart';
-import 'package:roshetta/features/patients/home_patients_feature/data/model/home_doctor_model.dart';
+import 'package:roshetta/features/patients/home_patients_feature/data/models/home_doctor_model.dart';
 import 'package:roshetta/features/patients/home_patients_feature/domain/repository/home_repository.dart';
 
 class HomeRepositoryImpl implements HomeRepository {

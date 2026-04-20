@@ -15,7 +15,13 @@ class EndPoint {
 
   // clinic profile
   static String profileDoctor = '/profile/doctor';
+  static String homePatient = "Home/";
 
+  //patient profile
+  static String profilePatient = 'profile/patient';
+
+  // patient history
+  static String historyPatient = 'patient/books';
   //patinet
   static String home = "Home";
   static String doctorPatientsData = "doctor/PatientsData";

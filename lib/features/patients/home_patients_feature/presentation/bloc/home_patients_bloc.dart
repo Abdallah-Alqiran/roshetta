@@ -8,20 +8,53 @@ class HomePatientsBloc extends Bloc<HomePatientsEvent, HomePatientsState> {
 
   HomePatientsBloc({required this.homeRepository})
       : super(HomePatientsInitial()) {
-    on<GetDoctorsEvent>(_onGetDoctorsEvent);
+    on<GetHomeDoctorsEvent>(_onGetHomeDoctorsEvent);
+    on<SearchDoctorsEvent>(_onSearchDoctorsEvent);
   }
 
-  void _onGetDoctorsEvent(
-    GetDoctorsEvent event,
+  void _onGetHomeDoctorsEvent(
+    GetHomeDoctorsEvent event,
     Emitter<HomePatientsState> emit,
   ) async {
     emit(HomePatientsLoading());
 
-    await homeRepository.getDoctors().then((result) {
-      result.fold(
-        (error) => emit(HomePatientsError(message: error)),
-        (doctors) => emit(HomePatientsLoaded(doctors: doctors)),
-      );
-    });
+    final result = await homeRepository.getDoctors();
+    result.fold(
+      (error) => emit(HomePatientsError(message: error)),
+      (doctors) => emit(HomePatientsLoaded(doctors: doctors)),
+    );
+  }
+
+  void _onSearchDoctorsEvent(
+    SearchDoctorsEvent event,
+    Emitter<HomePatientsState> emit,
+  ) async {
+    emit(HomePatientsLoading());
+
+    // For now, we'll fetch all and filter client-side if the API doesn't support filtering
+    // Or if the repository supports filtering, we use it.
+    // Assuming we fetch all and filter for now as a fallback or if repo is simple.
+    
+    final result = await homeRepository.getDoctors();
+    result.fold(
+      (error) => emit(HomePatientsError(message: error)),
+      (doctors) {
+        var filteredList = doctors;
+        
+        if (event.name != null && event.name!.isNotEmpty) {
+          filteredList = filteredList
+              .where((doc) => doc.name.toLowerCase().contains(event.name!.toLowerCase()))
+              .toList();
+        }
+        
+        if (event.specialization != null && event.specialization!.isNotEmpty) {
+          filteredList = filteredList
+              .where((doc) => doc.department.toLowerCase() == event.specialization!.toLowerCase())
+              .toList();
+        }
+        
+        emit(HomePatientsLoaded(doctors: filteredList));
+      },
+    );
   }
 }
