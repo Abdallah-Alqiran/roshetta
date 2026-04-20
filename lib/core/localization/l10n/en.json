@@ -55,7 +55,6 @@
   "male": "Male",
   "female": "Female",
   "account_type": "Account Type",
-  "patient": "Patient",
   "clinic": "Clinic",
   "birth_date": "Birth Date",
   "roshetta": "Roshetta",
@@ -140,5 +139,7 @@
   "book_now_multiline": "Book\nNow",
   "available_doctors": "Available Doctors",
   "sort_by": "Sort by: ",
-  "highest_rated": "Highest rated"
+  "highest_rated": "Highest rated",
+  "home": "الرئيسية",
+  "history": "السجل"
 }

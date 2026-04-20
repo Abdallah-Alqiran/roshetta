@@ -19,4 +19,9 @@ class ApiKey {
   static String authorization = "Authorization";
   static String accessToken = "access";
   static String role = "role";
+  static String id = "id";
+  static String email = "email";
+  static String name = "name";
+  static String gender = "gender";
+  static String isLoggedIn = "isLoggedIn";
 }

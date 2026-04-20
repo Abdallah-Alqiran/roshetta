@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:roshetta/core/extensions/context_extensions.dart';
 import 'package:roshetta/core/localization/app_localizations.dart';
 import 'package:roshetta/core/routing/app_routes.dart';
+import 'package:roshetta/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:roshetta/root/models/nav_items.dart';
 
 class AdminSidebar extends StatelessWidget {
@@ -26,10 +28,16 @@ class AdminSidebar extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 32.h),
-          CircleAvatar(
-            radius: 36.r,
-            backgroundColor: Colors.white,
-            child: Icon(Icons.person, size: 48.sp, color: Colors.teal),
+          InkWell(
+            onTap: () {
+              context.read<AuthBloc>().add(LogoutEvent());
+              context.go(AppRoutes.loginScreen);
+            },
+            child: CircleAvatar(
+              radius: 36.r,
+              backgroundColor: Colors.white,
+              child: Icon(Icons.person, size: 48.sp, color: Colors.teal),
+            ),
           ),
           SizedBox(height: 12.h),
 

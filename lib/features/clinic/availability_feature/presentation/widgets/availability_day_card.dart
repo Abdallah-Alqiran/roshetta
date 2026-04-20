@@ -36,6 +36,16 @@ class _AvailabilityDayCardState extends State<AvailabilityDayCard> {
     isActive = !widget.day.isVacation;
   }
 
+  @override
+  void didUpdateWidget(covariant AvailabilityDayCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.day != widget.day && oldWidget.day.isVacation != widget.day.isVacation) {
+      setState(() {
+        isActive = !widget.day.isVacation;
+      });
+    }
+  }
+
   AvailabilityScheduleClinicModel _copyWith(
     AvailabilityScheduleClinicModel old, {
     String? startTime,

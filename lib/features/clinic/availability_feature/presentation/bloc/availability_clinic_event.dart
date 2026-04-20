@@ -1,4 +1,5 @@
-part of 'availability_clinic_bloc.dart';
+
+import 'package:roshetta/features/clinic/availability_feature/data/model/availability_schedule_clinic_model.dart';
 
 abstract class AvailabilityClinicEvent {}
 

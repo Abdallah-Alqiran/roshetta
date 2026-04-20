@@ -25,9 +25,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with AuthFormControllersMixin 
     on<RoleSelectedEvent>((event, emit) {
       selectedRole = event.role;
     });
-    
     on<LoginEvent>(_onLogin);
     on<RegisterEvent>(_onRegister);
+    on<LogoutEvent>(_onLogout);
   }
   
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
@@ -81,6 +81,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with AuthFormControllersMixin 
         emit(AuthSuccess<AuthResponseModel>(data: successResponse));
       },
     );
+  }
+
+  Future<void> _onLogout(LogoutEvent event, Emitter<AuthState> emit) async {
+    await authRepository.logout();    
   }
 
   @override
