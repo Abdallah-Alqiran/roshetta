@@ -11,7 +11,7 @@ class EndPoint {
 
   // clinic
   static String clinicAvailabilitySchedule = "doctorSchedule";
-
+  static String clinicBooked = "Visit";
 }
 
 class ApiKey {

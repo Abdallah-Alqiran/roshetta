@@ -10,6 +10,7 @@ import 'package:roshetta/features/auth/presentation/screens/register_screen/regi
 import 'package:roshetta/features/auth/presentation/screens/widgets/auth_layout.dart';
 import 'package:roshetta/features/auth/presentation/screens/login_screen/login_screen.dart';
 import 'package:roshetta/features/clinic/availability_feature/presentation/bloc/availability_clinic_bloc.dart';
+import 'package:roshetta/features/clinic/booked_feature/presentation/bloc/booked_clinic_bloc.dart';
 import 'package:roshetta/features/patients/doctor_details_patient_feature/presentation/screens/doctor_details_patient_screen.dart';
 import 'package:roshetta/features/patients/home_patients_feature/presentation/screens/home_patients_screen.dart';
 import 'package:roshetta/features/patients/history_patients_feature/presentation/screens/history_patients_screen.dart';
@@ -19,7 +20,8 @@ import 'package:roshetta/root/custom_view_nav_bar.dart';
 
 class RouterGenerator {
   static GoRouter goRouter = GoRouter(
-    initialLocation: _getInitialRoute(),
+    initialLocation: AppRoutes.navBar,
+    // initialLocation: _getInitialRoute(),
     routes: [
       ShellRoute(
         builder: (context, state, child) {
@@ -70,6 +72,7 @@ class RouterGenerator {
               BlocProvider.value(value: sl<AuthBloc>()),
               BlocProvider.value(value: sl<RootBloc>()),
               BlocProvider.value(value: sl<AvailabilityClinicBloc>()),
+              BlocProvider.value(value: sl<BookedClinicBloc>()),
             ],
             child: CustomViewNavBar(role: role),
           );
@@ -111,6 +114,8 @@ class RouterGenerator {
 
   static String _getInitialRoute() {
     final role = sl<CacheHelper>().getDataString(key: ApiKey.role);
-    return (role == null || role.isEmpty) ? AppRoutes.loginScreen : AppRoutes.navBar;
+    return (role == null || role.isEmpty)
+        ? AppRoutes.loginScreen
+        : AppRoutes.navBar;
   }
 }
